@@ -24,4 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidSimpleClient"
 include(":app")
- 
+include(":app:presentation")
