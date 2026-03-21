@@ -1,0 +1,1 @@
+Simple android client with https://github.com/Grnne/BasicApiKirill/. Client based on clean architecture.
