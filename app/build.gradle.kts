@@ -27,9 +27,14 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -38,6 +43,7 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.annotations)
+    implementation(libs.koin.android)
     ksp(libs.koin.ksp.compiler)
 
     testImplementation(libs.junit)

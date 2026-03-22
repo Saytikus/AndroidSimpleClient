@@ -1,10 +1,10 @@
 package ru.saytikus.androidsimpleclient
 
 import android.app.Application
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Configuration
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.annotation.KoinApplication
-import org.koin.core.annotation.Module
+import org.koin.core.logger.Level
 import org.koin.ksp.generated.module
 import org.koin.ksp.generated.startKoin
 
@@ -15,13 +15,12 @@ class AndroidSimpleClient : Application() {
         super.onCreate()
 
         startKoin {
+            if(BuildConfig.DEBUG) androidLogger(Level.DEBUG) else androidLogger(Level.ERROR)
+
+            androidContext(this@AndroidSimpleClient)
+
             modules(PresentationModule().module)
         }
     }
 
 }
-
-@Module
-@Configuration
-@ComponentScan("ru.saytikus.presentation")
-class PresentationModule
