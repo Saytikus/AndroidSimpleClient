@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.ui.theme
+package ru.saytikus.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
