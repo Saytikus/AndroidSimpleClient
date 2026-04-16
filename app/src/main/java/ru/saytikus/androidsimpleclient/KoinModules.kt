@@ -6,5 +6,5 @@ import org.koin.core.annotation.Module
 
 @Module
 @Configuration
-@ComponentScan("ru.saytikus.presentation")
+@ComponentScan("ru.saytikus.androidsimpleclient.presentation")
 class PresentationModule

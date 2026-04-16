@@ -6,9 +6,10 @@ plugins {
 }
 
 android {
-    namespace = "ru.saytikus.presentation"
-
-    compileSdk = 36
+    namespace = "ru.saytikus.androidsimpleclient.presentation"
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         minSdk = 29

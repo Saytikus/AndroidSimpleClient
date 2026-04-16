@@ -1,4 +1,4 @@
-package ru.saytikus.presentation
+package ru.saytikus.androidsimpleclient.presentation
 
 import org.junit.Test
 
