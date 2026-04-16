@@ -26,3 +26,4 @@ rootProject.name = "AndroidSimpleClient"
 include(":app")
 include(":presentation")
 include(":domain")
+include(":data")
