@@ -1,5 +1,6 @@
 package ru.saytikus.androidsimpleclient.presentation.theme
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -38,13 +39,17 @@ fun AndroidSimpleClientTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+
+    val isSVersion = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+
     val colorScheme = when {
-        dynamicColor -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+
+        dynamicColor && isSVersion && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
+
+        dynamicColor && isSVersion && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
 
         darkTheme -> DarkColorScheme
+
         else -> LightColorScheme
     }
 
