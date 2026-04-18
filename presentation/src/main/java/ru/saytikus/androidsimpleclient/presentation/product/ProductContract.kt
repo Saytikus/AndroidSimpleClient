@@ -1,6 +1,8 @@
 package ru.saytikus.androidsimpleclient.presentation.product
 
+import androidx.compose.runtime.Immutable
 import kotlinx.serialization.Serializable
+import ru.saytikus.androidsimpleclient.domain.product.Product
 
 
 /**
@@ -12,7 +14,12 @@ object ProductDestination
 /**
  * UI State that represents ProductScreen
  **/
-class ProductState
+@Immutable
+data class ProductState(
+    val products: List<Product> = emptyList(),
+    val isProductRefreshActive: Boolean = false,
+    val isProductRefresh: Boolean = false
+)
 
 /**
  * Product Actions emitted from the UI Layer
@@ -20,6 +27,7 @@ class ProductState
  **/
 
 sealed interface ProductAction {
-    data object OnClick : ProductAction
+
+    data object OnProductRefresh : ProductAction
 }
 

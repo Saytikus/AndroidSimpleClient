@@ -14,7 +14,8 @@ class ProductCoordinator(
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: ProductAction) {
         when (action) {
-            ProductAction.OnClick -> { /* Handle action */
+            ProductAction.OnProductRefresh -> {
+                viewModel.refreshProducts()
             }
         }
     }
