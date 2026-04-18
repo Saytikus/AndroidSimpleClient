@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "ru.saytikus.androidsimpleclient"
-        minSdk = 31
+        minSdk = 29
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -53,5 +53,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
 
+    implementation(project(":domain"))
     implementation(project(":presentation"))
+    implementation(project(":data"))
 }

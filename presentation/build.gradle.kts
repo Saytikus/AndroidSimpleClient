@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = 31
+        minSdk = 29
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -67,4 +67,6 @@ dependencies {
     implementation(libs.koin.annotations)
     implementation(libs.koin.androidx.compose)
     ksp(libs.koin.ksp.compiler)
+
+    implementation(project(":domain"))
 }
