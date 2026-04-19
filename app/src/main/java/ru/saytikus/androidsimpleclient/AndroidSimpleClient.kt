@@ -7,7 +7,6 @@ import org.koin.core.annotation.KoinApplication
 import org.koin.core.logger.Level
 import org.koin.ksp.generated.module
 import org.koin.ksp.generated.startKoin
-import ru.saytikus.androidsimpleclient.data.di.DataServiceModule
 
 @KoinApplication
 class AndroidSimpleClient : Application() {
@@ -23,7 +22,6 @@ class AndroidSimpleClient : Application() {
             modules(
                 listOf(
                     DataModule().module,
-                    DataServiceModule().module,
                     DomainModule,
                     PresentationModule().module
                 )

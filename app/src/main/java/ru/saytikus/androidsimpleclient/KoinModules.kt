@@ -1,22 +1,33 @@
 package ru.saytikus.androidsimpleclient
 
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.product.Product
 import ru.saytikus.androidsimpleclient.domain.product.useCases.GetAllProductsUseCase
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.INoCmdInputBoundary
+import ru.saytikus.androidsimpleclient.domain.settings.Settings
+import ru.saytikus.androidsimpleclient.domain.settings.dto.SaveResponseServerHostAddressCommand
+import ru.saytikus.androidsimpleclient.domain.settings.useCase.ObserveSettingsUseCase
+import ru.saytikus.androidsimpleclient.domain.settings.useCase.SaveResponseServerHostAddressUseCase
 
 
-/*@Module
-@Configuration
-@ComponentScan("ru.saytikus.androidsimpleclient.domain")
-class DomainModule*/
 val DomainModule = module {
-    single<INoCmdInputBoundary<MbResult<List<Product>>>> {
+    single<IInputBoundary<MbResult<List<Product>>, Unit>>(named("GetAllProductsUseCase")) {
         GetAllProductsUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<Unit>, SaveResponseServerHostAddressCommand>>(named("SaveResponseServerHostAddressUseCase")) {
+        SaveResponseServerHostAddressUseCase(get())
+    }
+
+    single<IObserveInputBoundary<Flow<Settings>>>(named("ObserveSettingsUseCase")) {
+        ObserveSettingsUseCase(get())
     }
 }
 
