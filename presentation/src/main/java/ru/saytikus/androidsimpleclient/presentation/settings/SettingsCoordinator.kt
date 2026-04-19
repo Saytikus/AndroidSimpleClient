@@ -14,7 +14,12 @@ class SettingsCoordinator(
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: SettingsAction) {
         when (action) {
-            SettingsAction.OnClick -> { /* Handle action */
+            is SettingsAction.OnHostAddressChanged -> {
+                viewModel.onHostAddressChanged(action.newValue)
+            }
+
+            is SettingsAction.OnHostAddressSaveButtonClicked -> {
+                viewModel.onHostAddressSaveButtonClicked(action.newValue)
             }
         }
     }

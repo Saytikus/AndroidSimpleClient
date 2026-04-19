@@ -1,6 +1,8 @@
 package ru.saytikus.androidsimpleclient.presentation.settings
 
 import kotlinx.serialization.Serializable
+import ru.saytikus.androidsimpleclient.domain.settings.Settings
+import ru.saytikus.androidsimpleclient.domain.settings.SettingsDefaults
 
 
 /**
@@ -12,7 +14,11 @@ object SettingsDestination
 /**
  * UI State that represents SettingsScreen
  **/
-class SettingsState
+data class SettingsState (
+    val newHostAddress: String = "",
+    val settings: Settings = SettingsDefaults.defaultSettings,
+    val isDarkTheme: Boolean = true
+)
 
 /**
  * Settings Actions emitted from the UI Layer
@@ -20,6 +26,8 @@ class SettingsState
  **/
 
 sealed interface SettingsAction {
-    data object OnClick : SettingsAction
+    data class OnHostAddressChanged(val newValue: String) : SettingsAction
+
+    data class OnHostAddressSaveButtonClicked(val newValue: String) : SettingsAction
 }
 
