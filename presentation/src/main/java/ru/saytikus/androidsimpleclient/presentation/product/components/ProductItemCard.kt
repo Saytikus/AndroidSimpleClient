@@ -1,6 +1,5 @@
 package ru.saytikus.androidsimpleclient.presentation.product.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.saytikus.androidsimpleclient.domain.product.Product
+import ru.saytikus.androidsimpleclient.presentation.common.cardBorderStroke
 import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
 
@@ -63,15 +63,7 @@ fun ProductItemCard(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = colors.cardBackground),
-        border = BorderStroke(
-            width = 1.dp,
-            brush = Brush.horizontalGradient(
-                colors = listOf(
-                    accent.copy(alpha = 0.5f),
-                    colors.cardBorderEnd
-                )
-            )
-        ),
+        border = cardBorderStroke(accent),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Row(

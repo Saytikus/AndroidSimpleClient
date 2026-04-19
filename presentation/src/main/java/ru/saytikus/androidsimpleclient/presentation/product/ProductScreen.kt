@@ -61,10 +61,6 @@ fun ProductScreen(
 ) {
     val c = ColorProvider.colors
 
-    val backgroundBrush = Brush.linearGradient(
-        colors = listOf(c.backgroundStart, c.backgroundMid, c.backgroundEnd)
-    )
-
     val listState = rememberLazyListState()
 
     val canScrollForward by remember { derivedStateOf { listState.canScrollForward } }
@@ -123,7 +119,7 @@ fun ProductScreen(
                             disabledContentColor = ColorProvider.colors.backgroundStart
                         ),
 
-                    ) {
+                        ) {
                         Column(
                             modifier = Modifier
                         ) {
@@ -134,13 +130,6 @@ fun ProductScreen(
                                 contentDescription = null,
                                 tint = ColorProvider.colors.textPrimary
                             )
-
-/*                            Text(
-                                text = "Settings",
-                                modifier = Modifier,
-                                fontWeight = FontWeight.Normal,
-                                color = ColorProvider.colors.textPrimary
-                            )*/
                         }
                     }
                 }
@@ -153,7 +142,7 @@ fun ProductScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(brush = backgroundBrush)
+                .background(brush = ColorProvider.backgroundBrush())
         ) {
             // Blob 1
             Box(
@@ -335,13 +324,12 @@ fun ProductScreen(
 private fun ProductScreenPreviewLight(
     @PreviewParameter(ProductStatePreviewParameterProvider::class) state: ProductState
 ) {
-    AndroidSimpleClientTheme(
-        content = {
-            ProductScreen(
-                state = state, onAction = {})
-        }
-    )
-
+    AndroidSimpleClientTheme {
+        ProductScreen(
+            state = state,
+            onAction = {}
+        )
+    }
 }
 
 @Composable
@@ -350,13 +338,13 @@ private fun ProductScreenPreviewDark(
     @PreviewParameter(ProductStatePreviewParameterProvider::class) state: ProductState
 ) {
     AndroidSimpleClientTheme(
-        darkTheme = true,
-        content = {
-            ProductScreen(
-                state = state, onAction = {})
-        }
-    )
-
+        previewDarkTheme = true
+    ) {
+        ProductScreen(
+            state = state,
+            onAction = {}
+        )
+    }
 }
 
 /**
