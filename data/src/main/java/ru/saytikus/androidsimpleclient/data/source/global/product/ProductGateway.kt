@@ -1,6 +1,7 @@
 package ru.saytikus.androidsimpleclient.data.source.global.product
 
 import org.koin.core.annotation.Single
+import ru.saytikus.androidsimpleclient.data.source.global.common.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
@@ -8,10 +9,16 @@ import ru.saytikus.androidsimpleclient.domain.product.IProductGateway
 import ru.saytikus.androidsimpleclient.domain.product.Product
 
 @Single
-class ProductGateway(private val productService: IProductService) : IProductGateway {
+class ProductGateway(
+    private val serviceProvider: IRetrofitProvider
+
+) : IProductGateway {
+
+    private val _service: IProductService
+        get() = serviceProvider.retrofit().create(IProductService::class.java)
 
     override suspend fun getUsers(): MbResult<List<Product>> {
-        val response = productService.products()
+        val response = _service.products()
 
         if(!response.isSuccessful) {
             // TODO log
