@@ -8,7 +8,7 @@ sealed class DomainError {
         data class RequestError(val code: Int, val message: String?) : GatewayError()
     }
 
-    sealed class MapError {
+    sealed class MapError : DomainError() {
         data object UnexpectedFormat : MapError()
     }
 }
