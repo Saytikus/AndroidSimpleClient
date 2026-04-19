@@ -8,15 +8,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.Named
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.INoCmdInputBoundary
+import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.product.Product
 
 @KoinViewModel
 class ProductViewModel(
 
-    private val getProductsCase:
-    INoCmdInputBoundary<MbResult<List<Product>>>
+    @Named("GetAllProductsUseCase")
+    private val getProductsCase: IInputBoundary<MbResult<List<Product>>, Unit>
 
 ) : ViewModel() {
 
