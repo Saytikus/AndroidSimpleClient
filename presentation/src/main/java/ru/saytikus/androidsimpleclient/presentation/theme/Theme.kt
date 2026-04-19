@@ -1,26 +1,27 @@
 package ru.saytikus.androidsimpleclient.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
 
 @Composable
 fun AndroidSimpleClientTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    previewDarkTheme: Boolean? = null,
     content: @Composable () -> Unit
 ) {
-    val appColors = if (darkTheme) DarkAppColors else LightAppColors
+    val isSystemInDarkTheme = previewDarkTheme ?: isSystemInDarkTheme()
+
+    val isDark = remember { mutableStateOf(isSystemInDarkTheme) }
 
     CompositionLocalProvider(
-        LocalAppColors provides appColors
-    ) {
-        MaterialTheme(
-            colorScheme = if (darkTheme) darkColorScheme() else lightColorScheme(),
-            content = content
+        LocalAppColors provides ThemeState(
+            isDark.value,
+            { isDark.value = !isDark.value }
         )
+    ) {
+        content()
     }
 }

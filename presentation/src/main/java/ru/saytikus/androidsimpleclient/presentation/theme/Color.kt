@@ -3,6 +3,7 @@ package ru.saytikus.androidsimpleclient.presentation.theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 data class AppColors(
@@ -65,11 +66,19 @@ val LightAppColors = AppColors(
     pullIndicatorContainer = Color(0xFFF2F9F4)
 )
 
-val LocalAppColors = staticCompositionLocalOf { DarkAppColors }
+val LocalAppColors = staticCompositionLocalOf { ThemeState(true) {  } }
 
 object ColorProvider {
     val colors: AppColors
         @Composable
         @ReadOnlyComposable
-        get() = LocalAppColors.current
+        get() = if(LocalAppColors.current.isDark) DarkAppColors else LightAppColors
+
+    @Composable
+    fun backgroundBrush() = Brush.linearGradient(
+        colors = listOf(
+            colors.backgroundStart,
+            colors.backgroundMid,
+            colors.backgroundEnd)
+    )
 }
