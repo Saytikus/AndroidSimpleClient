@@ -14,16 +14,16 @@ android {
         minSdk = 29
         targetSdk = 36
 
-        versionCode = 3
-        versionName = "0.3.0"
-        val versionDatetime = "20:04:00 19.04.2026"
+        versionCode = 4
+        versionName = "0.3.1"
+        val versionDatetime = "20:14:00 19.04.2026"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
