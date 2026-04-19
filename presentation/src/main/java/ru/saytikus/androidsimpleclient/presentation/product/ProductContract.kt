@@ -22,12 +22,20 @@ data class ProductState(
 )
 
 /**
+ * UI navigation event
+ */
+sealed interface ProductNavigation {
+    data object Settings: ProductNavigation
+}
+
+/**
  * Product Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/
 
 sealed interface ProductAction {
+    data object OnProductRefreshRequested : ProductAction
 
-    data object OnProductRefresh : ProductAction
+    data object onSettingsButtonClicked : ProductAction
 }
 

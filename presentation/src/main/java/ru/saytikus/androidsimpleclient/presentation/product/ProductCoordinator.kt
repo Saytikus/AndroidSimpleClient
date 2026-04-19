@@ -9,13 +9,18 @@ import org.koin.compose.viewmodel.koinViewModel
  * and one-shot actions based on the new UI state
  */
 class ProductCoordinator(
-    val viewModel: ProductViewModel
+    private val viewModel: ProductViewModel,
+    private val onNavigate: (ProductNavigation) -> Unit
 ) {
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: ProductAction) {
         when (action) {
-            ProductAction.OnProductRefresh -> {
+            ProductAction.OnProductRefreshRequested -> {
                 viewModel.refreshProducts()
+            }
+
+            ProductAction.onSettingsButtonClicked -> {
+                onNavigate(ProductNavigation.Settings)
             }
         }
     }
@@ -25,11 +30,13 @@ class ProductCoordinator(
 
 @Composable
 fun rememberProductCoordinator(
-    viewModel: ProductViewModel= koinViewModel()
+    viewModel: ProductViewModel= koinViewModel(),
+    onNavigate: (ProductNavigation) -> Unit
 ): ProductCoordinator {
     return remember(viewModel) {
         ProductCoordinator(
-            viewModel = viewModel
+            viewModel = viewModel,
+            onNavigate
         )
     }
 }

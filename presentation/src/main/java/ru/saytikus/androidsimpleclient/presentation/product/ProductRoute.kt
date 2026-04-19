@@ -9,7 +9,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun ProductRoute(
-    coordinator: ProductCoordinator = rememberProductCoordinator()
+    onNavigate: (ProductNavigation) -> Unit,
+    coordinator: ProductCoordinator = rememberProductCoordinator(onNavigate = onNavigate)
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(ProductState())

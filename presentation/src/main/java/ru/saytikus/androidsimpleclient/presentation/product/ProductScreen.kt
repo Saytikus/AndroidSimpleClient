@@ -56,7 +56,8 @@ import ru.saytikus.androidsimpleclient.presentation.product.components.ProductIt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductScreen(
-    state: ProductState, onAction: (ProductAction) -> Unit
+    state: ProductState,
+    onAction: (ProductAction) -> Unit
 ) {
     val c = ColorProvider.colors
 
@@ -111,7 +112,7 @@ fun ProductScreen(
                 },
                 actions = {
                     Button(
-                        onClick = { /* TODO */ },
+                        onClick = { onAction(ProductAction.onSettingsButtonClicked) },
                         modifier = Modifier
                             .padding(top = 12.dp)
                             .padding(horizontal = 10.dp, vertical = 6.dp),
@@ -186,7 +187,7 @@ fun ProductScreen(
                 contentAlignment = Alignment.Center,
                 state = pullState,
                 isRefreshing = state.isProductRefresh,
-                onRefresh = { onAction(ProductAction.OnProductRefresh) },
+                onRefresh = { onAction(ProductAction.OnProductRefreshRequested) },
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),

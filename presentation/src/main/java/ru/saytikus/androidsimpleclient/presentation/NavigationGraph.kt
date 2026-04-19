@@ -6,8 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ru.saytikus.androidsimpleclient.presentation.product.ProductDestination
+import ru.saytikus.androidsimpleclient.presentation.product.ProductNavigation
 import ru.saytikus.androidsimpleclient.presentation.product.ProductRoute
-import ru.saytikus.androidsimpleclient.presentation.product.rememberProductCoordinator
+import ru.saytikus.androidsimpleclient.presentation.settings.SettingsDestination
+import ru.saytikus.androidsimpleclient.presentation.settings.SettingsRoute
 
 @Composable
 fun NavigationGraph() {
@@ -19,7 +21,19 @@ fun NavigationGraph() {
 
     ) {
         composable<ProductDestination> {
-            ProductRoute(rememberProductCoordinator())
+            ProductRoute(
+                onNavigate = { nav ->
+                    when(nav) {
+                        ProductNavigation.Settings -> {
+                            navController.navigate(SettingsDestination)
+                        }
+                    }
+                }
+            )
+        }
+
+        composable<SettingsDestination> {
+            SettingsRoute()
         }
     }
 }
