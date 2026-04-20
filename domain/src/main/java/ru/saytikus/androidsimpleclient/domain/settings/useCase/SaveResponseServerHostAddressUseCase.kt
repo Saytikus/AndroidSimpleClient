@@ -17,11 +17,25 @@ class SaveResponseServerHostAddressUseCase(
     override suspend fun invoke(cmd: SaveResponseServerHostAddressCommand): MbResult<Unit> =
         withContext(Dispatchers.IO) {
 
+            // empty check
             if(cmd.responseServerHostAddress.isEmpty()) {
                 return@withContext MbResult.Failure(MbError(DomainError.MapError.UnexpectedFormat))
             }
-            // TODO ipv4 address check
+
+            // ipv4 check
+            if(!isIpv4Address(cmd.responseServerHostAddress)) {
+                return@withContext MbResult.Failure(MbError(DomainError.MapError.UnexpectedFormat))
+            }
 
             return@withContext settingsRepo.setResponseServerHostAddress(cmd.responseServerHostAddress)
         }
+
+    private fun isIpv4Address(ipv4String: String): Boolean {
+        val parts = ipv4String.split(".")
+        if (parts.size != 4) return false
+
+        return parts.all { part ->
+            part.toIntOrNull()?.let { it in 0..255 && it.toString() == part } ?: false
+        }
+    }
 }

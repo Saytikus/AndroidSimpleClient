@@ -24,10 +24,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.saytikus.androidsimpleclient.presentation.common.cardBorderStroke
+import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
+import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
+import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
+import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
 
 @Composable
 fun ThemeToggleCard(
@@ -35,6 +40,12 @@ fun ThemeToggleCard(
     onToggle: () -> Unit,
     colors: AppColors
 ) {
+
+    val iconColor   = if (isDark) colors.textPrimary else Color(0xFFFBC02D).copy(alpha = 0.9f)
+    val iconBgStart = if (isDark) colors.textPrimary.copy(alpha = 0.12f) else Color(0xFFFFD166).copy(alpha = 0.17f)
+    val iconBgEnd   = if (isDark) colors.textPrimary.copy(alpha = 0.02f) else Color(0xFFFFAA00).copy(alpha = 0.04f)
+    val iconBorder  = if (isDark) Color(0xFF7B68B5).copy(alpha = 0.45f) else Color(0xFF6A9FD4).copy(alpha = 0.60f)
+
     Card(
         onClick = { onToggle() },
         modifier = Modifier.fillMaxWidth(),
@@ -50,27 +61,24 @@ fun ThemeToggleCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(14.dp)
         ) {
-            // Иконка
+
             Box(
                 modifier = Modifier
                     .size(44.dp)
                     .background(
                         brush = Brush.radialGradient(
-                            colors = listOf(
-                                colors.accent.copy(alpha = 0.25f),
-                                colors.accent.copy(alpha = 0.07f)
-                            ),
+                            colors = listOf(iconBgStart, iconBgEnd),
                             radius = 80f
                         ),
                         shape = RoundedCornerShape(12.dp)
                     )
-                    .border(1.dp, colors.accent.copy(alpha = 0.35f), RoundedCornerShape(12.dp)),
+                    .border(1.dp, iconBorder, RoundedCornerShape(12.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Rounded.DarkMode,
                     contentDescription = null,
-                    tint = colors.accent,
+                    tint = iconColor,
                     modifier = Modifier.size(22.dp)
                 )
             }
@@ -101,6 +109,47 @@ fun ThemeToggleCard(
                     uncheckedTrackColor = colors.textSecondary.copy(alpha = 0.3f),
                     uncheckedBorderColor = Color.Transparent
                 )
+            )
+        }
+    }
+}
+
+
+@Preview(name = "Light", showBackground = true, backgroundColor = 0xFFF2F9F4)
+@Composable
+private fun ThemeToggleCardLight() {
+    AndroidSimpleClientTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(brush = ColorProvider.backgroundBrush())
+                .padding(16.dp)
+        ) {
+            ThemeToggleCard(
+                false,
+                {  },
+                LightAppColors
+            )
+        }
+    }
+}
+
+@Preview(name = "Dark", showBackground = true, backgroundColor = 0xFF1A1A2E)
+@Composable
+private fun ThemeToggleCardDark() {
+    AndroidSimpleClientTheme(
+        previewDarkTheme = true
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(brush = ColorProvider.backgroundBrush())
+                .padding(16.dp)
+        ) {
+            ThemeToggleCard(
+                true,
+                {  },
+                DarkAppColors
             )
         }
     }
