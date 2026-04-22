@@ -55,5 +55,7 @@ dependencies {
     implementation(libs.koin.annotations)
     ksp(libs.koin.ksp.compiler)
 
+    implementation(libs.kotlinx.datetime)
+
     implementation(project(":domain"))
 }
