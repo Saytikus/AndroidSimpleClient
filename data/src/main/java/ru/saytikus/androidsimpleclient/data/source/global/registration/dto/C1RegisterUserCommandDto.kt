@@ -4,11 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class C1RegisterUserCommandDto(
-    val login: String,
+    val username: String,
 
     val email: String,
 
     val password: String,
 
-    val name: String
+    val displayName: String
 )

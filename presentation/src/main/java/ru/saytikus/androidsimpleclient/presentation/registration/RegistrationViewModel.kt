@@ -1,8 +1,6 @@
 package ru.saytikus.androidsimpleclient.presentation.registration
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
@@ -17,11 +15,4 @@ class RegistrationViewModel(
 
 ) : ViewModel() {
 
-    init {
-        println("VMMVMVMVMVMVMMVMVMVMMVVMVMVMVMVMVMVMVMV")
-        viewModelScope.launch {
-            registerUserCase(C1RegisterUserCommand("UserTemp2", "govno2@gmail.com", "Vasya123456", "Vasyan2"))
-        }
-
-    }
 }

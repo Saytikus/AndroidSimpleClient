@@ -31,7 +31,7 @@ class ProductGateway(
                 MbError(
                     DomainError.GatewayError.RequestError(
                         response.code(),
-                        response.errorBody().toString()
+                        response.errorBody()?.string()
                     )
                 )
             )

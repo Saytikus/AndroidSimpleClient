@@ -1,6 +1,5 @@
 package ru.saytikus.androidsimpleclient.domain.registration.answers
 
-import kotlinx.datetime.LocalDateTime
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
@@ -13,7 +12,7 @@ data class A1RegisterUserAnswer @OptIn(ExperimentalUuidApi::class) constructor(
 
     val displayName: String,
 
-    val registrationToken: String,
+    val token: String,
 
-    val expiresAt: LocalDateTime
+    val expiresAt: String
 )

@@ -8,24 +8,24 @@ import kotlin.uuid.ExperimentalUuidApi
 
 fun C1RegisterUserCommand.toDto() =
     C1RegisterUserCommandDto(
-        login,
+        username,
 
         email,
 
         password,
 
-        name
+        displayName
     )
 
 fun C1RegisterUserCommandDto.toDomain() =
     C1RegisterUserCommand(
-        login,
+        username,
 
         email,
 
         password,
 
-        name
+        displayName
     )
 
 @OptIn(ExperimentalUuidApi::class)
@@ -39,7 +39,7 @@ fun A1RegisterUserAnswer.toDto() =
 
         displayName,
 
-        registrationToken,
+        token,
 
         expiresAt
     )
@@ -55,7 +55,7 @@ fun A1RegisterUserAnswerDto.toDomain() =
 
         displayName,
 
-        registrationToken,
+        token,
 
         expiresAt
     )
