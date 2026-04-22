@@ -11,6 +11,9 @@ import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.product.Product
 import ru.saytikus.androidsimpleclient.domain.product.useCases.GetAllProductsUseCase
+import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterUserAnswer
+import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterUserCommand
+import ru.saytikus.androidsimpleclient.domain.registration.useCases.RegisterUserUseCase
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 import ru.saytikus.androidsimpleclient.domain.settings.dto.SaveResponseServerHostAddressCommand
 import ru.saytikus.androidsimpleclient.domain.settings.useCase.ObserveSettingsUseCase
@@ -28,6 +31,10 @@ val DomainModule = module {
 
     single<IObserveInputBoundary<Flow<Settings>>>(named("ObserveSettingsUseCase")) {
         ObserveSettingsUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<A1RegisterUserAnswer>, C1RegisterUserCommand>> {
+        RegisterUserUseCase(get())
     }
 }
 
