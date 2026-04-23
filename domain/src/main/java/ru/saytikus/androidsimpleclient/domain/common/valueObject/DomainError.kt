@@ -11,4 +11,9 @@ sealed class DomainError {
     sealed class MapError : DomainError() {
         data object UnexpectedFormat : MapError()
     }
+
+    sealed class DomainValidateError : DomainError() {
+        data class IncorrectAnswerData(val message: String) : DomainValidateError()
+        data class ErrorAnswerCode(val code: Int) : DomainValidateError()
+    }
 }
