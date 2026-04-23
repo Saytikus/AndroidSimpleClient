@@ -16,4 +16,8 @@ sealed class DomainError {
         data class IncorrectAnswerData(val message: String) : DomainValidateError()
         data class ErrorAnswerCode(val code: Int) : DomainValidateError()
     }
+
+    sealed class RepositoryError : DomainError() {
+        data object EntityAlreadyExists : RepositoryError()
+    }
 }
