@@ -1,14 +1,16 @@
-package ru.saytikus.androidsimpleclient.data.registration
+package ru.saytikus.androidsimpleclient.data.registration.gateway
 
 import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
+import ru.saytikus.androidsimpleclient.data.registration.source.remote.IRegistrationService
+import ru.saytikus.androidsimpleclient.data.registration.source.remote.toDomain
+import ru.saytikus.androidsimpleclient.data.registration.source.remote.toDto
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
 import ru.saytikus.androidsimpleclient.domain.registration.IRegistrationGateway
 import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand
-
 
 @Single
 class RegistrationGateway(

@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.registration
+package ru.saytikus.androidsimpleclient.data.registration.source.remote
 
 import retrofit2.Response
 import retrofit2.http.Body

@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.registration
+package ru.saytikus.androidsimpleclient.data.registration.source.remote
 
 import ru.saytikus.androidsimpleclient.data.registration.dto.A1RegisterProfileAnswerDto
 import ru.saytikus.androidsimpleclient.data.registration.dto.C1RegisterProfileCommandDto
