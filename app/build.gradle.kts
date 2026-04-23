@@ -4,6 +4,10 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+configurations.all {
+    exclude(group = "com.intellij", module = "annotations")
+}
+
 android {
     namespace = "ru.saytikus.androidsimpleclient"
 
@@ -48,6 +52,8 @@ dependencies {
     implementation(libs.koin.annotations)
     implementation(libs.koin.android)
     ksp(libs.koin.ksp.compiler)
+
+    implementation(libs.androidx.room.runtime)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
