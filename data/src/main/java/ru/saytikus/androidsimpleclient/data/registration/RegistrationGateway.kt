@@ -6,8 +6,8 @@ import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
 import ru.saytikus.androidsimpleclient.domain.registration.IRegistrationGateway
-import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterUserAnswer
-import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterUserCommand
+import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
+import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand
 
 
 @Single
@@ -23,8 +23,8 @@ class RegistrationGateway(
 
 
 
-    override suspend fun registerUser(registerEvent: C1RegisterUserCommand): MbResult<A1RegisterUserAnswer> {
-        val response = _service.registerUser(registerEvent.toDto())
+    override suspend fun registerProfile(registerEvent: C1RegisterProfileCommand): MbResult<A1RegisterProfileAnswer> {
+        val response = _service.registerProfile(registerEvent.toDto())
 
         if(!response.isSuccessful) {
             return MbResult.Failure(

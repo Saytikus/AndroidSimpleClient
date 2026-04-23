@@ -1,13 +1,13 @@
 package ru.saytikus.androidsimpleclient.data.registration
 
-import ru.saytikus.androidsimpleclient.data.registration.dto.A1RegisterUserAnswerDto
-import ru.saytikus.androidsimpleclient.data.registration.dto.C1RegisterUserCommandDto
-import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterUserAnswer
-import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterUserCommand
+import ru.saytikus.androidsimpleclient.data.registration.dto.A1RegisterProfileAnswerDto
+import ru.saytikus.androidsimpleclient.data.registration.dto.C1RegisterProfileCommandDto
+import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
+import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand
 import kotlin.uuid.ExperimentalUuidApi
 
-fun C1RegisterUserCommand.toDto() =
-    C1RegisterUserCommandDto(
+fun C1RegisterProfileCommand.toDto() =
+    C1RegisterProfileCommandDto(
         username,
 
         email,
@@ -17,8 +17,8 @@ fun C1RegisterUserCommand.toDto() =
         displayName
     )
 
-fun C1RegisterUserCommandDto.toDomain() =
-    C1RegisterUserCommand(
+fun C1RegisterProfileCommandDto.toDomain() =
+    C1RegisterProfileCommand(
         username,
 
         email,
@@ -29,8 +29,8 @@ fun C1RegisterUserCommandDto.toDomain() =
     )
 
 @OptIn(ExperimentalUuidApi::class)
-fun A1RegisterUserAnswer.toDto() =
-    A1RegisterUserAnswerDto(
+fun A1RegisterProfileAnswer.toDto() =
+    A1RegisterProfileAnswerDto(
         userId,
 
         username,
@@ -45,8 +45,8 @@ fun A1RegisterUserAnswer.toDto() =
     )
 
 @OptIn(ExperimentalUuidApi::class)
-fun A1RegisterUserAnswerDto.toDomain() =
-    A1RegisterUserAnswer(
+fun A1RegisterProfileAnswerDto.toDomain() =
+    A1RegisterProfileAnswer(
         userId,
 
         username,

@@ -7,14 +7,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import org.koin.android.annotation.KoinViewModel
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
-import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterUserAnswer
-import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterUserCommand
+import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
+import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand
 
 @KoinViewModel
 class RegistrationViewModel(
 
     private val registerUserCase:
-    IInputBoundary<MbResult<A1RegisterUserAnswer>, C1RegisterUserCommand>
+    IInputBoundary<MbResult<A1RegisterProfileAnswer>, C1RegisterProfileCommand>
 
 ) : ViewModel() {
 

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 
 @Serializable
-data class A1RegisterUserAnswerDto @OptIn(ExperimentalUuidApi::class) constructor(
+data class A1RegisterProfileAnswerDto @OptIn(ExperimentalUuidApi::class) constructor(
 
     val userId: Uuid,
 

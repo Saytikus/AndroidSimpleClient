@@ -5,18 +5,18 @@ import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
 import ru.saytikus.androidsimpleclient.domain.registration.IRegistrationGateway
-import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterUserAnswer
-import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterUserCommand
+import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
+import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand
 import kotlin.uuid.ExperimentalUuidApi
 
-class RegisterUserUseCase(
+class RegisterProfileUseCase(
 
     private val registrationGateway: IRegistrationGateway
 
-) : IInputBoundary<MbResult<A1RegisterUserAnswer>, C1RegisterUserCommand> {
+) : IInputBoundary<MbResult<A1RegisterProfileAnswer>, C1RegisterProfileCommand> {
 
-    override suspend fun invoke(cmd: C1RegisterUserCommand): MbResult<A1RegisterUserAnswer> {
-        val registerResult = registrationGateway.registerUser(cmd)
+    override suspend fun invoke(cmd: C1RegisterProfileCommand): MbResult<A1RegisterProfileAnswer> {
+        val registerResult = registrationGateway.registerProfile(cmd)
 
         // TODO logger
         when (registerResult) {
@@ -24,7 +24,7 @@ class RegisterUserUseCase(
                 println("Fail user register. Cause: ${registerResult.error}")
             }
 
-            is MbResult.Success<A1RegisterUserAnswer> -> {
+            is MbResult.Success<A1RegisterProfileAnswer> -> {
 
                 val validateResult = validateRegisterAnswer(cmd, registerResult.response)
 
@@ -47,8 +47,8 @@ class RegisterUserUseCase(
 
     @OptIn(ExperimentalUuidApi::class)
     private fun validateRegisterAnswer(
-        cmd: C1RegisterUserCommand,
-        answer: A1RegisterUserAnswer
+        cmd: C1RegisterProfileCommand,
+        answer: A1RegisterProfileAnswer
     ): Pair<Boolean, String> {
 
         var resultString = "Fail user register. Cause: "

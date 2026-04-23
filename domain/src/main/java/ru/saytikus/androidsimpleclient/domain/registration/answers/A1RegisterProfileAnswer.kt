@@ -3,7 +3,7 @@ package ru.saytikus.androidsimpleclient.domain.registration.answers
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-data class A1RegisterUserAnswer @OptIn(ExperimentalUuidApi::class) constructor(
+data class A1RegisterProfileAnswer @OptIn(ExperimentalUuidApi::class) constructor(
     val userId: Uuid,
 
     val username: String,

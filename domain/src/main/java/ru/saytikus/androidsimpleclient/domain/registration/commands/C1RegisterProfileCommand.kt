@@ -1,6 +1,6 @@
 package ru.saytikus.androidsimpleclient.domain.registration.commands
 
-data class C1RegisterUserCommand(
+data class C1RegisterProfileCommand(
     val username: String,
 
     val email: String,
