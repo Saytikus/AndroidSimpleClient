@@ -8,6 +8,8 @@ import androidx.navigation.compose.rememberNavController
 import ru.saytikus.androidsimpleclient.presentation.product.ProductDestination
 import ru.saytikus.androidsimpleclient.presentation.product.ProductNavigation
 import ru.saytikus.androidsimpleclient.presentation.product.ProductRoute
+import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationDestination
+import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationRoute
 import ru.saytikus.androidsimpleclient.presentation.settings.SettingsDestination
 import ru.saytikus.androidsimpleclient.presentation.settings.SettingsRoute
 
@@ -34,6 +36,10 @@ fun NavigationGraph() {
 
         composable<SettingsDestination> {
             SettingsRoute()
+        }
+
+        composable<RegistrationDestination> {
+            RegistrationRoute()
         }
     }
 }

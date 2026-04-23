@@ -1,6 +1,9 @@
 package ru.saytikus.androidsimpleclient.presentation.registration
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import org.koin.android.annotation.KoinViewModel
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
@@ -15,4 +18,9 @@ class RegistrationViewModel(
 
 ) : ViewModel() {
 
+
+    private val _stateFlow: MutableStateFlow<RegistrationState> =
+        MutableStateFlow(RegistrationState())
+
+    val stateFlow: StateFlow<RegistrationState> = _stateFlow.asStateFlow()
 }
