@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.source.global.common
+package ru.saytikus.androidsimpleclient.data.core.source.remote
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import org.koin.core.annotation.Single
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
-import ru.saytikus.androidsimpleclient.data.source.global.common.interfaces.IRetrofitProvider
+import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
 
 @Single

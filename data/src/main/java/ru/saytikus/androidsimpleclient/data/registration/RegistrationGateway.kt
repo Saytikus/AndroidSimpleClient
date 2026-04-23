@@ -1,7 +1,7 @@
-package ru.saytikus.androidsimpleclient.data.source.global.registration
+package ru.saytikus.androidsimpleclient.data.registration
 
 import org.koin.core.annotation.Single
-import ru.saytikus.androidsimpleclient.data.source.global.common.interfaces.IRetrofitProvider
+import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError

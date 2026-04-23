@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.source.global.product
+package ru.saytikus.androidsimpleclient.data.product
 
 import ru.saytikus.androidsimpleclient.domain.product.Product
 

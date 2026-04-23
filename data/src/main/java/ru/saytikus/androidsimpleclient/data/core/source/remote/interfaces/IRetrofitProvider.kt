@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.source.global.common.interfaces
+package ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces
 
 import retrofit2.Retrofit
 

@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.source.global.settings
+package ru.saytikus.androidsimpleclient.data.settings
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit

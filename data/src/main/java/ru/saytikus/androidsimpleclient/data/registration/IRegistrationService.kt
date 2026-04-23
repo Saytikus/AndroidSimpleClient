@@ -1,10 +1,10 @@
-package ru.saytikus.androidsimpleclient.data.source.global.registration
+package ru.saytikus.androidsimpleclient.data.registration
 
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
-import ru.saytikus.androidsimpleclient.data.source.global.registration.dto.A1RegisterUserAnswerDto
-import ru.saytikus.androidsimpleclient.data.source.global.registration.dto.C1RegisterUserCommandDto
+import ru.saytikus.androidsimpleclient.data.registration.dto.A1RegisterUserAnswerDto
+import ru.saytikus.androidsimpleclient.data.registration.dto.C1RegisterUserCommandDto
 
 interface IRegistrationService {
 

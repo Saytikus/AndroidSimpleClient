@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.source.global.product
+package ru.saytikus.androidsimpleclient.data.product
 
 import retrofit2.Response
 import retrofit2.http.GET

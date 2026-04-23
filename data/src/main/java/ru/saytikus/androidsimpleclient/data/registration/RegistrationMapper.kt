@@ -1,7 +1,7 @@
-package ru.saytikus.androidsimpleclient.data.source.global.registration
+package ru.saytikus.androidsimpleclient.data.registration
 
-import ru.saytikus.androidsimpleclient.data.source.global.registration.dto.A1RegisterUserAnswerDto
-import ru.saytikus.androidsimpleclient.data.source.global.registration.dto.C1RegisterUserCommandDto
+import ru.saytikus.androidsimpleclient.data.registration.dto.A1RegisterUserAnswerDto
+import ru.saytikus.androidsimpleclient.data.registration.dto.C1RegisterUserCommandDto
 import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterUserAnswer
 import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterUserCommand
 import kotlin.uuid.ExperimentalUuidApi

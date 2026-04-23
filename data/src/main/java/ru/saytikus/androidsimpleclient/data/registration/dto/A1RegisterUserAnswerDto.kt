@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.source.global.registration.dto
+package ru.saytikus.androidsimpleclient.data.registration.dto
 
 import kotlin.uuid.Uuid
 import kotlinx.serialization.Serializable
