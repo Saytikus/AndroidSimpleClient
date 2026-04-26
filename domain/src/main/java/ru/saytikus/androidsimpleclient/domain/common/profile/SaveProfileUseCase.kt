@@ -1,7 +1,6 @@
-package ru.saytikus.androidsimpleclient.domain.registration.useCases
+package ru.saytikus.androidsimpleclient.domain.common.profile
 
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.entities.Profile
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IRepository
 import kotlin.uuid.ExperimentalUuidApi
