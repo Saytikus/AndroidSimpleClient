@@ -59,22 +59,22 @@ fun RegistrationButton(
 
             .background(
                 brush =
-                if(!isEnabled) {
-                    Brush.linearGradient(
-                        colors = listOf(
-                            colors.textSecondary.copy(0.5f),
-                            colors.textSecondary.copy(0.5f)
+                    if (!isEnabled) {
+                        Brush.linearGradient(
+                            colors = listOf(
+                                colors.textSecondary.copy(0.5f),
+                                colors.textSecondary.copy(0.5f)
+                            )
                         )
-                    )
 
-                } else {
-                    Brush.linearGradient(
-                        colors = listOf(
-                            colors.accent.copy(alpha = 0.85f),
-                            colors.accent.copy(alpha = 0.55f)
+                    } else {
+                        Brush.linearGradient(
+                            colors = listOf(
+                                colors.accent.copy(alpha = 0.85f),
+                                colors.accent.copy(alpha = 0.55f)
+                            )
                         )
-                    )
-                },
+                    },
 
                 shape = RoundedCornerShape(14.dp)
             )
@@ -82,7 +82,7 @@ fun RegistrationButton(
             .border(
                 1.dp,
                 color =
-                    if(!isEnabled) {
+                    if (!isEnabled) {
                         colors.textSecondary.copy(0.25f)
 
                     } else {
@@ -91,16 +91,21 @@ fun RegistrationButton(
                 RoundedCornerShape(14.dp)
             )
 
-            .pointerInput(isEnabled) {
-                detectTapGestures(
-                    onPress = {
-                        isPressed = true
-                        tryAwaitRelease()
-                        isPressed = false
-                    },
-                    onTap = { onClick() }
-                )
-            },
+            .then(
+                if (isEnabled) {
+                    Modifier.pointerInput(Unit) {
+                        detectTapGestures(
+                            onPress = {
+                                isPressed = true
+                                tryAwaitRelease()
+                                isPressed = false
+                            },
+                            onTap = { onClick() }
+                        )
+                    }
+                } else Modifier
+
+            ),
 
         contentAlignment = Alignment.Center
     ) {
@@ -129,7 +134,7 @@ fun RegistrationButtonLight() {
                 contentAlignment = Alignment.Center
             ) {
                 RegistrationButton(
-                    {  },
+                    { },
                     LightAppColors,
                     true
                 )
@@ -152,7 +157,7 @@ fun RegistrationButtonDark() {
                 contentAlignment = Alignment.Center
             ) {
                 RegistrationButton(
-                    {  },
+                    { },
                     DarkAppColors,
                     true
                 )
@@ -174,7 +179,7 @@ fun RegistrationButtonLightDisabled() {
                 contentAlignment = Alignment.Center
             ) {
                 RegistrationButton(
-                    {  },
+                    { },
                     LightAppColors,
                     false
                 )
@@ -197,7 +202,7 @@ fun RegistrationButtonDarkDisabled() {
                 contentAlignment = Alignment.Center
             ) {
                 RegistrationButton(
-                    {  },
+                    { },
                     DarkAppColors,
                     false
                 )

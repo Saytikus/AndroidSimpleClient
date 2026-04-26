@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -201,12 +202,16 @@ fun RegistrationField(
 
         // error text under text field
         AnimatedVisibility(
+            modifier = Modifier
+                .size(width = 100.dp, height = 60.dp),
             visible = error != null,
             enter = fadeIn(tween(200)) + expandVertically(tween(200)),
             exit = fadeOut(tween(150)) + shrinkVertically(tween(150))
         ) {
             Row(
-                modifier = Modifier.padding(start = 44.dp, top = 4.dp, bottom = 4.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(end = 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
@@ -219,7 +224,8 @@ fun RegistrationField(
                 Text(
                     text = error ?: "",
                     fontSize = 11.sp,
-                    color = colors.errorColor
+                    color = colors.errorColor,
+                    maxLines = 3
                 )
             }
         }
