@@ -9,13 +9,27 @@ import org.koin.androidx.compose.koinViewModel
  * and one-shot actions based on the new UI state
  */
 class RegistrationCoordinator(
-    val viewModel: RegistrationViewModel
+    val viewModel: RegistrationViewModel,
+    private val DEBUG_onSettingsNavigate: (RegistrationNavigation) -> Unit
 ) {
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: RegistrationAction) {
         when (action) {
-            RegistrationAction.OnClick -> { /* Handle action */
-            }
+            is RegistrationAction.OnDisplayNameChange -> viewModel.onDisplayNameChanged(action.newValue)
+
+            is RegistrationAction.OnEmailChange -> viewModel.onEmailChanged(action.newValue)
+            
+            is RegistrationAction.OnPasswordChange -> viewModel.onPasswordChanged(action.newValue)
+
+            is RegistrationAction.OnUsernameChange -> viewModel.onUsernameChanged(action.newValue)
+
+            is RegistrationAction.OnRegistrationSubmit -> viewModel.onRegisterProfileButtonClicked()
+
+            is RegistrationAction.OnSignInClick -> TODO()
+
+            is RegistrationAction.DEBUG_onSettingsButtonClick -> DEBUG_onSettingsNavigate(
+                RegistrationNavigation.Settings
+            )
         }
     }
 
@@ -24,11 +38,13 @@ class RegistrationCoordinator(
 
 @Composable
 fun rememberRegistrationCoordinator(
-    viewModel: RegistrationViewModel= koinViewModel()
+    viewModel: RegistrationViewModel= koinViewModel(),
+    DEBUG_onSettingsNavigate: (RegistrationNavigation) -> Unit
 ): RegistrationCoordinator {
     return remember(viewModel) {
         RegistrationCoordinator(
-            viewModel = viewModel
+            viewModel = viewModel,
+            DEBUG_onSettingsNavigate
         )
     }
 }
