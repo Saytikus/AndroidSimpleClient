@@ -82,7 +82,7 @@ fun SettingsScreen(
                             Icon(
                                 imageVector = Icons.Rounded.Settings,
                                 contentDescription = null,
-                                tint = Color.White,
+                                tint = c.avatar,
                                 modifier = Modifier.size(20.dp)
                             )
                         }
