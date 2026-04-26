@@ -10,7 +10,7 @@ import org.koin.androidx.compose.koinViewModel
  */
 class RegistrationCoordinator(
     val viewModel: RegistrationViewModel,
-    private val DEBUG_onSettingsNavigate: (RegistrationNavigation) -> Unit
+    private val onNavigate: (RegistrationNavigation) -> Unit
 ) {
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: RegistrationAction) {
@@ -27,8 +27,12 @@ class RegistrationCoordinator(
 
             is RegistrationAction.OnSignInClick -> TODO()
 
-            is RegistrationAction.DEBUG_onSettingsButtonClick -> DEBUG_onSettingsNavigate(
+            is RegistrationAction.DEBUG_onSettingsButtonClick -> onNavigate(
                 RegistrationNavigation.Settings
+            )
+
+            RegistrationAction.OnRegistrationSuccessfully -> onNavigate(
+                RegistrationNavigation.Authentication
             )
         }
     }
@@ -39,12 +43,12 @@ class RegistrationCoordinator(
 @Composable
 fun rememberRegistrationCoordinator(
     viewModel: RegistrationViewModel= koinViewModel(),
-    DEBUG_onSettingsNavigate: (RegistrationNavigation) -> Unit
+    onNavigate: (RegistrationNavigation) -> Unit
 ): RegistrationCoordinator {
     return remember(viewModel) {
         RegistrationCoordinator(
             viewModel = viewModel,
-            DEBUG_onSettingsNavigate
+            onNavigate
         )
     }
 }

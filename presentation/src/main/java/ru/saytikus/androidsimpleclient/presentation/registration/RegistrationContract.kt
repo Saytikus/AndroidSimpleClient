@@ -27,12 +27,16 @@ data class RegistrationState(
 
     val passwordError: String? = null,
 
-    val displayNameError: String? = null
+    val displayNameError: String? = null,
+
+    val isRegistrationSuccessfully: Boolean = false
 )
 
 sealed interface RegistrationNavigation {
 
     data object Settings : RegistrationNavigation
+    
+    data object Authentication : RegistrationNavigation
 }
 
 /**
@@ -54,5 +58,7 @@ sealed interface RegistrationAction {
     data object OnSignInClick : RegistrationAction
 
     data object DEBUG_onSettingsButtonClick : RegistrationAction
+
+    data object OnRegistrationSuccessfully : RegistrationAction
 }
 

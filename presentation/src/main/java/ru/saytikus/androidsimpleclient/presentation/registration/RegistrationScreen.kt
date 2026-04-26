@@ -43,6 +43,12 @@ fun RegistrationScreen(
 ) {
     val c = ColorProvider.colors
 
+    // registration end with sucessfully operation
+    if(state.isRegistrationSuccessfully) {
+        onAction(RegistrationAction.OnRegistrationSuccessfully)
+    }
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()

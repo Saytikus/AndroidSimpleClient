@@ -41,10 +41,16 @@ fun NavigationGraph() {
 
         composable<RegistrationDestination> {
             RegistrationRoute(
-                DEBUG_onSettingsNavigate = { nav ->
+                onNavigate = { nav ->
                     when(nav) {
                         RegistrationNavigation.Settings -> {
                             navController.navigate(SettingsDestination)
+                        }
+
+                        RegistrationNavigation.Authentication -> {
+                            navController.navigate(ProductDestination) {
+                                popUpTo<RegistrationDestination>() { inclusive = true }
+                            }
                         }
                     }
                 }

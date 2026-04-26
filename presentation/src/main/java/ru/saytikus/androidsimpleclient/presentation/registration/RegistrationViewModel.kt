@@ -168,7 +168,7 @@ class RegistrationViewModel(
                 }
 
                 is MbResult.Success -> {
-                    // tODO user notification
+                    _stateFlow.update { it.copy(isRegistrationSuccessfully = true) }
                 }
             }
         }

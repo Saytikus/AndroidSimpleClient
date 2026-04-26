@@ -7,8 +7,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun RegistrationRoute(
-    DEBUG_onSettingsNavigate: (RegistrationNavigation) -> Unit,
-    coordinator: RegistrationCoordinator = rememberRegistrationCoordinator(DEBUG_onSettingsNavigate = DEBUG_onSettingsNavigate)
+    onNavigate: (RegistrationNavigation) -> Unit,
+    coordinator: RegistrationCoordinator = rememberRegistrationCoordinator(
+        onNavigate = onNavigate
+    )
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(RegistrationState())
