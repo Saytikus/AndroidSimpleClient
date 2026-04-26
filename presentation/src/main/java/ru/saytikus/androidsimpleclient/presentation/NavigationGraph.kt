@@ -9,6 +9,7 @@ import ru.saytikus.androidsimpleclient.presentation.product.ProductDestination
 import ru.saytikus.androidsimpleclient.presentation.product.ProductNavigation
 import ru.saytikus.androidsimpleclient.presentation.product.ProductRoute
 import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationDestination
+import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationNavigation
 import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationRoute
 import ru.saytikus.androidsimpleclient.presentation.settings.SettingsDestination
 import ru.saytikus.androidsimpleclient.presentation.settings.SettingsRoute
@@ -19,7 +20,7 @@ fun NavigationGraph() {
 
     NavHost(
         navController = navController,
-        startDestination = ProductDestination
+        startDestination = RegistrationDestination
 
     ) {
         composable<ProductDestination> {
@@ -39,7 +40,15 @@ fun NavigationGraph() {
         }
 
         composable<RegistrationDestination> {
-            RegistrationRoute()
+            RegistrationRoute(
+                DEBUG_onSettingsNavigate = { nav ->
+                    when(nav) {
+                        RegistrationNavigation.Settings -> {
+                            navController.navigate(SettingsDestination)
+                        }
+                    }
+                }
+            )
         }
     }
 }

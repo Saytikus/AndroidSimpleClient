@@ -23,7 +23,9 @@ data class AppColors(
     val topBarBadgeBg: Color,
     val emptyIconBg: Color,
     val emptyIconTint: Color,
-    val pullIndicatorContainer: Color
+    val pullIndicatorContainer: Color,
+    val avatar: Color,
+    val errorColor: Color
 )
 
 val DarkAppColors = AppColors(
@@ -43,7 +45,9 @@ val DarkAppColors = AppColors(
     topBarBadgeBg      = Color(0xFFE9EAED).copy(alpha = 0.10f),
     emptyIconBg        = Color(0xFFE9EAED).copy(alpha = 0.06f),
     emptyIconTint      = Color(0xFFE9EAED).copy(alpha = 0.30f),
-    pullIndicatorContainer = Color(0xFF1A1A2E)
+    pullIndicatorContainer = Color(0xFF1A1A2E),
+    avatar = Color(0xFFE9EAED),
+    errorColor = Color(0xFFFFB830)
 )
 
 val LightAppColors = AppColors(
@@ -63,7 +67,9 @@ val LightAppColors = AppColors(
     topBarBadgeBg      = Color(0xFF1A2E22).copy(alpha = 0.07f),
     emptyIconBg        = Color(0xFF1A2E22).copy(alpha = 0.05f),
     emptyIconTint      = Color(0xFF1A2E22).copy(alpha = 0.22f),
-    pullIndicatorContainer = Color(0xFFF2F9F4)
+    pullIndicatorContainer = Color(0xFFF2F9F4),
+    avatar = Color(0xFFE9EAED),
+    errorColor = Color(0xFFE94560).copy(alpha = 0.8f)
 )
 
 val LocalAppColors = staticCompositionLocalOf { ThemeState(true) {  } }

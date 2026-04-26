@@ -10,16 +10,21 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.saytikus.androidsimpleclient.data.core.profile.source.local.ProfileDao
 import ru.saytikus.androidsimpleclient.data.core.source.local.ApplicationDatabase
+import ru.saytikus.androidsimpleclient.data.registration.validators.EmailValidator
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.entities.Profile
+import ru.saytikus.androidsimpleclient.domain.common.profile.Profile
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
+import ru.saytikus.androidsimpleclient.domain.common.interfaces.IValidator
 import ru.saytikus.androidsimpleclient.domain.product.Product
 import ru.saytikus.androidsimpleclient.domain.product.useCases.GetAllProductsUseCase
 import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand
 import ru.saytikus.androidsimpleclient.domain.registration.useCases.RegisterProfileUseCase
-import ru.saytikus.androidsimpleclient.domain.registration.useCases.SaveProfileUseCase
+import ru.saytikus.androidsimpleclient.domain.common.profile.SaveProfileUseCase
+import ru.saytikus.androidsimpleclient.domain.common.profile.validators.DisplayNameValidator
+import ru.saytikus.androidsimpleclient.domain.common.profile.validators.PasswordValidator
+import ru.saytikus.androidsimpleclient.domain.common.profile.validators.UsernameValidator
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 import ru.saytikus.androidsimpleclient.domain.settings.dto.SaveResponseServerHostAddressCommand
 import ru.saytikus.androidsimpleclient.domain.settings.useCase.ObserveSettingsUseCase
@@ -48,6 +53,24 @@ val DomainModule = module {
 
     single<IInputBoundary<MbResult<Unit>, Profile>>(named("SaveProfileUseCase")) {
         SaveProfileUseCase(get())
+    }
+}
+
+val DomainValidatorModule = module {
+    single<IValidator<String>>(named("UsernameValidator")) {
+        UsernameValidator()
+    }
+
+    single<IValidator<String>>(named("EmailValidator")) {
+        EmailValidator()
+    }
+
+    single<IValidator<String>>(named("PasswordValidator")) {
+        PasswordValidator()
+    }
+
+    single<IValidator<String>>(named("DisplayNameValidator")) {
+        DisplayNameValidator()
     }
 }
 

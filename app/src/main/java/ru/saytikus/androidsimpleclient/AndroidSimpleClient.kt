@@ -23,6 +23,7 @@ class AndroidSimpleClient : Application() {
                 listOf(
                     LocalStorageModule().module,
                     DataModule().module,
+                    DomainValidatorModule,
                     DomainModule,
                     PresentationModule().module
                 )
