@@ -13,7 +13,7 @@ class DisplayNameValidator : IValidator<String> {
             value.length > DisplayNameValidationRule.MAX_LENGTH -> {
                 ValidateResult.Error(
                     ValidateError("Display name must contain at least " +
-                            "${DisplayNameValidationRule.MAX_LENGTH} characters")
+                            "${DisplayNameValidationRule.MAX_LENGTH} characters.")
                 )
             }
 

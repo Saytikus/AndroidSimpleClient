@@ -25,6 +25,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.ErrorOutline
+import androidx.compose.material.icons.rounded.Password
 import androidx.compose.material.icons.rounded.Visibility
 import androidx.compose.material.icons.rounded.VisibilityOff
 import androidx.compose.material3.Icon
@@ -177,35 +178,10 @@ fun RegistrationField(
             )
         }
 
-        // password visibility icon
-        if (isPassword) {
-
-            Box(
-                modifier = Modifier
-                    .padding(end = 12.dp)
-                    .size(28.dp)
-                    .background(
-                        color = colors.textPrimary.copy(alpha = 0.1f),
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .clickable { passwordVisible = !passwordVisible },
-                contentAlignment = Alignment.Center
-            ) {
-
-                Icon(
-                    imageVector = if (passwordVisible)
-                        Icons.Rounded.VisibilityOff else Icons.Rounded.Visibility,
-                    contentDescription = null,
-                    tint = colors.textSecondary,
-                    modifier = Modifier.size(14.dp)
-                )
-            }
-        }
-
         // error text under text field
         AnimatedVisibility(
             modifier = Modifier
-                .size(width = 100.dp, height = 60.dp),
+                .size(width = 120.dp, height = 60.dp),
             visible = error != null,
             enter = fadeIn(tween(200)) + expandVertically(tween(200)),
             exit = fadeOut(tween(150)) + shrinkVertically(tween(150))
@@ -228,6 +204,31 @@ fun RegistrationField(
                     fontSize = 11.sp,
                     color = colors.errorColor,
                     maxLines = 3
+                )
+            }
+        }
+
+        // password visibility icon
+        if (isPassword) {
+
+            Box(
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .size(28.dp)
+                    .background(
+                        color = colors.textPrimary.copy(alpha = 0.1f),
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .clickable { passwordVisible = !passwordVisible },
+                contentAlignment = Alignment.Center
+            ) {
+
+                Icon(
+                    imageVector = if (passwordVisible)
+                        Icons.Rounded.VisibilityOff else Icons.Rounded.Visibility,
+                    contentDescription = null,
+                    tint = colors.textSecondary,
+                    modifier = Modifier.size(14.dp)
                 )
             }
         }
@@ -350,6 +351,67 @@ fun RegistrationFieldDarkError() {
                     false,
                     { },
                     "Email is incorrect."
+                )
+            }
+        }
+    )
+}
+
+@Preview
+@Composable
+fun RegistrationFieldLightPasswordError() {
+    AndroidSimpleClientTheme(
+        content = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(brush = ColorProvider.backgroundBrush())
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                RegistrationField(
+                    "Password",
+                    "*******",
+                    { },
+                    "input data here",
+                    Icons.Rounded.Password,
+                    KeyboardType.Password,
+                    ImeAction.Next,
+                    LightAppColors,
+                    true,
+                    { },
+                    "TEST LONG LONG LONG ERROR STRING"
+                )
+            }
+        }
+    )
+}
+
+@Preview
+@Composable
+fun RegistrationFieldDarkPasswordError() {
+    AndroidSimpleClientTheme(
+        previewDarkTheme = true,
+        content = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(brush = ColorProvider.backgroundBrush())
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                RegistrationField(
+                    "Password",
+                    "*******",
+                    { },
+                    "input data here",
+                    Icons.Rounded.Password,
+                    KeyboardType.Password,
+                    ImeAction.Next,
+                    DarkAppColors,
+                    true,
+                    { },
+                    "TEST LONG LONG LONG ERROR STRING"
                 )
             }
         }
