@@ -12,7 +12,28 @@ object RegistrationDestination
 /**
  * UI State that represents RegistrationScreen
  **/
-class RegistrationState
+data class RegistrationState(
+    val username: String = "",
+
+    val email: String = "",
+
+    val password: String = "",
+
+    val displayName: String = "",
+
+    val usernameError: String? = null,
+
+    val emailError: String? = null,
+
+    val passwordError: String? = null,
+
+    val displayNameError: String? = null
+)
+
+sealed interface RegistrationNavigation {
+
+    data object Settings : RegistrationNavigation
+}
 
 /**
  * Registration Actions emitted from the UI Layer
@@ -20,6 +41,18 @@ class RegistrationState
  **/
 
 sealed interface RegistrationAction {
-    data object OnClick : RegistrationAction
+    data class OnUsernameChange(val newValue: String) : RegistrationAction
+
+    data class OnEmailChange(val newValue: String) : RegistrationAction
+
+    data class OnPasswordChange(val newValue: String) : RegistrationAction
+
+    data class OnDisplayNameChange(val newValue: String) : RegistrationAction
+
+    data object OnRegistrationSubmit : RegistrationAction
+
+    data object OnSignInClick : RegistrationAction
+
+    data object DEBUG_onSettingsButtonClick : RegistrationAction
 }
 
