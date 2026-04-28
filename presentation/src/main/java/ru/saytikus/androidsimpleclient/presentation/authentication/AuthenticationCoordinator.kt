@@ -14,8 +14,12 @@ class AuthenticationCoordinator(
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: AuthenticationAction) {
         when (action) {
-            AuthenticationAction.OnClick -> { /* Handle action */
-            }
+
+            AuthenticationAction.OnSignInButtonClick -> viewModel.onSignInButtonClicked()
+
+            is AuthenticationAction.OnUsernameOrEmailChange -> viewModel.onUsernameOrEmailChange(action.newValue)
+
+            is AuthenticationAction.onPasswordChange -> viewModel.onPasswordChange(action.newValue)
         }
     }
 

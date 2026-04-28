@@ -28,6 +28,22 @@ class AuthenticationViewModel(
     val stateFlow: StateFlow<AuthenticationState> = _stateFlow.asStateFlow()
 
 
+    fun onUsernameOrEmailChange(newValue: String) {
+        viewModelScope.launch {
+            _stateFlow.update {
+                it.copy(usernameOrEmail = newValue)
+            }
+        }
+    }
+
+    fun onPasswordChange(newValue: String) {
+        viewModelScope.launch {
+            _stateFlow.update {
+                it.copy(password = newValue)
+            }
+        }
+    }
+
     fun onSignInButtonClicked() {
         signInProfile(_stateFlow.value)
     }
