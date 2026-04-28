@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.registration.components
+package ru.saytikus.androidsimpleclient.presentation.common.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -8,7 +8,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,7 +43,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -61,7 +59,7 @@ import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
 
 @Composable
-fun RegistrationField(
+fun AppInputTextField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
@@ -94,10 +92,10 @@ fun RegistrationField(
 
 
     Row(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .fillMaxWidth()
             .background(
-                if(error != null) {
+                if (error != null) {
                     colors.errorColor.copy(0.1f)
                 } else {
                     colors.backgroundStart
@@ -250,7 +248,7 @@ fun RegistrationField(
 
 @Preview
 @Composable
-fun RegistrationFieldLightSuccess() {
+fun AppInputTextFieldLightSuccess() {
     AndroidSimpleClientTheme(
         content = {
             Box(
@@ -260,7 +258,7 @@ fun RegistrationFieldLightSuccess() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                RegistrationField(
+                AppInputTextField(
                     "Email",
                     "example@email.com",
                     { },
@@ -280,7 +278,7 @@ fun RegistrationFieldLightSuccess() {
 
 @Preview
 @Composable
-fun RegistrationFieldDarkSuccess() {
+fun AppInputTextFieldDarkSuccess() {
     AndroidSimpleClientTheme(
         previewDarkTheme = true,
         content = {
@@ -289,9 +287,9 @@ fun RegistrationFieldDarkSuccess() {
                     .fillMaxWidth()
                     .background(brush = ColorProvider.backgroundBrush())
                     .padding(16.dp),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Companion.Center
             ) {
-                RegistrationField(
+                AppInputTextField(
                     "Email",
                     "example@email.com",
                     { },
@@ -311,7 +309,7 @@ fun RegistrationFieldDarkSuccess() {
 
 @Preview
 @Composable
-fun RegistrationFieldLightError() {
+fun AppInputTextFieldLightError() {
     AndroidSimpleClientTheme(
         content = {
             Box(
@@ -321,7 +319,7 @@ fun RegistrationFieldLightError() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                RegistrationField(
+                AppInputTextField(
                     "Email",
                     "example@email.com",
                     { },
@@ -341,7 +339,7 @@ fun RegistrationFieldLightError() {
 
 @Preview
 @Composable
-fun RegistrationFieldDarkError() {
+fun AppInputTextFieldDarkError() {
     AndroidSimpleClientTheme(
         previewDarkTheme = true,
         content = {
@@ -352,7 +350,7 @@ fun RegistrationFieldDarkError() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                RegistrationField(
+                AppInputTextField(
                     "Email",
                     "example@email.com",
                     { },
@@ -372,7 +370,7 @@ fun RegistrationFieldDarkError() {
 
 @Preview
 @Composable
-fun RegistrationFieldLightPasswordError() {
+fun AppInputTextFieldLightPasswordError() {
     AndroidSimpleClientTheme(
         content = {
             Box(
@@ -382,7 +380,7 @@ fun RegistrationFieldLightPasswordError() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                RegistrationField(
+                AppInputTextField(
                     "Password",
                     "*******",
                     { },
@@ -402,7 +400,7 @@ fun RegistrationFieldLightPasswordError() {
 
 @Preview
 @Composable
-fun RegistrationFieldDarkPasswordError() {
+fun AppInputTextFieldDarkPasswordError() {
     AndroidSimpleClientTheme(
         previewDarkTheme = true,
         content = {
@@ -413,7 +411,7 @@ fun RegistrationFieldDarkPasswordError() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                RegistrationField(
+                AppInputTextField(
                     "Password",
                     "*******",
                     { },

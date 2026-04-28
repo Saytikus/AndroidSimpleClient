@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ru.saytikus.androidsimpleclient.presentation.common.components.AppInputTextField
 import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationAction
 import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationState
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
@@ -55,7 +56,7 @@ fun RegistrationFormCard(
     ) {
 
         Column {
-            RegistrationField(
+            AppInputTextField(
                 label = "Username",
                 value = state.username,
                 onValueChange = { onAction(RegistrationAction.OnUsernameChange(it)) },
@@ -69,7 +70,7 @@ fun RegistrationFormCard(
 
             RegistrationFieldDivider(colors)
 
-            RegistrationField(
+            AppInputTextField(
                 label = "Email",
                 value = state.email,
                 onValueChange = { onAction(RegistrationAction.OnEmailChange(it)) },
@@ -83,7 +84,7 @@ fun RegistrationFormCard(
 
             RegistrationFieldDivider(colors)
 
-            RegistrationField(
+            AppInputTextField(
                 label = "Password",
                 value = state.password,
                 onValueChange = { onAction(RegistrationAction.OnPasswordChange(it)) },
@@ -98,7 +99,7 @@ fun RegistrationFormCard(
 
             RegistrationFieldDivider(colors)
 
-            RegistrationField(
+            AppInputTextField(
                 label = "Display name",
                 value = state.displayName,
                 onValueChange = { onAction(RegistrationAction.OnDisplayNameChange(it)) },
