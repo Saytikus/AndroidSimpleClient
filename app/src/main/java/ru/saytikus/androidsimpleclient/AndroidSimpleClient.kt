@@ -7,6 +7,11 @@ import org.koin.core.annotation.KoinApplication
 import org.koin.core.logger.Level
 import org.koin.ksp.generated.module
 import org.koin.ksp.generated.startKoin
+import ru.saytikus.androidsimpleclient.di.DataModule
+import ru.saytikus.androidsimpleclient.di.DomainUseCaseModule
+import ru.saytikus.androidsimpleclient.di.DomainValidatorModule
+import ru.saytikus.androidsimpleclient.di.LocalStorageModule
+import ru.saytikus.androidsimpleclient.di.PresentationModule
 
 @KoinApplication
 class AndroidSimpleClient : Application() {
@@ -24,7 +29,7 @@ class AndroidSimpleClient : Application() {
                     LocalStorageModule().module,
                     DataModule().module,
                     DomainValidatorModule,
-                    DomainModule,
+                    DomainUseCaseModule,
                     PresentationModule().module
                 )
             )
