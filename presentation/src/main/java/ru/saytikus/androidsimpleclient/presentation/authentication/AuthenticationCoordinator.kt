@@ -9,6 +9,7 @@ import org.koin.androidx.compose.koinViewModel
  * and one-shot actions based on the new UI state
  */
 class AuthenticationCoordinator(
+    private val onNavigate: (AuthenticationNavigation) -> Unit,
     val viewModel: AuthenticationViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
@@ -20,6 +21,10 @@ class AuthenticationCoordinator(
             is AuthenticationAction.OnUsernameOrEmailChange -> viewModel.onUsernameOrEmailChange(action.newValue)
 
             is AuthenticationAction.onPasswordChange -> viewModel.onPasswordChange(action.newValue)
+
+            is AuthenticationAction.OnRegisterButtonClick -> { onNavigate(AuthenticationNavigation.RegistrationScreen) }
+
+            is AuthenticationAction.OnSignInSuccessfully -> { onNavigate(AuthenticationNavigation.MainScreen) }
         }
     }
 
@@ -28,10 +33,12 @@ class AuthenticationCoordinator(
 
 @Composable
 fun rememberAuthenticationCoordinator(
+    onNavigate: (AuthenticationNavigation) -> Unit,
     viewModel: AuthenticationViewModel = koinViewModel()
 ): AuthenticationCoordinator {
     return remember(viewModel) {
         AuthenticationCoordinator(
+            onNavigate,
             viewModel = viewModel
         )
     }

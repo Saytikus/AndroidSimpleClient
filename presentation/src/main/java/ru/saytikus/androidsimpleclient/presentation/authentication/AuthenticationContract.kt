@@ -17,14 +17,16 @@ data class AuthenticationState(
 
     val password: String = "",
 
-    val authenticationError: String = "",
+    val authenticationError: String? = null,
 
     val isAuthenticationSuccessfully: Boolean = false
 )
 
 sealed interface AuthenticationNavigation {
 
-    data object MainScreen: AuthenticationNavigation
+    data object MainScreen : AuthenticationNavigation
+
+    data object RegistrationScreen : AuthenticationNavigation
 }
 
 /**
@@ -38,5 +40,9 @@ sealed interface AuthenticationAction {
     data class onPasswordChange(val newValue: String) : AuthenticationAction
 
     data object OnSignInButtonClick : AuthenticationAction
+
+    data object OnRegisterButtonClick : AuthenticationAction
+
+    data object OnSignInSuccessfully : AuthenticationAction
 }
 

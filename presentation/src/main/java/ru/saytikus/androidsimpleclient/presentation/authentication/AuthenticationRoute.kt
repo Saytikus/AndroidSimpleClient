@@ -2,7 +2,6 @@ package ru.saytikus.androidsimpleclient.presentation.authentication
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 
 
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -10,7 +9,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun AuthenticationRoute(
-    coordinator: AuthenticationCoordinator = rememberAuthenticationCoordinator()
+    onNavigate: (AuthenticationNavigation) -> Unit,
+    coordinator: AuthenticationCoordinator = rememberAuthenticationCoordinator(onNavigate)
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(AuthenticationState())
