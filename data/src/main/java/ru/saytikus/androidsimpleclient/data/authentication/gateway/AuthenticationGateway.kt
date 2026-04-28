@@ -28,14 +28,15 @@ class AuthenticationGateway(
 
         // TODO logger
         if(!response.isSuccessful) {
-
-            println("SIGN IN USER ${cmd.usernameOrEmail} ERROR! CAUSE: ${response.code()} ${response.errorBody()?.string()}")
+            // TODO core error dto
+            val responceBody = response.errorBody()?.string()
+            println("SIGN IN USER ${cmd.usernameOrEmail} ERROR! CAUSE: ${response.code()} $responceBody")
 
             return MbResult.Failure(
                 MbError(
                     DomainError.GatewayError.RequestError(
                         response.code(),
-                        response.errorBody()?.string()
+                        responceBody
                     )
                 )
             )

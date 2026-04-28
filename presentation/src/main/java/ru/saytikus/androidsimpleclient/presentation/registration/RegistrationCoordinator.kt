@@ -25,13 +25,15 @@ class RegistrationCoordinator(
 
             is RegistrationAction.OnRegistrationSubmit -> viewModel.onRegisterProfileButtonClicked()
 
-            is RegistrationAction.OnSignInClick -> TODO()
+            is RegistrationAction.OnSignInClick -> onNavigate(
+                RegistrationNavigation.Authentication
+            )
 
             is RegistrationAction.DEBUG_onSettingsButtonClick -> onNavigate(
                 RegistrationNavigation.Settings
             )
 
-            RegistrationAction.OnRegistrationSuccessfully -> onNavigate(
+            is RegistrationAction.OnRegistrationSuccessfully -> onNavigate(
                 RegistrationNavigation.Authentication
             )
         }
