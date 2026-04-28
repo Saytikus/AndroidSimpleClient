@@ -1,6 +1,5 @@
 package ru.saytikus.androidsimpleclient.presentation.authentication
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.StateFlow
@@ -8,12 +7,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Named
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
 
+@KoinViewModel
 class AuthenticationViewModel(
 
     @Named("SignInProfileUseCase")
@@ -31,7 +33,10 @@ class AuthenticationViewModel(
     fun onUsernameOrEmailChange(newValue: String) {
         viewModelScope.launch {
             _stateFlow.update {
-                it.copy(usernameOrEmail = newValue)
+                it.copy(
+                    usernameOrEmail = newValue,
+                    authenticationError = null
+                )
             }
         }
     }
@@ -39,7 +44,10 @@ class AuthenticationViewModel(
     fun onPasswordChange(newValue: String) {
         viewModelScope.launch {
             _stateFlow.update {
-                it.copy(password = newValue)
+                it.copy(
+                    password = newValue,
+                    authenticationError = null
+                )
             }
         }
     }
@@ -61,7 +69,8 @@ class AuthenticationViewModel(
             when(result) {
                 is MbResult.Failure -> {
                     _stateFlow.update {
-                        it.copy(authenticationError = result.error.error.toString()) // TODO fix error get
+                        val error = result.error.error as DomainError.GatewayError.RequestError
+                        it.copy(authenticationError = error.message) // TODO fix error get
                     }
                 }
                 is MbResult.Success<*> -> {
