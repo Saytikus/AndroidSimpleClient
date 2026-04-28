@@ -12,14 +12,31 @@ object AuthenticationDestination
 /**
  * UI State that represents AuthenticationScreen
  **/
-class AuthenticationState
+data class AuthenticationState(
+    val usernameOrEmail: String = "",
+
+    val password: String = "",
+
+    val authenticationError: String = "",
+
+    val isAuthenticationSuccessfully: Boolean = false
+)
+
+sealed interface AuthenticationNavigation {
+
+    data object MainScreen: AuthenticationNavigation
+}
 
 /**
  * Authentication Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/
-
 sealed interface AuthenticationAction {
-    data object OnClick : AuthenticationAction
+
+    data class OnUsernameOrEmailChange(val newValue: String) : AuthenticationAction
+
+    data class onPasswordChange(val newValue: String) : AuthenticationAction
+
+    data object OnSignInButtonClick : AuthenticationAction
 }
 
