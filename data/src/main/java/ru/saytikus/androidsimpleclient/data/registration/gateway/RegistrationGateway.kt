@@ -39,6 +39,7 @@ class RegistrationGateway(
             )
         }
 
+        // todo fix !!
         return MbResult.Success(
             response.body()?.toDomain()!!
         )

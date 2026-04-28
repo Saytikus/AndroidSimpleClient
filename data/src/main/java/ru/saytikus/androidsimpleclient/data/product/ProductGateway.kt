@@ -37,6 +37,7 @@ class ProductGateway(
             )
         }
 
+        // todo fix !!
         return MbResult.Success(
             response.body()
                 ?.map {
