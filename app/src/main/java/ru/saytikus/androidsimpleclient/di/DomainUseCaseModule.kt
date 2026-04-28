@@ -3,6 +3,9 @@ package ru.saytikus.androidsimpleclient.di
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import ru.saytikus.androidsimpleclient.domain.authentication.SignInProfileUseCase
+import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
+import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
@@ -39,5 +42,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<Unit>, Profile>>(named("SaveProfileUseCase")) {
         SaveProfileUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<A2SignInProfileAnswer>, C2SignInProfileCommand>>(named("SignInProfileUseCase")) {
+        SignInProfileUseCase(get())
     }
 }
