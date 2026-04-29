@@ -13,6 +13,7 @@ import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInPro
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.dto.ValidateResult
+import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IValidator
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
@@ -25,7 +26,11 @@ class AuthenticationViewModel(
     IInputBoundary<MbResult<A2SignInProfileAnswer>, C2SignInProfileCommand>,
 
     @Named("PasswordValidator")
-    private val passwordValidator: IValidator<String>
+    private val passwordValidator: IValidator<String>,
+
+    @Named("UpdateEncryptedSettingsUseCase")
+    private val updateEncryptedSettingsCase:
+    IInputBoundary<MbResult<Unit>, EncryptedSettings>
 
 ) : ViewModel() {
 
@@ -90,13 +95,21 @@ class AuthenticationViewModel(
                         it.copy(authenticationError = error.message) // TODO fix error get
                     }
                 }
-                is MbResult.Success<*> -> {
-
-                    // TODO save auth token
+                is MbResult.Success -> {
 
                     _stateFlow.update {
                         it.copy(isAuthenticationSuccessfully = true)
                     }
+
+                    println("AuthenticationViewModel::signInProfile: receive answer on signInProfileCase: ${result.response}")
+
+                    // save token
+                    updateEncryptedSettingsCase(
+                        EncryptedSettings(
+                            result.response.token,
+                            result.response.expiresAt
+                        )
+                    )
                 }
             }
         }
