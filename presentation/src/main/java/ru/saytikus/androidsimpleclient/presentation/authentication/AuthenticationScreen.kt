@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Lock
@@ -26,9 +29,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material3.Text
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.saytikus.androidsimpleclient.presentation.common.components.AppInputTextField
@@ -70,15 +75,26 @@ fun AuthenticationScreen(
                 color = c.textPrimary
             )
 
-            Text(
-                text = state.authenticationError ?: "",
-                fontSize = 14.sp,
-                color = c.errorColor,
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .heightIn(min = 200.dp)
-            )
+                    .wrapContentHeight()
+                    .background(
+                        brush = Brush.radialGradient(
+                            colors = listOf(c.errorColor.copy(0.06f), c.errorColor.copy(0.12f)),
+                            radius = 600f
+                        ),
+                        shape = CircleShape
+                    ),
+                contentAlignment = Alignment.BottomCenter
+
+            ) {
+                Text(
+                    text = state.authenticationError ?: "",
+                    fontSize = 14.sp,
+                    color = c.errorColor
+                )
+            }
+
 
             Card(
                 modifier = Modifier
@@ -110,14 +126,14 @@ fun AuthenticationScreen(
                 AppInputTextField(
                     "Password",
                     state.password,
-                    onValueChange = { onAction(AuthenticationAction.onPasswordChange(it)) },
+                    onValueChange = { onAction(AuthenticationAction.OnPasswordChange(it)) },
                     placeholder = "••••••••",
                     Icons.Rounded.Lock,
                     KeyboardType.Password,
                     imeAction = ImeAction.Done,
                     onDone = { onAction(AuthenticationAction.OnSignInButtonClick) },
                     colors = c,
-                    error = null
+                    error = state.passwordError
                 )
 
                 Button(
@@ -131,6 +147,7 @@ fun AuthenticationScreen(
                         disabledContentColor = c.textPrimary
                     ),
                     enabled = state.authenticationError == null &&
+                              state.passwordError == null &&
                               state.usernameOrEmail.isNotBlank() &&
                               state.password.isNotBlank()
                 ) {
@@ -228,7 +245,8 @@ private fun AuthenticationScreenPreviewDarkError() {
                 state = AuthenticationState(
                     "TestProfileLogin",
                     "12345678",
-                    "Bla-bla-bla-bla"
+                    "Bla-bla-bla-bla",
+                    "Bla-bla-bla-bla2"
                 ),
                 onAction = {}
             )

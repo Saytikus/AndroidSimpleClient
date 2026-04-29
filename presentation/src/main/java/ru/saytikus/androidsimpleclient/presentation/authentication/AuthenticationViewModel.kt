@@ -12,7 +12,9 @@ import org.koin.core.annotation.Named
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.common.dto.ValidateResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.common.interfaces.IValidator
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
 
 @KoinViewModel
@@ -20,7 +22,10 @@ class AuthenticationViewModel(
 
     @Named("SignInProfileUseCase")
     private val signInProfileCase:
-    IInputBoundary<MbResult<A2SignInProfileAnswer>, C2SignInProfileCommand>
+    IInputBoundary<MbResult<A2SignInProfileAnswer>, C2SignInProfileCommand>,
+
+    @Named("PasswordValidator")
+    private val passwordValidator: IValidator<String>
 
 ) : ViewModel() {
 
@@ -28,6 +33,9 @@ class AuthenticationViewModel(
         MutableStateFlow(AuthenticationState())
 
     val stateFlow: StateFlow<AuthenticationState> = _stateFlow.asStateFlow()
+
+
+
 
 
     fun onUsernameOrEmailChange(newValue: String) {
@@ -42,10 +50,19 @@ class AuthenticationViewModel(
     }
 
     fun onPasswordChange(newValue: String) {
-        viewModelScope.launch {
-            _stateFlow.update {
+        when(val validateResult = passwordValidator.validate(newValue)) {
+            is ValidateResult.Error -> _stateFlow.update {
                 it.copy(
                     password = newValue,
+                    passwordError = validateResult.error.reasonMessage,
+                    authenticationError = null
+                )
+            }
+
+            ValidateResult.Success -> _stateFlow.update {
+                it.copy(
+                    password = newValue,
+                    passwordError = null,
                     authenticationError = null
                 )
             }

@@ -17,6 +17,8 @@ data class AuthenticationState(
 
     val password: String = "",
 
+    val passwordError: String? = null,
+
     val authenticationError: String? = null,
 
     val isAuthenticationSuccessfully: Boolean = false
@@ -37,7 +39,7 @@ sealed interface AuthenticationAction {
 
     data class OnUsernameOrEmailChange(val newValue: String) : AuthenticationAction
 
-    data class onPasswordChange(val newValue: String) : AuthenticationAction
+    data class OnPasswordChange(val newValue: String) : AuthenticationAction
 
     data object OnSignInButtonClick : AuthenticationAction
 

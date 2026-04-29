@@ -20,7 +20,7 @@ class AuthenticationCoordinator(
 
             is AuthenticationAction.OnUsernameOrEmailChange -> viewModel.onUsernameOrEmailChange(action.newValue)
 
-            is AuthenticationAction.onPasswordChange -> viewModel.onPasswordChange(action.newValue)
+            is AuthenticationAction.OnPasswordChange -> viewModel.onPasswordChange(action.newValue)
 
             is AuthenticationAction.OnRegisterButtonClick -> { onNavigate(AuthenticationNavigation.RegistrationScreen) }
 

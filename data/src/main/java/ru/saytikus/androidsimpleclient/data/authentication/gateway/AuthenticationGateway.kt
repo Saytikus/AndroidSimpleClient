@@ -5,6 +5,7 @@ import ru.saytikus.androidsimpleclient.data.authentication.source.remote.IAuthen
 import ru.saytikus.androidsimpleclient.data.authentication.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.authentication.source.remote.toDto
 import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
+import ru.saytikus.androidsimpleclient.data.core.source.remote.mappers.deserialize
 import ru.saytikus.androidsimpleclient.domain.authentication.IAuthenticationGateway
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
@@ -28,15 +29,15 @@ class AuthenticationGateway(
 
         // TODO logger
         if(!response.isSuccessful) {
-            // TODO core error dto
-            val responceBody = response.errorBody()?.string()
-            println("SIGN IN USER ${cmd.usernameOrEmail} ERROR! CAUSE: ${response.code()} $responceBody")
+
+            val err = response.errorBody()?.deserialize()
+            println("SIGN IN USER ${cmd.usernameOrEmail} ERROR! CAUSE: ${response.code()} ${err?.detail}")
 
             return MbResult.Failure(
                 MbError(
                     DomainError.GatewayError.RequestError(
                         response.code(),
-                        responceBody
+                        err?.detail
                     )
                 )
             )
