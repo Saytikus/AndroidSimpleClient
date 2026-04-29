@@ -60,5 +60,7 @@ dependencies {
 
     implementation(libs.kotlinx.datetime)
 
+    implementation(libs.ksafe.core)
+
     implementation(project(":domain"))
 }
