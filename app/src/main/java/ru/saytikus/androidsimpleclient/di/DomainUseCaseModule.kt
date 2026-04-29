@@ -7,6 +7,8 @@ import ru.saytikus.androidsimpleclient.domain.authentication.SignInProfileUseCas
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.useCases.UpdateEncryptedSettingsUseCase
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.profile.Profile
@@ -46,5 +48,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<A2SignInProfileAnswer>, C2SignInProfileCommand>>(named("SignInProfileUseCase")) {
         SignInProfileUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<Unit>, EncryptedSettings>>(named("UpdateEncryptedSettingsUseCase")) {
+        UpdateEncryptedSettingsUseCase(get(named("EncryptedSettingsRepository")))
     }
 }
