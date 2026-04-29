@@ -43,7 +43,7 @@ class AuthenticationGateway(
             )
         }
 
-        println("SIGN IN USER ${cmd.usernameOrEmail} SUCCESSFULLY!")
+        println("AuthenticationGateway::requestSignInProfile: receive answer on C2SignInProfileCommand: ${response.body()}")
 
         return MbResult.Success(response.body()?.toDomain()!!)
     }

@@ -30,5 +30,5 @@ fun A2SignInProfileAnswerDto.toDomain() =
 
         token,
 
-        displayName
+        expiresAt
     )

@@ -5,8 +5,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import ru.saytikus.androidsimpleclient.data.authentication.dto.A2SignInProfileAnswerDto
 import ru.saytikus.androidsimpleclient.data.authentication.dto.C2SignInProfileCommandDto
-import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
-import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
 
 interface IAuthenticationService {
 

@@ -39,6 +39,8 @@ class RegistrationGateway(
             )
         }
 
+        println("RegistrationGateway::registerProfile: receive answer on C1RegisterProfileCommand: ${response.body()}")
+
         // todo fix !!
         return MbResult.Success(
             response.body()?.toDomain()!!
