@@ -12,6 +12,7 @@ import ru.saytikus.androidsimpleclient.di.DomainUseCaseModule
 import ru.saytikus.androidsimpleclient.di.DomainValidatorModule
 import ru.saytikus.androidsimpleclient.di.LocalStorageModule
 import ru.saytikus.androidsimpleclient.di.PresentationModule
+import ru.saytikus.androidsimpleclient.di.dataCoreModule
 
 @KoinApplication
 class AndroidSimpleClient : Application() {
@@ -26,6 +27,7 @@ class AndroidSimpleClient : Application() {
 
             modules(
                 listOf(
+                    dataCoreModule,
                     LocalStorageModule().module,
                     DataModule().module,
                     DomainValidatorModule,

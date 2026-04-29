@@ -61,6 +61,8 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
 
+    implementation(libs.ksafe.core)
+
     implementation(project(":domain"))
     implementation(project(":presentation"))
     implementation(project(":data"))
