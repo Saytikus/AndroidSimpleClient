@@ -19,5 +19,7 @@ sealed class DomainError {
 
     sealed class RepositoryError : DomainError() {
         data object EntityAlreadyExists : RepositoryError()
+
+        data class MightyDataError(val message: String?) : RepositoryError()
     }
 }
