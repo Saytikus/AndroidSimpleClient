@@ -2,11 +2,11 @@ package ru.saytikus.androidsimpleclient.data.chat.souce.remote
 
 import ru.saytikus.androidsimpleclient.data.chat.dto.A3ChatListItemDto
 import ru.saytikus.androidsimpleclient.data.core.message.toDomain
-import ru.saytikus.androidsimpleclient.domain.chat.answers.A3ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.Chat
 
 
 fun A3ChatListItemDto.toDomain() =
-    A3ChatListItem(
+    Chat(
         chatId,
 
         type,

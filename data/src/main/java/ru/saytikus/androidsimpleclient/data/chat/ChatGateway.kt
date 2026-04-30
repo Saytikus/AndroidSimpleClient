@@ -5,7 +5,7 @@ import ru.saytikus.androidsimpleclient.data.chat.souce.remote.IChatService
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.chat.IChatGateway
-import ru.saytikus.androidsimpleclient.domain.chat.answers.A3ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.Chat
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
@@ -24,7 +24,7 @@ class ChatGateway(
         get() = retrofitProvider.retrofit().create(IChatService::class.java)
 
 
-    override suspend fun getProfileChats(): MbResult<List<A3ChatListItem>> {
+    override suspend fun getProfileChats(): MbResult<List<Chat>> {
         val result = runCatching { _service.getProfileChats() }
 
         if (result.isFailure) {
