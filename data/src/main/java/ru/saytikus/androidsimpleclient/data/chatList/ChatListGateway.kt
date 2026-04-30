@@ -1,11 +1,11 @@
-package ru.saytikus.androidsimpleclient.data.chat
+package ru.saytikus.androidsimpleclient.data.chatList
 
 import org.koin.core.annotation.Single
-import ru.saytikus.androidsimpleclient.data.chat.souce.remote.IChatService
-import ru.saytikus.androidsimpleclient.data.chat.souce.remote.toDomain
+import ru.saytikus.androidsimpleclient.data.chatList.souce.remote.IChatListService
+import ru.saytikus.androidsimpleclient.data.chatList.souce.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
-import ru.saytikus.androidsimpleclient.domain.chat.IChatGateway
-import ru.saytikus.androidsimpleclient.domain.chat.Chat
+import ru.saytikus.androidsimpleclient.domain.chatList.IChatListGateway
+import ru.saytikus.androidsimpleclient.domain.chatList.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
@@ -14,17 +14,17 @@ import java.net.SocketTimeoutException
 
 
 @Single
-class ChatGateway(
+class ChatListGateway(
 
     private val retrofitProvider: IRetrofitProvider
 
-) : IChatGateway {
+) : IChatListGateway {
 
-    private val _service: IChatService
-        get() = retrofitProvider.retrofit().create(IChatService::class.java)
+    private val _service: IChatListService
+        get() = retrofitProvider.retrofit().create(IChatListService::class.java)
 
 
-    override suspend fun getProfileChats(): MbResult<List<Chat>> {
+    override suspend fun getProfileChats(): MbResult<List<ChatListItem>> {
         val result = runCatching { _service.getProfileChats() }
 
         if (result.isFailure) {

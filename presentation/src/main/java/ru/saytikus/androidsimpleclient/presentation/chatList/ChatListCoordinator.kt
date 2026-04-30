@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.chat
+package ru.saytikus.androidsimpleclient.presentation.chatList
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -8,13 +8,13 @@ import org.koin.androidx.compose.koinViewModel
  * Screen's coordinator which is responsible for handling actions from the UI layer
  * and one-shot actions based on the new UI state
  */
-class ChatCoordinator(
-    val viewModel: ChatViewModel
+class ChatListCoordinator(
+    val viewModel: ChatListViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
-    fun handle(action: ChatAction) {
+    fun handle(action: ChatListAction) {
         when (action) {
-            ChatAction.OnClick -> { /* Handle action */
+            ChatListAction.OnClick -> { /* Handle action */
             }
         }
     }
@@ -23,11 +23,11 @@ class ChatCoordinator(
 }
 
 @Composable
-fun rememberChatCoordinator(
-    viewModel: ChatViewModel = koinViewModel()
-): ChatCoordinator {
+fun rememberChatListCoordinator(
+    viewModel: ChatListViewModel = koinViewModel()
+): ChatListCoordinator {
     return remember(viewModel) {
-        ChatCoordinator(
+        ChatListCoordinator(
             viewModel = viewModel
         )
     }

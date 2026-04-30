@@ -1,12 +1,11 @@
-package ru.saytikus.androidsimpleclient.data.chat.dto
+package ru.saytikus.androidsimpleclient.data.chatList.dto
 
 import kotlinx.serialization.Serializable
 import ru.saytikus.androidsimpleclient.data.core.message.MessageDto
-import ru.saytikus.androidsimpleclient.domain.common.message.Message
 
 
 @Serializable
-data class A3ChatListItemDto(
+data class ChatListItemDto(
     val chatId: String,
 
     val type: String,

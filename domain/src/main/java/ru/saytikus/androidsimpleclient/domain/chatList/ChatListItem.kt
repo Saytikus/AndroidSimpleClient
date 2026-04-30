@@ -1,8 +1,8 @@
-package ru.saytikus.androidsimpleclient.domain.chat
+package ru.saytikus.androidsimpleclient.domain.chatList
 
 import ru.saytikus.androidsimpleclient.domain.common.message.Message
 
-data class Chat(
+data class ChatListItem(
     val chatId: String,
 
     val type: String,
