@@ -16,7 +16,7 @@ object ChatListDestination
  * UI State that represents ChatListScreen
  **/
 data class ChatListState(
-    val chats: List<ChatListItem>,
+    val chats: List<ChatListItem> = emptyList(),
 
     val searchQuery: String = "",
 
