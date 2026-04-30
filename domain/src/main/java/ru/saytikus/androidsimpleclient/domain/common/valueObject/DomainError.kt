@@ -6,6 +6,8 @@ sealed class DomainError {
         data object NoChannel : GatewayError()
         data object Timeout : GatewayError()
         data class RequestError(val code: Int, val message: String?) : GatewayError()
+
+        data object UnknownError : GatewayError()
     }
 
     sealed class MapError : DomainError() {
