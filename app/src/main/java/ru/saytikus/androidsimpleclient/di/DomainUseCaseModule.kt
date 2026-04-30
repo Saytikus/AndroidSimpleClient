@@ -6,6 +6,8 @@ import org.koin.dsl.module
 import ru.saytikus.androidsimpleclient.domain.authentication.SignInProfileUseCase
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
+import ru.saytikus.androidsimpleclient.domain.chat.answers.A3ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetProfileChatsUseCase
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.useCases.UpdateEncryptedSettingsUseCase
@@ -52,5 +54,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<Unit>, EncryptedSettings>>(named("UpdateEncryptedSettingsUseCase")) {
         UpdateEncryptedSettingsUseCase(get(named("EncryptedSettingsRepository")))
+    }
+
+    single<IInputBoundary<MbResult<List<A3ChatListItem>>, Unit>>(named("GetProfileChatsUseCase")) {
+        GetProfileChatsUseCase(get())
     }
 }
