@@ -1,9 +1,11 @@
 package ru.saytikus.androidsimpleclient.domain.chatList
 
 import ru.saytikus.androidsimpleclient.domain.common.message.Message
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
-data class ChatListItem(
-    val chatId: String,
+data class ChatListItem @OptIn(ExperimentalUuidApi::class) constructor(
+    val chatId: Uuid,
 
     val type: String,
 
