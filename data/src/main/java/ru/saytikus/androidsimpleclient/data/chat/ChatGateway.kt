@@ -27,13 +27,6 @@ class ChatGateway(
     override suspend fun getProfileChats(): MbResult<List<A3ChatListItem>> {
         val result = runCatching { _service.getProfileChats() }
 
-        val response = result.getOrNull()
-
-        if (response == null) {
-            println("ChatGateway::getProfileChats: response in null.")
-            return MbResult.Failure(MbError(DomainError.GatewayError.UnknownError))
-        }
-
         if (result.isFailure) {
             val exception = result.exceptionOrNull()
 
@@ -56,6 +49,13 @@ class ChatGateway(
                 return MbResult.Failure(MbError(DomainError.MapError.UnexpectedFormat))
             }
 
+        }
+
+        val response = result.getOrNull()
+
+        if (response == null) {
+            println("ChatGateway::getProfileChats: response in null.")
+            return MbResult.Failure(MbError(DomainError.GatewayError.UnknownError))
         }
 
         val answer = response.body()
