@@ -1,11 +1,14 @@
 package ru.saytikus.androidsimpleclient.domain.common.message
 
-data class Message(
-    val id: String,
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
-    val senderId: String,
+data class Message @OptIn(ExperimentalUuidApi::class) constructor(
+    val id: Uuid,
 
-    val senderName: String,
+    val senderId: Uuid,
+
+    val senderName: String?,
 
     val text: String,
 

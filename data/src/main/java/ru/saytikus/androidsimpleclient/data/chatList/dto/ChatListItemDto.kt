@@ -12,11 +12,11 @@ data class ChatListItemDto @OptIn(ExperimentalUuidApi::class) constructor(
 
     val type: String,
 
-    val title: String,
+    val title: String?,
 
-    val companionName: String,
+    val companionName: String?,
 
-    val lastMessage: MessageDto,
+    val lastMessage: MessageDto?,
 
     val unreadCount: Int,
 

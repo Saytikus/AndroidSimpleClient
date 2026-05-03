@@ -1,8 +1,10 @@
 package ru.saytikus.androidsimpleclient.data.core.message
 
 import ru.saytikus.androidsimpleclient.domain.common.message.Message
+import kotlin.uuid.ExperimentalUuidApi
 
 
+@OptIn(ExperimentalUuidApi::class)
 fun Message.toDto() =
     MessageDto(
         id,
@@ -19,6 +21,7 @@ fun Message.toDto() =
     )
 
 
+@OptIn(ExperimentalUuidApi::class)
 fun MessageDto.toDomain() =
     Message(
         id,

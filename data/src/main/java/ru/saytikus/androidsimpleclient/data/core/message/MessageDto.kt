@@ -1,14 +1,16 @@
 package ru.saytikus.androidsimpleclient.data.core.message
 
 import kotlinx.serialization.Serializable
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 @Serializable
-data class MessageDto(
-    val id: String,
+data class MessageDto @OptIn(ExperimentalUuidApi::class) constructor(
+    val id: Uuid,
 
-    val senderId: String,
+    val senderId: Uuid,
 
-    val senderName: String,
+    val senderName: String?,
 
     val text: String,
 
