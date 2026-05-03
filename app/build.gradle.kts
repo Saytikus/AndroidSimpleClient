@@ -18,9 +18,9 @@ android {
         minSdk = 29
         targetSdk = 36
 
-        versionCode = 8
-        versionName = "0.5.0"
-        val versionDatetime = "23:48:00 29.04.2026"
+        versionCode = 9
+        versionName = "0.6.0"
+        val versionDatetime = "20:52:00 03.05.2026"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
