@@ -8,6 +8,9 @@ import androidx.navigation.compose.rememberNavController
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationDestination
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationNavigation
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationRoute
+import ru.saytikus.androidsimpleclient.presentation.chatList.ChatListDestination
+import ru.saytikus.androidsimpleclient.presentation.chatList.ChatListNavigation
+import ru.saytikus.androidsimpleclient.presentation.chatList.ChatListRoute
 import ru.saytikus.androidsimpleclient.presentation.product.ProductDestination
 import ru.saytikus.androidsimpleclient.presentation.product.ProductNavigation
 import ru.saytikus.androidsimpleclient.presentation.product.ProductRoute
@@ -66,13 +69,26 @@ fun NavigationGraph() {
                     when(nav) {
 
                         AuthenticationNavigation.MainScreen -> {
-                            navController.navigate(ProductDestination) {
+                            navController.navigate(ChatListDestination) {
                                 popUpTo<AuthenticationDestination>() { inclusive = true }
                             }
                         }
 
                         AuthenticationNavigation.RegistrationScreen -> {
                             navController.navigate(RegistrationDestination)
+                        }
+                    }
+                }
+            )
+        }
+
+        composable<ChatListDestination> {
+            ChatListRoute(
+                onNavigate = { nav ->
+                    when(nav) {
+
+                        ChatListNavigation.Settings -> {
+                            navController.navigate(SettingsDestination)
                         }
                     }
                 }
