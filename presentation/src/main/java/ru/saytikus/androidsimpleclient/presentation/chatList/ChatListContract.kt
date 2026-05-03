@@ -15,13 +15,22 @@ object ChatListDestination
 /**
  * UI State that represents ChatListScreen
  **/
-data class ChatListState(
+data class ChatListState @OptIn(ExperimentalUuidApi::class) constructor(
     val chats: List<ChatListItem> = emptyList(),
+
+    val ownerProfileId: Uuid = Uuid.NIL,
 
     val searchQuery: String = "",
 
-    val isRefreshing: Boolean = false
+    val isRefreshing: Boolean = false,
+
+    val refreshError: Boolean = false
 )
+
+sealed interface ChatListNavigation {
+
+    data object Settings : ChatListNavigation
+}
 
 /**
  * ChatList Actions emitted from the UI Layer
@@ -37,5 +46,7 @@ sealed interface ChatListAction {
     data class OnSearchQueryChange(val searchQuery: String) : ChatListAction
 
     data object OnChatsRefresh : ChatListAction
+
+    data object OnSettingsButtonClick : ChatListAction
 }
 
