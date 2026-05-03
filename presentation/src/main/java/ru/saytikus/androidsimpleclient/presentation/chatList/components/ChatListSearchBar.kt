@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +33,7 @@ import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
 
 @Composable
-private fun ChatListSearchBar(
+fun ChatListSearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
     colors: AppColors
@@ -84,7 +85,8 @@ private fun ChatListSearchBar(
                     )
                 }
                 innerTextField()
-            }
+            },
+            cursorBrush = SolidColor(colors.textPrimary)
         )
 
         if (query.isNotEmpty()) {
