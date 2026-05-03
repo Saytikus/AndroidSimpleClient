@@ -5,11 +5,14 @@ import androidx.compose.runtime.getValue
 
 
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlin.uuid.ExperimentalUuidApi
 
 
+@OptIn(ExperimentalUuidApi::class)
 @Composable
 fun ChatListRoute(
-    coordinator: ChatListCoordinator = rememberChatListCoordinator()
+    onNavigate: (ChatListNavigation) -> Unit,
+    coordinator: ChatListCoordinator = rememberChatListCoordinator(onNavigate)
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(ChatListState())

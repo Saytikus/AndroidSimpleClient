@@ -63,7 +63,7 @@ val LightAppColors = AppColors(
     avatarBackground   = Color(0xFF1FA85A).copy(alpha = 0.10f),
     avatarBorder       = Color(0xFF1FA85A).copy(alpha = 0.22f),
     textPrimary        = Color(0xFF1A2E22),
-    textSecondary      = Color(0xFF1A2E22).copy(alpha = 0.42f),
+    textSecondary      = Color(0xFF1A2E22).copy(alpha = 0.82f),
     topBarBadgeBg      = Color(0xFF1A2E22).copy(alpha = 0.07f),
     emptyIconBg        = Color(0xFF1A2E22).copy(alpha = 0.05f),
     emptyIconTint      = Color(0xFF1A2E22).copy(alpha = 0.22f),
