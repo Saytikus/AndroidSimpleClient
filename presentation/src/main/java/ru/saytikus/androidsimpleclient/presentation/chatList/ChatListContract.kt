@@ -30,6 +30,8 @@ data class ChatListState @OptIn(ExperimentalUuidApi::class) constructor(
 sealed interface ChatListNavigation {
 
     data object Settings : ChatListNavigation
+
+    data object AddChat : ChatListNavigation
 }
 
 /**
@@ -48,5 +50,7 @@ sealed interface ChatListAction {
     data object OnChatsRefresh : ChatListAction
 
     data object OnSettingsButtonClick : ChatListAction
+
+    data object OnAddChatButtonClick : ChatListAction
 }
 

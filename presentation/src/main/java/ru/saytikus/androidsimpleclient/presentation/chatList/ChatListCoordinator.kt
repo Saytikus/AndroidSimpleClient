@@ -28,6 +28,8 @@ class ChatListCoordinator(
             ChatListAction.OnSettingsButtonClick -> onNavigate(
                 ChatListNavigation.Settings
             )
+
+            ChatListAction.OnAddChatButtonClick -> TODO()
         }
     }
 

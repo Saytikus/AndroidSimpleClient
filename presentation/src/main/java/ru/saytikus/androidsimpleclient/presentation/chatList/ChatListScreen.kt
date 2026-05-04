@@ -38,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.saytikus.androidsimpleclient.presentation.chatList.components.AddChatButton
 import ru.saytikus.androidsimpleclient.presentation.chatList.components.ChatEmptyState
 import ru.saytikus.androidsimpleclient.presentation.chatList.components.ChatListSearchBar
 import ru.saytikus.androidsimpleclient.presentation.chatList.components.ChatListSurface
@@ -228,6 +229,16 @@ fun ChatListScreen(
                     }
                 }
             }
+
+            AddChatButton(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .offset(x = (-10).dp, y = (-210).dp),
+
+                onClick = { onAction(ChatListAction.OnAddChatButtonClick) },
+
+                colors = c
+            )
         }
     }
 }
@@ -241,9 +252,7 @@ private fun ChatListScreenPreviewLightEmpty() {
         content = {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .background(brush = ColorProvider.backgroundBrush())
-                    .padding(16.dp),
+                    .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 ChatListScreen(

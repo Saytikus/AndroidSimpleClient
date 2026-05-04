@@ -90,6 +90,8 @@ fun NavigationGraph() {
                         ChatListNavigation.Settings -> {
                             navController.navigate(SettingsDestination)
                         }
+
+                        ChatListNavigation.AddChat -> TODO()
                     }
                 }
             )
