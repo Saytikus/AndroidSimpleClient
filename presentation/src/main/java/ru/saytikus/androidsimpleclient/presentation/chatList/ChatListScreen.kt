@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.saytikus.androidsimpleclient.presentation.chatList.components.AddChatButton
 import ru.saytikus.androidsimpleclient.presentation.chatList.components.ChatEmptyState
-import ru.saytikus.androidsimpleclient.presentation.chatList.components.ChatListSearchBar
+import ru.saytikus.androidsimpleclient.presentation.common.components.SearchBar
 import ru.saytikus.androidsimpleclient.presentation.chatList.components.ChatListSurface
 import ru.saytikus.androidsimpleclient.presentation.chatList.components.preview.previewChatList
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
@@ -168,12 +168,13 @@ fun ChatListScreen(
             ) {
                 Spacer(modifier = Modifier.height(4.dp))
 
-                ChatListSearchBar(
+                SearchBar(
                     query = state.searchQuery,
                     onQueryChange = {
                         onAction(ChatListAction.OnSearchQueryChange(it))
                     },
-                    colors = c
+                    colors = c,
+                    "Chats"
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))

@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.chatList.components
+package ru.saytikus.androidsimpleclient.presentation.common.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -33,10 +33,11 @@ import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
 
 @Composable
-fun ChatListSearchBar(
+fun SearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
-    colors: AppColors
+    colors: AppColors,
+    queryPlaceholder: String
 ) {
 
     Row(
@@ -49,7 +50,7 @@ fun ChatListSearchBar(
             .border(
                 1.dp,
                 colors.textPrimary.copy(alpha = 0.07f),
-                RoundedCornerShape(12.dp)
+                androidx.compose.foundation.shape.RoundedCornerShape(12.dp)
             )
             .padding(horizontal = 12.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -79,7 +80,7 @@ fun ChatListSearchBar(
             decorationBox = { innerTextField ->
                 if (query.isEmpty()) {
                     Text(
-                        text = "Search...",
+                        text = "Search $queryPlaceholder",
                         fontSize = 14.sp,
                         color = colors.textSecondary
                     )
@@ -106,7 +107,7 @@ fun ChatListSearchBar(
 
 @Preview
 @Composable
-fun ChatListSearchBarLight() {
+fun SearchBarLight() {
     AndroidSimpleClientTheme(
         content = {
             Box(
@@ -116,10 +117,11 @@ fun ChatListSearchBarLight() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                ChatListSearchBar(
+                SearchBar(
                     "",
-                    {  },
+                    { },
                     LightAppColors,
+                    "Chats"
                 )
             }
         }
@@ -128,7 +130,7 @@ fun ChatListSearchBarLight() {
 
 @Preview
 @Composable
-fun ChatListSearchBarDark() {
+fun SearchBarDark() {
     AndroidSimpleClientTheme(
         previewDarkTheme = true,
         content = {
@@ -139,10 +141,11 @@ fun ChatListSearchBarDark() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                ChatListSearchBar(
+                SearchBar(
                     "",
-                    {  },
-                    DarkAppColors
+                    { },
+                    DarkAppColors,
+                    "Users"
                 )
             }
         }
