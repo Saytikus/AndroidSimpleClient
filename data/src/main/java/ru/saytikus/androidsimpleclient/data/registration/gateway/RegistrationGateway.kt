@@ -1,6 +1,7 @@
 package ru.saytikus.androidsimpleclient.data.registration.gateway
 
 import org.koin.core.annotation.Single
+import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
 import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.data.registration.source.remote.IRegistrationService
 import ru.saytikus.androidsimpleclient.data.registration.source.remote.toDomain
@@ -26,24 +27,13 @@ class RegistrationGateway(
 
 
     override suspend fun registerProfile(registerEvent: C1RegisterProfileCommand): MbResult<A1RegisterProfileAnswer> {
-        val response = _service.registerProfile(registerEvent.toDto())
+        println("Gateway call RegistrationGateway::registerProfile")
 
-        if(!response.isSuccessful) {
-            return MbResult.Failure(
-                MbError(
-                    DomainError.GatewayError.RequestError(
-                        response.code(),
-                        response.errorBody()?.string()
-                    )
-                )
-            )
-        }
+        val result = runCatching { _service.registerProfile(registerEvent.toDto()) }
 
-        println("RegistrationGateway::registerProfile: receive answer on C1RegisterProfileCommand: ${response.body()}")
+        val answer = handleRetrofitServiceResult(result)
 
-        // todo fix !!
-        return MbResult.Success(
-            response.body()?.toDomain()!!
-        )
+        return if(answer is MbResult.Success) MbResult.Success(answer.response.toDomain())
+        else answer as MbResult.Failure
     }
 }

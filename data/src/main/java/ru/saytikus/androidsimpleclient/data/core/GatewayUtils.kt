@@ -60,5 +60,7 @@ fun <T> handleRetrofitServiceResult(result: Result<Response<T>>): MbResult<T> {
         return MbResult.Failure(MbError(DomainError.GatewayError.UnknownError))
     }
 
+    println("handleGatewayResult: received answer: $answer")
+
     return MbResult.Success(answer)
 }
