@@ -1,7 +1,5 @@
 package ru.saytikus.androidsimpleclient.data.core.source.remote
 
-import kotlin.uuid.ExperimentalUuidApi
-
 object RetrofitEndpoints {
 
     private const val ROOT = "/api"
@@ -17,9 +15,6 @@ object RetrofitEndpoints {
     const val LOGIN = "$AUTH_SUBROOT/login"
 
     const val REGISTER = "$AUTH_SUBROOT/register"
-
-
-    const val CHATS = CHAT_SUBROOT
 
     const val SEARCH = "$USERS_SUBROOT/search"
 
