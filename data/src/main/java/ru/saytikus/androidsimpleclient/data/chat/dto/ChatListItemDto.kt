@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.chatList.dto
+package ru.saytikus.androidsimpleclient.data.chat.dto
 
 import kotlinx.serialization.Serializable
 import ru.saytikus.androidsimpleclient.data.core.message.MessageDto

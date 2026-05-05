@@ -1,6 +1,6 @@
-package ru.saytikus.androidsimpleclient.presentation.chatList.components.preview
+package ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview
 
-import ru.saytikus.androidsimpleclient.domain.chatList.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.common.message.Message
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

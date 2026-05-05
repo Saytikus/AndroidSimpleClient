@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.chatList.components
+package ru.saytikus.androidsimpleclient.presentation.chat.chatList.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

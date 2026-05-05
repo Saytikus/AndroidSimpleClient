@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.chatList
+package ru.saytikus.androidsimpleclient.presentation.chat.chatList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -38,11 +38,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.saytikus.androidsimpleclient.presentation.chatList.components.AddChatButton
-import ru.saytikus.androidsimpleclient.presentation.chatList.components.ChatEmptyState
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.AddChatButton
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatEmptyState
 import ru.saytikus.androidsimpleclient.presentation.common.components.SearchBar
-import ru.saytikus.androidsimpleclient.presentation.chatList.components.ChatListSurface
-import ru.saytikus.androidsimpleclient.presentation.chatList.components.preview.previewChatList
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatListSurface
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewChatList
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import kotlin.uuid.ExperimentalUuidApi

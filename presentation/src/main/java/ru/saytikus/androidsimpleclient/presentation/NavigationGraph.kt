@@ -8,9 +8,9 @@ import androidx.navigation.compose.rememberNavController
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationDestination
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationNavigation
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationRoute
-import ru.saytikus.androidsimpleclient.presentation.chatList.ChatListDestination
-import ru.saytikus.androidsimpleclient.presentation.chatList.ChatListNavigation
-import ru.saytikus.androidsimpleclient.presentation.chatList.ChatListRoute
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListDestination
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListNavigation
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListRoute
 import ru.saytikus.androidsimpleclient.presentation.product.ProductDestination
 import ru.saytikus.androidsimpleclient.presentation.product.ProductNavigation
 import ru.saytikus.androidsimpleclient.presentation.product.ProductRoute

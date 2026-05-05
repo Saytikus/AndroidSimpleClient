@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.chatList
+package ru.saytikus.androidsimpleclient.presentation.chat.chatList
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

@@ -1,7 +1,7 @@
-package ru.saytikus.androidsimpleclient.domain.chatList.useCases
+package ru.saytikus.androidsimpleclient.domain.chat.useCases
 
-import ru.saytikus.androidsimpleclient.domain.chatList.IChatListGateway
-import ru.saytikus.androidsimpleclient.domain.chatList.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.IChatListGateway
+import ru.saytikus.androidsimpleclient.domain.chat.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 

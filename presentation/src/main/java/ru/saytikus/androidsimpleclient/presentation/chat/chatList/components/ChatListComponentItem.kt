@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.chatList.components
+package ru.saytikus.androidsimpleclient.presentation.chat.chatList.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ChatBubble
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,11 +26,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.saytikus.androidsimpleclient.domain.chatList.ChatListItem
-import ru.saytikus.androidsimpleclient.domain.common.message.Message
+import ru.saytikus.androidsimpleclient.domain.chat.ChatListItem
 import ru.saytikus.androidsimpleclient.presentation.R
-import ru.saytikus.androidsimpleclient.presentation.chatList.components.preview.previewChatList
-import ru.saytikus.androidsimpleclient.presentation.chatList.components.preview.previewOwnerUuid
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewChatList
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewOwnerUuid
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider

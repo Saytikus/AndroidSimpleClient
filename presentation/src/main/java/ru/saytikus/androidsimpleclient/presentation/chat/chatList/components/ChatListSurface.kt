@@ -1,76 +1,68 @@
-package ru.saytikus.androidsimpleclient.presentation.chatList.components
+package ru.saytikus.androidsimpleclient.presentation.chat.chatList.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Chat
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import ru.saytikus.androidsimpleclient.domain.chat.ChatListItem
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewChatList
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewOwnerUuid
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
+import kotlin.collections.lastIndex
 import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
+@OptIn(ExperimentalUuidApi::class)
 @Composable
-fun ChatEmptyState(colors: AppColors) {
-    Box(
+fun ChatListSurface(
+    chats: List<ChatListItem>,
+    ownerProfileId: Uuid,
+    listState: LazyListState,
+    onChatClick: (Uuid) -> Unit,
+    colors: AppColors
+) {
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(400.dp),
-        contentAlignment = Alignment.Center
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(72.dp)
-                    .background(colors.backgroundEnd, CircleShape),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Chat,
-                    contentDescription = null,
-                    tint = colors.accent,
-                    modifier = Modifier.size(36.dp)
+        chats.forEachIndexed { index, chat ->
+
+            ChatListComponentItem(
+                chat = chat,
+                ownerProfileId = ownerProfileId,
+                onClick = { onChatClick(chat.chatId) },
+                colors = colors
+            )
+
+            if (index < chats.lastIndex) {
+                HorizontalDivider(
+                    modifier = Modifier.padding(start = 74.dp),
+                    thickness = 1.dp,
+                    color = colors.textPrimary.copy(alpha = 0.05f)
                 )
             }
-            Text(
-                text = "No chats yet",
-                color = colors.accent,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
-            )
-            Text(
-                text = "Pull down to refresh",
-                color = colors.textPrimary,
-                fontSize = 12.sp
-            )
         }
     }
+
 }
+
 
 @OptIn(ExperimentalUuidApi::class)
 @Preview
 @Composable
-fun ChatEmptyStateLight() {
+fun ChatListSurfaceLight() {
     AndroidSimpleClientTheme(
         content = {
             Box(
@@ -80,7 +72,11 @@ fun ChatEmptyStateLight() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                ChatEmptyState(
+                ChatListSurface(
+                    previewChatList,
+                    previewOwnerUuid,
+                    LazyListState(),
+                    { },
                     LightAppColors,
                 )
             }
@@ -91,7 +87,7 @@ fun ChatEmptyStateLight() {
 @OptIn(ExperimentalUuidApi::class)
 @Preview
 @Composable
-fun ChatEmptyStateDark() {
+fun ChatListSurfaceDark() {
     AndroidSimpleClientTheme(
         previewDarkTheme = true,
         content = {
@@ -102,7 +98,11 @@ fun ChatEmptyStateDark() {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                ChatEmptyState(
+                ChatListSurface(
+                    previewChatList,
+                    previewOwnerUuid,
+                    LazyListState(),
+                    { },
                     DarkAppColors,
                 )
             }

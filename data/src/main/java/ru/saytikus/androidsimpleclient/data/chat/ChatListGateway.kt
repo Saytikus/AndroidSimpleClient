@@ -1,17 +1,13 @@
-package ru.saytikus.androidsimpleclient.data.chatList
+package ru.saytikus.androidsimpleclient.data.chat
 
 import org.koin.core.annotation.Single
-import ru.saytikus.androidsimpleclient.data.chatList.souce.remote.IChatListService
-import ru.saytikus.androidsimpleclient.data.chatList.souce.remote.toDomain
+import ru.saytikus.androidsimpleclient.data.chat.souce.remote.IChatListService
+import ru.saytikus.androidsimpleclient.data.chat.souce.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
 import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
-import ru.saytikus.androidsimpleclient.domain.chatList.IChatListGateway
-import ru.saytikus.androidsimpleclient.domain.chatList.ChatListItem
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
+import ru.saytikus.androidsimpleclient.domain.chat.IChatListGateway
+import ru.saytikus.androidsimpleclient.domain.chat.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
-import java.io.IOException
-import java.net.SocketTimeoutException
 
 
 @Single
