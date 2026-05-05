@@ -15,6 +15,9 @@ import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.profile.Profile
 import ru.saytikus.androidsimpleclient.domain.common.profile.SaveProfileUseCase
+import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchAnswer
+import ru.saytikus.androidsimpleclient.domain.common.profileSearch.commands.ProfileSearchCommand
+import ru.saytikus.androidsimpleclient.domain.common.profileSearch.useCases.SearchProfilesUseCase
 import ru.saytikus.androidsimpleclient.domain.product.Product
 import ru.saytikus.androidsimpleclient.domain.product.useCases.GetAllProductsUseCase
 import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
@@ -58,5 +61,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<List<ChatListItem>>, Unit>>(named("GetProfileChatsUseCase")) {
         GetProfileChatsUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<ProfileSearchAnswer>, ProfileSearchCommand>>(named("SearchProfilesUseCase")) {
+        SearchProfilesUseCase(get())
     }
 }

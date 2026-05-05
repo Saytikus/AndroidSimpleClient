@@ -8,6 +8,8 @@ object RetrofitEndpoints {
 
     private const val CHAT_SUBROOT = "$ROOT/chats"
 
+    private const val USERS_SUBROOT = "$ROOT/Users"
+
 
 
     const val LOGIN = "$AUTH_SUBROOT/login"
@@ -17,4 +19,5 @@ object RetrofitEndpoints {
 
     const val CHATS = CHAT_SUBROOT
 
+    const val SEARCH = "$USERS_SUBROOT/search"
 }
