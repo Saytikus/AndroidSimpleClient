@@ -40,9 +40,6 @@ class AuthenticationViewModel(
     val stateFlow: StateFlow<AuthenticationState> = _stateFlow.asStateFlow()
 
 
-
-
-
     fun onUsernameOrEmailChange(newValue: String) {
         viewModelScope.launch {
             _stateFlow.update {
@@ -55,7 +52,7 @@ class AuthenticationViewModel(
     }
 
     fun onPasswordChange(newValue: String) {
-        when(val validateResult = passwordValidator.validate(newValue)) {
+        when (val validateResult = passwordValidator.validate(newValue)) {
             is ValidateResult.Error -> _stateFlow.update {
                 it.copy(
                     password = newValue,
@@ -88,13 +85,43 @@ class AuthenticationViewModel(
                 )
             )
 
-            when(result) {
+            when (result) {
                 is MbResult.Failure -> {
                     _stateFlow.update {
-                        val error = result.error.error as DomainError.GatewayError.RequestError
-                        it.copy(authenticationError = error.message) // TODO fix error get
+                        val error = result.error.error
+
+                        var message = ""
+                        when (error) {
+                            is DomainError.DomainValidateError.ErrorAnswerCode,
+                            is DomainError.DomainValidateError.IncorrectAnswerData,
+                            is DomainError.RepositoryError.EntityAlreadyExists -> { /*NO-OP*/ }
+
+                            is DomainError.GatewayError.NoChannel -> message =
+                                "Server not response"
+
+
+                            is DomainError.GatewayError.RequestError -> message =
+                                "Error with code[${error.code}]: ${error.message ?: "empty message"}"
+
+                            is DomainError.GatewayError.Timeout -> message =
+                                "Server response time elapsed"
+
+                            is DomainError.GatewayError.UnknownError -> message =
+                                "Unknown error"
+
+                            is DomainError.MapError.UnexpectedFormat -> message =
+                                "Error with parse server answer"
+
+
+
+                            is DomainError.RepositoryError.MightyDataError -> message =
+                                "Device corruption error"
+                        }
+
+                        it.copy(authenticationError = message) // TODO fix error get
                     }
                 }
+
                 is MbResult.Success -> {
 
                     _stateFlow.update {
