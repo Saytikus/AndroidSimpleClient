@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.domain.chat
+package ru.saytikus.androidsimpleclient.domain.chat.entities
 
 import ru.saytikus.androidsimpleclient.domain.common.message.Message
 import kotlin.uuid.ExperimentalUuidApi

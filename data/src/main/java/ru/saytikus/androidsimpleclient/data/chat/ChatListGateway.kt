@@ -5,8 +5,8 @@ import ru.saytikus.androidsimpleclient.data.chat.souce.remote.IChatListService
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
 import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
-import ru.saytikus.androidsimpleclient.domain.chat.IChatListGateway
-import ru.saytikus.androidsimpleclient.domain.chat.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.IChatGateway
+import ru.saytikus.androidsimpleclient.domain.chat.entities.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 
 
@@ -15,7 +15,7 @@ class ChatListGateway(
 
     private val retrofitProvider: IRetrofitProvider
 
-) : IChatListGateway {
+) : IChatGateway {
 
     private val _service: IChatListService
         get() = retrofitProvider.retrofit().create(IChatListService::class.java)

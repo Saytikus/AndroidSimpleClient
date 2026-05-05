@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.saytikus.androidsimpleclient.domain.chat.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.entities.ChatListItem
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewChatList
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewOwnerUuid
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
