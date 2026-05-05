@@ -1,5 +1,7 @@
 package ru.saytikus.androidsimpleclient.data.core.source.remote
 
+import kotlin.uuid.ExperimentalUuidApi
+
 object RetrofitEndpoints {
 
     private const val ROOT = "/api"
@@ -20,4 +22,10 @@ object RetrofitEndpoints {
     const val CHATS = CHAT_SUBROOT
 
     const val SEARCH = "$USERS_SUBROOT/search"
+
+    const val PRIVATE_CHAT = "$CHAT_SUBROOT/private"
+
+
+    @OptIn(ExperimentalUuidApi::class)
+    const val CREATE_PRIVATE_CHAT = "$PRIVATE_CHAT/{userId}"
 }

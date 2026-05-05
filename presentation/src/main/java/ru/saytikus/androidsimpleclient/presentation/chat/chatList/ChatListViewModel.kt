@@ -32,6 +32,7 @@ class ChatListViewModel(
 
 
     init {
+
         onChatRefresh()
     }
 

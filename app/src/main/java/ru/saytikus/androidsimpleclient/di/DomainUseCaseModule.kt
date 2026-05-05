@@ -6,7 +6,10 @@ import org.koin.dsl.module
 import ru.saytikus.androidsimpleclient.domain.authentication.SignInProfileUseCase
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
+import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
+import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.entities.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.useCases.CreatePrivateChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetProfileChatsUseCase
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
@@ -65,5 +68,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<ProfileSearchAnswer>, ProfileSearchCommand>>(named("SearchProfilesUseCase")) {
         SearchProfilesUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<CreatePrivateChatAnswer>, CreatePrivateChatCommand>>(named("CreatePrivateChatUseCase")) {
+        CreatePrivateChatUseCase(get())
     }
 }
