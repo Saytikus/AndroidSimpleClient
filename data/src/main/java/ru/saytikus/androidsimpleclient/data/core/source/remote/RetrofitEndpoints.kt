@@ -25,7 +25,5 @@ object RetrofitEndpoints {
 
     const val PRIVATE_CHAT = "$CHAT_SUBROOT/private"
 
-
-    @OptIn(ExperimentalUuidApi::class)
     const val CREATE_PRIVATE_CHAT = "$PRIVATE_CHAT/{userId}"
 }
