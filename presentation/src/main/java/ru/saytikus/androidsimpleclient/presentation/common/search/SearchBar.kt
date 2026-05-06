@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.common.components
+package ru.saytikus.androidsimpleclient.presentation.common.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

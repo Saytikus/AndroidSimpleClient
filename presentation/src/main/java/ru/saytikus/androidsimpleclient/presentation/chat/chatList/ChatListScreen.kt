@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.AddChatButton
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatEmptyState
-import ru.saytikus.androidsimpleclient.presentation.common.components.SearchBar
+import ru.saytikus.androidsimpleclient.presentation.common.search.SearchBar
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatListSurface
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewChatList
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
