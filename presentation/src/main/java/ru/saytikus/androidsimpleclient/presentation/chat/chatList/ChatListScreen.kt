@@ -40,9 +40,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.AddChatButton
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatEmptyState
-import ru.saytikus.androidsimpleclient.presentation.common.search.SearchBar
-import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatListSurface
+import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatListComponentItem
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewChatList
+import ru.saytikus.androidsimpleclient.presentation.common.displayItem.DisplayItemList
+import ru.saytikus.androidsimpleclient.presentation.common.search.SearchBar
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import kotlin.uuid.ExperimentalUuidApi
@@ -216,15 +217,28 @@ fun ChatListScreen(
                             }
                         } else {
                             item {
-                                ChatListSurface(
-                                    chats = state.chats,
-                                    ownerProfileId = state.ownerProfileId,
-                                    listState,
-                                    onChatClick = {
-                                        onAction(ChatListAction.OnChatClick(it))
-                                    },
+
+                                DisplayItemList(
+                                    items = state.chats,
                                     colors = c
-                                )
+                                ) { chat ->
+
+                                    ChatListComponentItem(
+                                        chat = chat,
+
+                                        ownerProfileId = state.ownerProfileId,
+
+                                        onClick = {
+                                            onAction(
+                                                ChatListAction.OnChatClick(
+                                                    chat.chatId
+                                                )
+                                            )
+                                        },
+
+                                        colors = c
+                                    )
+                                }
                             }
                         }
                     }
@@ -295,9 +309,7 @@ private fun ChatListScreenPreviewLight() {
         content = {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .background(brush = ColorProvider.backgroundBrush())
-                    .padding(16.dp),
+                    .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 ChatListScreen(
