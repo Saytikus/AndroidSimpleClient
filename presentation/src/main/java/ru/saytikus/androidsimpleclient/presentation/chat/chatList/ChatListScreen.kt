@@ -42,8 +42,8 @@ import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.Add
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatEmptyState
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatListComponentItem
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.preview.previewChatList
-import ru.saytikus.androidsimpleclient.presentation.common.displayItem.DisplayItemList
-import ru.saytikus.androidsimpleclient.presentation.common.search.SearchBar
+import ru.saytikus.androidsimpleclient.presentation.core.ui.displayItem.DisplayItemList
+import ru.saytikus.androidsimpleclient.presentation.core.ui.search.components.SearchBar
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import kotlin.uuid.ExperimentalUuidApi

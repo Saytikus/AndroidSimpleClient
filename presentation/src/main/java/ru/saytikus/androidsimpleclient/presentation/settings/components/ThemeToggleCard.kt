@@ -27,7 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.saytikus.androidsimpleclient.presentation.common.cardBorderStroke
+import ru.saytikus.androidsimpleclient.presentation.core.ui.cardBorderStroke
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider

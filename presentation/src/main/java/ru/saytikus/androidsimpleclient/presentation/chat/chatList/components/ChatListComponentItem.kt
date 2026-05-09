@@ -55,7 +55,7 @@ fun ChatListComponentItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(vertical = 11.dp),
+            .padding(6.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -129,7 +129,7 @@ fun ChatListComponentItem(
 
                     val prefixText = when {
                         chat.lastMessage?.senderId == ownerProfileId -> ""
-                        chat.lastMessage?.senderName != null -> "${chat?.lastMessage?.senderName}: "
+                        chat.lastMessage?.senderName != null -> "${chat.lastMessage?.senderName}: "
                         else -> null
                     }
 
@@ -394,7 +394,7 @@ fun ChatListComponentItemLightFifth() {
                 val ownerId = Uuid.generateV4()
                 ChatListComponentItem(
                     previewChatList[4],
-                    previewOwnerUuid,
+                    ownerId,
                     {  },
                     LightAppColors,
                 )

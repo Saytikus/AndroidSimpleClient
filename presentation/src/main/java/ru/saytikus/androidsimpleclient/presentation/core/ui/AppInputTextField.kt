@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.common.components
+package ru.saytikus.androidsimpleclient.presentation.core.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -40,7 +40,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
@@ -74,25 +73,13 @@ fun AppInputTextField(
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
 
-    // TODO move to colors
-    // error colors
-    val borderColor = if (error != null)
-        colors.textPrimary.copy(alpha = 0.07f)
-    else
-        colors.textPrimary.copy(alpha = 0.07f)
-
-    val iconTint = if (error != null)
-        Color(0xFFE94560).copy(alpha = 0.75f)
-    else
-        colors.accent.copy(alpha = 0.65f)
-
 
     // for focus on text field with click on registration field
     val focusRequester = remember { FocusRequester() }
 
 
     Row(
-        modifier = Modifier.Companion
+        modifier = Modifier
             .fillMaxWidth()
             .background(
                 if (error != null) {
@@ -287,7 +274,7 @@ fun AppInputTextFieldDarkSuccess() {
                     .fillMaxWidth()
                     .background(brush = ColorProvider.backgroundBrush())
                     .padding(16.dp),
-                contentAlignment = Alignment.Companion.Center
+                contentAlignment = Alignment.Center
             ) {
                 AppInputTextField(
                     "Email",

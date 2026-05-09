@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.common.displayItem
+package ru.saytikus.androidsimpleclient.presentation.core.ui.displayItem
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.components.ChatListComponentItem
-import ru.saytikus.androidsimpleclient.presentation.common.displayItem.DisplayItemList
+import ru.saytikus.androidsimpleclient.presentation.core.ui.displayItem.DisplayItemList
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors

@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.common.search
+package ru.saytikus.androidsimpleclient.presentation.core.ui.search.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -35,8 +35,11 @@ import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
 @Composable
 fun SearchBar(
     query: String,
+
     onQueryChange: (String) -> Unit,
+
     colors: AppColors,
+
     queryPlaceholder: String
 ) {
 

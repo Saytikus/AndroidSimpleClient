@@ -23,7 +23,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.saytikus.androidsimpleclient.presentation.common.components.AppInputTextField
+import ru.saytikus.androidsimpleclient.presentation.core.ui.AppInputTextField
 import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationAction
 import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationState
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
