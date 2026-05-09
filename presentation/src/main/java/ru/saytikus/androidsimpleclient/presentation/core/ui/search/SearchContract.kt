@@ -23,6 +23,6 @@ data class SearchState<T>(
 sealed interface SearchAction {
     data class OnQueryChange(val query: String) : SearchAction
 
-    data object OnRetry: SearchAction
+    data class OnRetry(val query: String): SearchAction
 }
 
