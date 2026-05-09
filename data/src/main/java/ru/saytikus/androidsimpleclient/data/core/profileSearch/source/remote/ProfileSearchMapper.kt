@@ -4,8 +4,10 @@ import ru.saytikus.androidsimpleclient.data.core.profileSearch.dto.ProfileSearch
 import ru.saytikus.androidsimpleclient.data.core.profileSearch.dto.ProfileSearchListItemDto
 import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchAnswer
 import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchListItem
+import kotlin.uuid.ExperimentalUuidApi
 
 
+@OptIn(ExperimentalUuidApi::class)
 fun ProfileSearchListItemDto.toDomain() =
     ProfileSearchListItem(
 

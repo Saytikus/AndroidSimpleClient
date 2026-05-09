@@ -1,8 +1,11 @@
 package ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers
 
-data class ProfileSearchListItem(
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
-    val userId: String?,
+data class ProfileSearchListItem @OptIn(ExperimentalUuidApi::class) constructor(
+
+    val userId: Uuid,
 
     val username: String?,
 
