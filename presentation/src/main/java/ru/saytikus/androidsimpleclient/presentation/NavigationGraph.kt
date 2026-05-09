@@ -11,6 +11,9 @@ import ru.saytikus.androidsimpleclient.presentation.authentication.Authenticatio
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListDestination
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListNavigation
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListRoute
+import ru.saytikus.androidsimpleclient.presentation.chat.createChat.CreateChatDestination
+import ru.saytikus.androidsimpleclient.presentation.chat.createChat.CreateChatNavigation
+import ru.saytikus.androidsimpleclient.presentation.chat.createChat.CreateChatRoute
 import ru.saytikus.androidsimpleclient.presentation.product.ProductDestination
 import ru.saytikus.androidsimpleclient.presentation.product.ProductNavigation
 import ru.saytikus.androidsimpleclient.presentation.product.ProductRoute
@@ -91,7 +94,21 @@ fun NavigationGraph() {
                             navController.navigate(SettingsDestination)
                         }
 
-                        ChatListNavigation.AddChat -> TODO()
+                        ChatListNavigation.AddChat -> navController.navigate(
+                            CreateChatDestination
+                        )
+                    }
+                }
+            )
+        }
+
+        composable<CreateChatDestination> {
+            CreateChatRoute(
+                onNavigate = { nav ->
+                    when(nav) {
+                        CreateChatNavigation.CreatedChat -> navController.navigate(
+                            ChatListDestination
+                        )    // TODO fix after add chat screen
                     }
                 }
             )

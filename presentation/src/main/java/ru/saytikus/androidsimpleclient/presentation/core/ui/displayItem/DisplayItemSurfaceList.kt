@@ -1,9 +1,9 @@
 package ru.saytikus.androidsimpleclient.presentation.core.ui.displayItem
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Surface
@@ -27,7 +27,8 @@ fun <Item> DisplayItemSurfaceList(
 
     Surface(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxWidth()
+            .wrapContentHeight(),
         color = colors.cardBackground,
         shape = RoundedCornerShape(20.dp)
     ) {

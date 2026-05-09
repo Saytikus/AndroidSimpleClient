@@ -29,7 +29,7 @@ class ChatListCoordinator(
                 ChatListNavigation.Settings
             )
 
-            ChatListAction.OnAddChatButtonClick -> TODO()
+            ChatListAction.OnAddChatButtonClick -> onNavigate(ChatListNavigation.AddChat)
         }
     }
 

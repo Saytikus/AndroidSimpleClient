@@ -43,8 +43,8 @@ val DarkAppColors = AppColors(
     textPrimary        = Color(0xFFE9EAED),
     textSecondary      = Color(0xFFE9EAED).copy(alpha = 0.40f),
     topBarBadgeBg      = Color(0xFFE9EAED).copy(alpha = 0.10f),
-    emptyIconBg        = Color(0xFFE9EAED).copy(alpha = 0.06f),
-    emptyIconTint      = Color(0xFFE9EAED).copy(alpha = 0.30f),
+    emptyIconBg        = Color(0xFFE9EAED).copy(alpha = 0.13f),
+    emptyIconTint      = Color(0xFFE9EAED).copy(alpha = 0.60f),
     pullIndicatorContainer = Color(0xFF1A1A2E),
     avatar = Color(0xFFE9EAED),
     errorColor = Color(0xFFFFB830)
@@ -65,8 +65,8 @@ val LightAppColors = AppColors(
     textPrimary        = Color(0xFF1A2E22),
     textSecondary      = Color(0xFF1A2E22).copy(alpha = 0.82f),
     topBarBadgeBg      = Color(0xFF1A2E22).copy(alpha = 0.07f),
-    emptyIconBg        = Color(0xFF1A2E22).copy(alpha = 0.05f),
-    emptyIconTint      = Color(0xFF1A2E22).copy(alpha = 0.22f),
+    emptyIconBg        = Color(0xFF1A2E22).copy(alpha = 0.13f),
+    emptyIconTint      = Color(0xFF1A2E22).copy(alpha = 0.6f),
     pullIndicatorContainer = Color(0xFFF2F9F4),
     avatar = Color(0xFFE9EAED),
     errorColor = Color(0xFFE94560).copy(alpha = 0.8f)
