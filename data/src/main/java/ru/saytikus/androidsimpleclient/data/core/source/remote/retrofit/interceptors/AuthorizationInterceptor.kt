@@ -1,11 +1,11 @@
-package ru.saytikus.androidsimpleclient.data.core.source.remote.interceptors
+package ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interceptors
 
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
-import ru.saytikus.androidsimpleclient.data.core.source.remote.RetrofitEndpoints
+import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.RetrofitEndpoints
 import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.ISingleObjectRepository
 

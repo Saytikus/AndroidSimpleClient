@@ -62,5 +62,7 @@ dependencies {
 
     implementation(libs.ksafe.core)
 
+    implementation(libs.signalR.kore)
+
     implementation(project(":domain"))
 }

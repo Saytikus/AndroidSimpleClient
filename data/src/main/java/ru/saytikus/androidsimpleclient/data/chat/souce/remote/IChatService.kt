@@ -6,7 +6,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import ru.saytikus.androidsimpleclient.data.chat.dto.ChatListItemDto
 import ru.saytikus.androidsimpleclient.data.chat.dto.CreatePrivateChatAnswerDto
-import ru.saytikus.androidsimpleclient.data.core.source.remote.RetrofitEndpoints
+import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.RetrofitEndpoints
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

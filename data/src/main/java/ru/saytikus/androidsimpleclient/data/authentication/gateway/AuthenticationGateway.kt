@@ -5,14 +5,11 @@ import ru.saytikus.androidsimpleclient.data.authentication.source.remote.IAuthen
 import ru.saytikus.androidsimpleclient.data.authentication.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.authentication.source.remote.toDto
 import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
-import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
-import ru.saytikus.androidsimpleclient.data.core.source.remote.mappers.deserialize
+import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.authentication.IAuthenticationGateway
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
 
 @Single
 class AuthenticationGateway(

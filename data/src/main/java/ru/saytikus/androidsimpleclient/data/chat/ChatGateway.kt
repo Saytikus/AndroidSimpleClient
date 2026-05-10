@@ -4,7 +4,7 @@ import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.IChatService
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
-import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
+import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.chat.IChatGateway
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand

@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.core.source.remote.dto
+package ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.dto
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable

@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.core.source.remote
+package ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,8 +14,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.annotation.Single
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
-import ru.saytikus.androidsimpleclient.data.core.source.remote.interceptors.AuthorizationInterceptor
-import ru.saytikus.androidsimpleclient.data.core.source.remote.interfaces.IRetrofitProvider
+import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interceptors.AuthorizationInterceptor
+import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
 
 @Single

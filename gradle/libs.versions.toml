@@ -30,6 +30,7 @@ roomRuntime = "2.8.4"
 roomCompiler = "2.8.4"
 roomKtx = "2.8.4"
 ksafe = "2.0.0-RC2"
+signalRKore = "0.9.13"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -80,6 +81,8 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 ksafe-core = { group = "eu.anifantakis", name = "ksafe", version.ref = "ksafe" }
+
+signalR-kore = { group = "eu.lepicekmichal.signalrkore", name = "signalrkore", version.ref = "signalRKore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

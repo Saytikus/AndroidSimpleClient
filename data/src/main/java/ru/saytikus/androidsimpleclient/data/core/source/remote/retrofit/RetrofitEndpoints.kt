@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.core.source.remote
+package ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit
 
 object RetrofitEndpoints {
 
