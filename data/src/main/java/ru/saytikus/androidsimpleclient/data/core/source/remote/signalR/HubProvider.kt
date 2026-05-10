@@ -3,6 +3,7 @@ package ru.saytikus.androidsimpleclient.data.core.source.remote.signalR
 import eu.lepicekmichal.signalrkore.AutomaticReconnect
 import eu.lepicekmichal.signalrkore.HubConnection
 import eu.lepicekmichal.signalrkore.HubConnectionBuilder
+import eu.lepicekmichal.signalrkore.HubConnectionState
 import eu.lepicekmichal.signalrkore.Logger
 import eu.lepicekmichal.signalrkore.OnValue1
 import kotlinx.coroutines.CoroutineScope
@@ -10,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -17,6 +19,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.KSerializer
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
+import ru.saytikus.androidsimpleclient.domain.chat.ChatConnectionState
 import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.ISingleObjectRepository
 import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
@@ -29,7 +32,7 @@ class HubProvider(
     @Named("EncryptedSettingsRepository")
     private val _encryptedSettingsRepository: ISingleObjectRepository<EncryptedSettings>
 
-) {
+) : IHubProvider {
 
     private var _connection = runBlocking {
          createConnection()
@@ -39,7 +42,25 @@ class HubProvider(
 
 
 
-    var connectionState = _connection.connectionState
+    override fun connectionState() = _connection.connectionState.map {
+        when(it) {
+            HubConnectionState.CONNECTING -> {
+                ChatConnectionState.CONNECTING
+            }
+
+            HubConnectionState.CONNECTED -> {
+                ChatConnectionState.CONNECTED
+            }
+
+            HubConnectionState.DISCONNECTED -> {
+                ChatConnectionState.DISCONNECTED
+            }
+
+            HubConnectionState.RECONNECTING -> {
+                ChatConnectionState.RECONNECTING
+            }
+        }
+    }
 
 
 
@@ -55,15 +76,15 @@ class HubProvider(
         }
     }
 
-    suspend fun connect() = withContext(Dispatchers.IO) {
+    override suspend fun connect() = withContext(Dispatchers.IO) {
         _connection.start()
     }
 
-    suspend fun disconnect() = withContext(Dispatchers.IO) {
+    override suspend fun disconnect() = withContext(Dispatchers.IO) {
         _connection.stop()
     }
 
-    suspend fun send(
+    override suspend fun send(
         method: String,
 
         message: Any
@@ -72,7 +93,7 @@ class HubProvider(
         _connection.send(method, message)
     }
 
-    suspend fun <ResponseType : Any> sendAwait(
+    override suspend fun <ResponseType : Any> sendAwait(
         method: String,
 
         responseSerializer: KSerializer<ResponseType>,
@@ -87,7 +108,7 @@ class HubProvider(
         )
     }
 
-    fun <ResponseType : Any> messageFlow(
+    override fun <ResponseType : Any> messageFlow(
         method: String,
 
         messageSerializer: KSerializer<ResponseType>
