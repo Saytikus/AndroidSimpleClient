@@ -74,10 +74,3 @@ dependencies {
 
     implementation(project(":domain"))
 }
-
-kotlin {
-    compilerOptions {
-        // Добавьте эту строку:
-        freeCompilerArgs.add("-opt-in=kotlin.uuid.ExperimentalUuidApi")
-    }
-}
