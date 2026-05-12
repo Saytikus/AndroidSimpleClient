@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -26,6 +27,7 @@ class RetrofitProvider(
 
 ) : IRetrofitProvider {
 
+    @Volatile
     private var _retrofit: Retrofit = runBlocking {
         buildRetrofit(
             settingsRepo.getOnce().responseServerHostAddress,
@@ -40,6 +42,7 @@ class RetrofitProvider(
         scope.launch {
             settingsRepo.observeSettings()
                 .distinctUntilChanged()
+                .drop(1)
                 .onEach {
                     _retrofit = buildRetrofit(
                         it.responseServerHostAddress,

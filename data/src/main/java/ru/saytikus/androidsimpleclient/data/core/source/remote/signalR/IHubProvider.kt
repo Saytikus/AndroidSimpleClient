@@ -7,7 +7,7 @@ import ru.saytikus.androidsimpleclient.domain.chat.ChatConnectionState
 
 interface IHubProvider {
 
-    fun connectionState(): Flow<ChatConnectionState>
+    val connectionState: Flow<ChatConnectionState>
 
     suspend fun connect()
 
@@ -25,7 +25,12 @@ interface IHubProvider {
         responseSerializer: KSerializer<ResponseType>,
 
         message: Any
+    )
 
+    suspend fun <T : Any> sendAwait(
+        method: String,
+        message: T,
+        serializer: KSerializer<T>
     )
 
     fun <ResponseType : Any> messageFlow(

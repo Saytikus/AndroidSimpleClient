@@ -8,11 +8,12 @@ import eu.lepicekmichal.signalrkore.Logger
 import eu.lepicekmichal.signalrkore.OnValue1
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -23,8 +24,10 @@ import ru.saytikus.androidsimpleclient.domain.chat.ChatConnectionState
 import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.ISingleObjectRepository
 import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
+import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @Single
+@OptIn(ExperimentalAtomicApi::class)
 class HubProvider(
 
     private val _settingsRepo: ISettingsRepository,
@@ -34,45 +37,41 @@ class HubProvider(
 
 ) : IHubProvider {
 
+
     private var _connection = runBlocking {
-         createConnection()
+        createConnection()
     }
 
     private val _scope = CoroutineScope(Dispatchers.IO)
 
 
+    private val _connectionState = MutableStateFlow(ChatConnectionState.DISCONNECTED)
+    override val connectionState = _connectionState.asStateFlow()
 
-    override fun connectionState() = _connection.connectionState.map {
-        when(it) {
-            HubConnectionState.CONNECTING -> {
-                ChatConnectionState.CONNECTING
-            }
-
-            HubConnectionState.CONNECTED -> {
-                ChatConnectionState.CONNECTED
-            }
-
-            HubConnectionState.DISCONNECTED -> {
-                ChatConnectionState.DISCONNECTED
-            }
-
-            HubConnectionState.RECONNECTING -> {
-                ChatConnectionState.RECONNECTING
-            }
-        }
-    }
-
-
+    private var _stateCollectorJob: Job? = null
 
     init {
+
+        subscribeToConnectionState()
 
         _scope.launch {
             _settingsRepo.observeSettings()
                 .distinctUntilChanged()
-                .onEach {
+                .drop(1)
+                .collect {
+                    val isConnected =
+                        _connection.connectionState.value == HubConnectionState.CONNECTED
+
+                    _connection.stop()
                     _connection = createConnection()
+
+                    // отменяем старый коллектор, стартуем новый
+                    subscribeToConnectionState()
+
+                    if (isConnected) _connection.start()
                 }
-                .collect()
+
+
         }
     }
 
@@ -101,10 +100,24 @@ class HubProvider(
         message: Any
 
     ) = withContext(Dispatchers.IO) {
+
         return@withContext _connection.invoke(
             method,
             responseSerializer,
             message
+        )
+    }
+
+
+    override suspend fun <T : Any> sendAwait(
+        method: String,
+        message: T,
+        serializer: KSerializer<T>
+    ): Unit = withContext(Dispatchers.IO) {
+        return@withContext _connection.invoke(
+            method,
+            message,
+            serializer
         )
     }
 
@@ -128,10 +141,24 @@ class HubProvider(
 
             logger = Logger { severity, message, cause ->
                 // TODO replace println by logger
-                when(severity) {
+                when (severity) {
                     Logger.Severity.INFO -> println("SIGNALR INFO: $message")
                     Logger.Severity.WARNING -> println("SIGNALR WARNING: $message")
                     Logger.Severity.ERROR -> println("SIGNALR ERROR: $message, cause: $cause")
+                }
+            }
+        }
+    }
+
+    private fun subscribeToConnectionState() {
+        _stateCollectorJob?.cancel()
+        _stateCollectorJob = _scope.launch {
+            _connection.connectionState.collect { state ->
+                _connectionState.value = when (state) {
+                    HubConnectionState.CONNECTING -> ChatConnectionState.CONNECTING
+                    HubConnectionState.CONNECTED -> ChatConnectionState.CONNECTED
+                    HubConnectionState.DISCONNECTED -> ChatConnectionState.DISCONNECTED
+                    HubConnectionState.RECONNECTING -> ChatConnectionState.RECONNECTING
                 }
             }
         }

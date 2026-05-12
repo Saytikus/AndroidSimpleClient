@@ -64,3 +64,40 @@ fun <T> handleRetrofitServiceResult(result: Result<Response<T>>): MbResult<T> {
 
     return MbResult.Success(answer)
 }
+
+fun <T> handleHubResult(result: Result<T>): MbResult<T> {
+
+    if (result.isFailure) {
+        val exception = result.exceptionOrNull()
+
+        if (exception == null) {
+            println("handleHubResult: catch null exception.")
+            return MbResult.Failure(MbError(DomainError.GatewayError.UnknownError))
+        }
+
+        println("handleHubResult: receive exception: ${exception.toString()}.")
+
+        if (exception is SocketTimeoutException) {
+            return MbResult.Failure(MbError(DomainError.GatewayError.Timeout))
+        }
+
+        if (exception is IOException) {
+            return MbResult.Failure(MbError(DomainError.GatewayError.NoChannel))
+        }
+
+        if (exception is IllegalArgumentException) {
+            return MbResult.Failure(MbError(DomainError.MapError.UnexpectedFormat))
+        }
+
+        // TODO parse Exception
+    }
+
+    val answer = result.getOrNull()
+
+    if (answer == null) {
+        println("handleHubResult: answer is null.")
+        return MbResult.Failure(MbError(DomainError.GatewayError.UnknownError))
+    }
+
+    return MbResult.Success(answer)
+}
