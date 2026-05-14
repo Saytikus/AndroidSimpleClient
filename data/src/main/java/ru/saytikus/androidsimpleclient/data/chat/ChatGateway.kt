@@ -43,7 +43,7 @@ class ChatGateway(
 
 
     private val _chatEvents = MutableSharedFlow<ChatEvent>(
-        replay = 2,
+        replay = 0,
         extraBufferCapacity = 10
     )
 
