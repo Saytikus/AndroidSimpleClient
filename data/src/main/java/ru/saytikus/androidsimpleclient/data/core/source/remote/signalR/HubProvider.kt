@@ -114,17 +114,152 @@ class HubProvider(
         }
     }
 
-    override suspend fun <T : Any> sendAwait(
+    override suspend fun <ArgumentType : Any> sendAwait(
         method: String,
-        message: T,
-        serializer: KSerializer<T>,
+
+        message: ArgumentType,
+
+        serializer: KSerializer<ArgumentType>
     ) {
+
         val connection = _connectionMutex.withLock { _connection }
-            ?: error("HubProvider: connection is not initialized yet")
+            ?: error("HubProvider::sendAwaitA1: connection is not initialized yet")
         try {
             connection.invoke(method, message, serializer)
         } catch (e: Exception) {
-            println("HubProvider: sendAwait() failed [$method]: $e")
+            println("HubProvider::sendAwaitA1: sendAwait() failed [$method]: $e")
+            throw e
+        }
+    }
+
+    override suspend fun <ArgumentType1 : Any, ArgumentType2 : Any> sendAwait(
+        method: String,
+
+        message1: ArgumentType1,
+
+        serializer1: KSerializer<ArgumentType1>,
+
+        message2: ArgumentType2,
+
+        serializer2: KSerializer<ArgumentType2>
+    ) {
+
+        val connection = _connectionMutex.withLock { _connection }
+            ?: error("HubProvider::sendAwaitA2: connection is not initialized yet")
+        try {
+            connection.invoke(
+                method = method,
+
+                arg1 = message1,
+
+                argSerializer1 = serializer1,
+
+                arg2 = message2,
+
+                argSerializer2 = serializer2
+            )
+
+        } catch (e: Exception) {
+            println("HubProvider::sendAwaitA2: sendAwait() failed [$method]: $e")
+            throw e
+        }
+    }
+
+    override suspend fun <
+            ArgumentType1 : Any,
+            ArgumentType2 : Any,
+            ArgumentType3 : Any
+            > sendAwait(
+        method: String,
+
+        message1: ArgumentType1,
+
+        serializer1: KSerializer<ArgumentType1>,
+
+        message2: ArgumentType2,
+
+        serializer2: KSerializer<ArgumentType2>,
+
+        message3: ArgumentType3,
+
+        serializer3: KSerializer<ArgumentType3>
+    ) {
+
+        val connection = _connectionMutex.withLock { _connection }
+            ?: error("HubProvider::sendAwaitA3: connection is not initialized yet")
+        try {
+            connection.invoke(
+                method = method,
+
+                arg1 = message1,
+
+                argSerializer1 = serializer1,
+
+                arg2 = message2,
+
+                argSerializer2 = serializer2,
+
+                arg3 = message3,
+
+                argSerializer3 = serializer3
+            )
+
+        } catch (e: Exception) {
+            println("HubProvider::sendAwaitA3: sendAwait() failed [$method]: $e")
+            throw e
+        }
+    }
+
+    override suspend fun <
+            ArgumentType1 : Any,
+            ArgumentType2 : Any,
+            ArgumentType3 : Any,
+            ArgumentType4 : Any
+            > sendAwait(
+        method: String,
+
+        message1: ArgumentType1,
+
+        serializer1: KSerializer<ArgumentType1>,
+
+        message2: ArgumentType2,
+
+        serializer2: KSerializer<ArgumentType2>,
+
+        message3: ArgumentType3,
+
+        serializer3: KSerializer<ArgumentType3>,
+
+        message4: ArgumentType4,
+
+        serializer4: KSerializer<ArgumentType4>
+    ) {
+
+        val connection = _connectionMutex.withLock { _connection }
+            ?: error("HubProvider::sendAwaitA4: connection is not initialized yet")
+        try {
+            connection.invoke(
+                method = method,
+
+                arg1 = message1,
+
+                argSerializer1 = serializer1,
+
+                arg2 = message2,
+
+                argSerializer2 = serializer2,
+
+                arg3 = message3,
+
+                argSerializer3 = serializer3,
+
+                arg4 = message4,
+
+                argSerializer4 = serializer4
+            )
+
+        } catch (e: Exception) {
+            println("HubProvider::sendAwaitA4: sendAwait() failed [$method]: $e")
             throw e
         }
     }

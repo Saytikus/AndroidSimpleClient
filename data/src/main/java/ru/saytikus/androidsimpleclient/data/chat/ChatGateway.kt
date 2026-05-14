@@ -11,8 +11,8 @@ import ru.saytikus.androidsimpleclient.data.chat.souce.remote.IChatService
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.handleHubResult
 import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
-import ru.saytikus.androidsimpleclient.data.core.message.MessageDto
-import ru.saytikus.androidsimpleclient.data.core.message.toDomain
+import ru.saytikus.androidsimpleclient.data.core.message.dto.MessageDto
+import ru.saytikus.androidsimpleclient.data.core.message.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.IHubProvider
 import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.sendAwait

@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.core.message
+package ru.saytikus.androidsimpleclient.data.core.message.dto
 
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi

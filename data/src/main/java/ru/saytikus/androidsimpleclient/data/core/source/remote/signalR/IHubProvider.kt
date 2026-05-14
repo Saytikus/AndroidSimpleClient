@@ -19,10 +19,69 @@ interface IHubProvider {
         message: Any
     )
 
-    suspend fun <T : Any> sendAwait(
+    suspend fun <ArgumentType : Any> sendAwait(
         method: String,
-        message: T,
-        serializer: KSerializer<T>
+
+        message: ArgumentType,
+
+        serializer: KSerializer<ArgumentType>
+    )
+
+    suspend fun <ArgumentType1 : Any, ArgumentType2 : Any> sendAwait(
+        method: String,
+
+        message1: ArgumentType1,
+
+        serializer1: KSerializer<ArgumentType1>,
+
+        message2: ArgumentType2,
+
+        serializer2: KSerializer<ArgumentType2>
+    )
+
+    suspend fun <
+            ArgumentType1 : Any,
+            ArgumentType2 : Any,
+            ArgumentType3 : Any
+            > sendAwait(
+        method: String,
+
+        message1: ArgumentType1,
+
+        serializer1: KSerializer<ArgumentType1>,
+
+        message2: ArgumentType2,
+
+        serializer2: KSerializer<ArgumentType2>,
+
+        message3: ArgumentType3,
+
+        serializer3: KSerializer<ArgumentType3>
+    )
+
+    suspend fun <
+            ArgumentType1 : Any,
+            ArgumentType2 : Any,
+            ArgumentType3 : Any,
+            ArgumentType4 : Any
+            > sendAwait(
+        method: String,
+
+        message1: ArgumentType1,
+
+        serializer1: KSerializer<ArgumentType1>,
+
+        message2: ArgumentType2,
+
+        serializer2: KSerializer<ArgumentType2>,
+
+        message3: ArgumentType3,
+
+        serializer3: KSerializer<ArgumentType3>,
+
+        message4: ArgumentType4,
+
+        serializer4: KSerializer<ArgumentType4>
     )
 
     fun subscribe(method: String, action: suspend () -> Unit)

@@ -3,7 +3,7 @@
 package ru.saytikus.androidsimpleclient.domain.chat.model
 
 import ru.saytikus.androidsimpleclient.domain.chat.dto.ChatCreatedEventBody
-import ru.saytikus.androidsimpleclient.domain.common.message.Message
+import ru.saytikus.androidsimpleclient.domain.common.message.model.Message
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

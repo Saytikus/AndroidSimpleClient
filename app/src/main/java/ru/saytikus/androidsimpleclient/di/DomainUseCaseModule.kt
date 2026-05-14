@@ -20,6 +20,10 @@ import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.Encrypted
 import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.useCases.UpdateEncryptedSettingsUseCase
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
+import ru.saytikus.androidsimpleclient.domain.common.message.model.MessageEvent
+import ru.saytikus.androidsimpleclient.domain.common.message.model.SendMessageCommand
+import ru.saytikus.androidsimpleclient.domain.common.message.useCases.ObserveMessageEventsUseCase
+import ru.saytikus.androidsimpleclient.domain.common.message.useCases.SendMessageUseCase
 import ru.saytikus.androidsimpleclient.domain.common.profile.Profile
 import ru.saytikus.androidsimpleclient.domain.common.profile.SaveProfileUseCase
 import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchAnswer
@@ -84,5 +88,13 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<Unit>, LeaveChatCommand>>(named("LeaveChatUseCase")) {
         LeaveChatUseCase(get())
+    }
+
+    single<IObserveInputBoundary<Flow<MessageEvent>>>(named("ObserveMessageEventsUseCase")) {
+        ObserveMessageEventsUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<Unit>, SendMessageCommand>>(named("SendMessageUseCase")) {
+        SendMessageUseCase(get())
     }
 }

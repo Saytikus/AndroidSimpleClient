@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.domain.common.message
+package ru.saytikus.androidsimpleclient.domain.common.message.model
 
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
