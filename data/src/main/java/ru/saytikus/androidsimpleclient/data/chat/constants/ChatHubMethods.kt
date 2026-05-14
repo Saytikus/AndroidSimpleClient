@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.data.chat
+package ru.saytikus.androidsimpleclient.data.chat.constants
 
 object ChatHubMethods {
 

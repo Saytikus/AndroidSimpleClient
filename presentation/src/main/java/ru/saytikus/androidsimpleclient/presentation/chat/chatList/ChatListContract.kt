@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.presentation.chat.chatList
 
 import kotlinx.serialization.Serializable
-import ru.saytikus.androidsimpleclient.domain.chat.entities.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

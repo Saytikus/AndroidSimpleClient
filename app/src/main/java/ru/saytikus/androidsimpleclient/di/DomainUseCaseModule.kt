@@ -10,7 +10,7 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
-import ru.saytikus.androidsimpleclient.domain.chat.entities.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.CreatePrivateChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetProfileChatsUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.JoinChatUseCase

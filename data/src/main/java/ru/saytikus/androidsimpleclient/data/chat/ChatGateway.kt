@@ -1,10 +1,18 @@
 package ru.saytikus.androidsimpleclient.data.chat
 
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.serialization.builtins.serializer
 import org.koin.core.annotation.Single
+import ru.saytikus.androidsimpleclient.data.chat.constants.ChatHubEvents
+import ru.saytikus.androidsimpleclient.data.chat.constants.ChatHubMethods
+import ru.saytikus.androidsimpleclient.data.chat.dto.ChatCreatedEventBodyDto
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.IChatService
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.handleHubResult
 import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
+import ru.saytikus.androidsimpleclient.data.core.message.MessageDto
+import ru.saytikus.androidsimpleclient.data.core.message.toDomain
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.IHubProvider
 import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.sendAwait
@@ -13,9 +21,11 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
-import ru.saytikus.androidsimpleclient.domain.chat.entities.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.model.ChatEvent
+import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 
 @OptIn(ExperimentalUuidApi::class)
@@ -30,6 +40,70 @@ class ChatGateway(
 
     private val _service: IChatService
         get() = _retrofitProvider.retrofit().create(IChatService::class.java)
+
+
+    private val _chatEvents = MutableSharedFlow<ChatEvent>(
+        replay = 2,
+        extraBufferCapacity = 10
+    )
+
+    override val chatEvents = _chatEvents.asSharedFlow()
+
+
+    init {
+
+        _hubProvider.subscribe(
+            ChatHubEvents.CHAT_LIST_UPDATED,
+
+            Uuid.serializer(),
+
+            MessageDto.serializer()
+
+        ) { chatId, messageDto ->
+            println("ChatGateway received ${ChatHubEvents.CHAT_LIST_UPDATED}: $chatId, $messageDto")
+            _chatEvents.emit(ChatEvent.ChatListUpdatedEvent(chatId, messageDto.toDomain()))
+        }
+
+        _hubProvider.subscribe(
+            ChatHubEvents.CHAT_CREATED,
+
+            Uuid.serializer(),
+
+            ChatCreatedEventBodyDto.serializer()
+
+        ) { chatId, bodyDto ->
+            println("ChatGateway received ${ChatHubEvents.CHAT_CREATED}: $chatId, $bodyDto")
+            _chatEvents.emit(ChatEvent.ChatCreatedEvent(chatId, bodyDto.toDomain()))
+        }
+
+        _hubProvider.subscribe(
+            ChatHubEvents.USER_ONLINE_CHANGED,
+
+            Uuid.serializer(),
+
+            Boolean.serializer()
+
+        ) { userId, isOnline ->
+            println("ChatGateway received ${ChatHubEvents.USER_ONLINE_CHANGED}: $userId, $isOnline")
+            _chatEvents.emit(ChatEvent.UserOnlineChangedEvent(userId, isOnline))
+        }
+
+        _hubProvider.subscribe(
+            ChatHubEvents.TYPING_CHANGED,
+
+            Uuid.serializer(),
+
+            Uuid.serializer(),
+
+            Boolean.serializer()
+
+        ) { chatId, userId, isTyping ->
+            println("ChatGateway received ${ChatHubEvents.TYPING_CHANGED}: $chatId, $userId, $isTyping")
+            _chatEvents.emit(ChatEvent.TypingChangedEvent(chatId, userId, isTyping))
+        }
+
+    }
+
 
 
     override suspend fun getProfileChats(): MbResult<List<ChatListItem>> {
