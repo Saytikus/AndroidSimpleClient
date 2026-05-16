@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.KSerializer
@@ -57,7 +58,8 @@ class HubProvider(
 
 
     init {
-        _scope.launch {
+
+        runBlocking {
             try {
                 val connection = createConnection()
                 _connectionMutex.withLock { _connection = connection }
@@ -66,8 +68,10 @@ class HubProvider(
             } catch (e: Exception) {
                 println("HubProvider: initial connection creation failed: $e")
             }
+        }
 
 
+        _scope.launch {
             _settingsRepo.observeSettings()
                 .map { it.responseServerHostAddress }
                 .distinctUntilChanged()
