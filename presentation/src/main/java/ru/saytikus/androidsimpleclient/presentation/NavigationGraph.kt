@@ -8,6 +8,9 @@ import androidx.navigation.compose.rememberNavController
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationDestination
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationNavigation
 import ru.saytikus.androidsimpleclient.presentation.authentication.AuthenticationRoute
+import ru.saytikus.androidsimpleclient.presentation.chat.chat.ChatDestination
+import ru.saytikus.androidsimpleclient.presentation.chat.chat.ChatNavigation
+import ru.saytikus.androidsimpleclient.presentation.chat.chat.ChatRoute
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListDestination
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListNavigation
 import ru.saytikus.androidsimpleclient.presentation.chat.chatList.ChatListRoute
@@ -22,7 +25,9 @@ import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationNav
 import ru.saytikus.androidsimpleclient.presentation.registration.RegistrationRoute
 import ru.saytikus.androidsimpleclient.presentation.settings.SettingsDestination
 import ru.saytikus.androidsimpleclient.presentation.settings.SettingsRoute
+import kotlin.uuid.ExperimentalUuidApi
 
+@OptIn(ExperimentalUuidApi::class)
 @Composable
 fun NavigationGraph() {
     val navController: NavHostController = rememberNavController()
@@ -97,6 +102,20 @@ fun NavigationGraph() {
                         ChatListNavigation.AddChat -> navController.navigate(
                             CreateChatDestination
                         )
+
+                        is ChatListNavigation.Chat -> navController.navigate(
+                            ChatDestination(chatId = nav.chatId.toString())
+                        )
+                    }
+                }
+            )
+        }
+
+        composable<ChatDestination> {
+            ChatRoute(
+                onNavigate = { nav ->
+                    when(nav) {
+                        ChatNavigation.Back -> navController.popBackStack()
                     }
                 }
             )

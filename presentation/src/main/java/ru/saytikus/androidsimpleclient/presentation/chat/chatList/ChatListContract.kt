@@ -32,6 +32,10 @@ sealed interface ChatListNavigation {
     data object Settings : ChatListNavigation
 
     data object AddChat : ChatListNavigation
+
+    data class Chat @OptIn(ExperimentalUuidApi::class) constructor(
+        val chatId: Uuid
+    ) : ChatListNavigation
 }
 
 /**

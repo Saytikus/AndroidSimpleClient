@@ -2,29 +2,24 @@ package ru.saytikus.androidsimpleclient.presentation.chat.chat
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-
-
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlin.uuid.ExperimentalUuidApi
 
 
+@OptIn(ExperimentalUuidApi::class)
 @Composable
 fun ChatRoute(
-    coordinator: ChatCoordinator = rememberChatCoordinator()
+    onNavigate: (ChatNavigation) -> Unit,
+    coordinator: ChatCoordinator = rememberChatCoordinator(onNavigate)
 ) {
-    // State observing and declarations
- val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(ChatState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(ChatState())
 
-    // UI Actions
     val actionsHandler: (ChatAction) -> Unit = { action ->
-		coordinator.handle(action)
-	}
+        coordinator.handle(action)
+    }
 
-    // UI Rendering
     ChatScreen(
-    	state = uiState,
-    	onAction = actionsHandler
+        state = uiState,
+        onAction = actionsHandler
     )
 }
-
-

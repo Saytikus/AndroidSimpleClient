@@ -3,6 +3,7 @@ package ru.saytikus.androidsimpleclient.presentation.chat.chatList
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import org.koin.androidx.compose.koinViewModel
+import kotlin.uuid.ExperimentalUuidApi
 
 /**
  * Screen's coordinator which is responsible for handling actions from the UI layer
@@ -16,10 +17,11 @@ class ChatListCoordinator(
 ) {
 
     val screenStateFlow = viewModel.stateFlow
+    @OptIn(ExperimentalUuidApi::class)
     fun handle(action: ChatListAction) {
         when (action) {
 
-            is ChatListAction.OnChatClick -> TODO()
+            is ChatListAction.OnChatClick -> onNavigate(ChatListNavigation.Chat(action.chatId))
 
             ChatListAction.OnChatsRefresh -> viewModel.onChatRefresh()
 
