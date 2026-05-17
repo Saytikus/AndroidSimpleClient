@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -56,20 +57,20 @@ internal fun ChatInputBar(
                     strokeWidth = 1.dp.toPx()
                 )
             }
-            .padding(horizontal = 14.dp, vertical = 10.dp),
-        verticalAlignment = Alignment.Bottom,
+            .padding(horizontal = 14.dp, vertical = 36.dp),
+        verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Box(
             modifier = Modifier
                 .weight(1f)
                 .background(
-                    color = Color.White.copy(alpha = 0.07f),
+                    color = colors.inputBarColor,
                     shape = RoundedCornerShape(20.dp)
                 )
                 .border(
                     1.dp,
-                    Color.White.copy(alpha = 0.09f),
+                    colors.accent,
                     RoundedCornerShape(20.dp)
                 )
                 .padding(horizontal = 14.dp, vertical = 9.dp)
@@ -100,7 +101,8 @@ internal fun ChatInputBar(
                         )
                     }
                     innerTextField()
-                }
+                },
+                cursorBrush = SolidColor(colors.textPrimary)
             )
         }
 

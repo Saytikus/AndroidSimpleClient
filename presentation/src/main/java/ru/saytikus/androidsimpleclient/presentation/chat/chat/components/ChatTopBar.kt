@@ -63,8 +63,8 @@ internal fun ChatTopBar(
                     strokeWidth = 1.dp.toPx()
                 )
             }
-            .padding(horizontal = 14.dp, vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically,
+            .padding(horizontal = 14.dp, vertical = 26.dp),
+        verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         ChatTopBarButton(
@@ -76,7 +76,7 @@ internal fun ChatTopBar(
 
         Box(
             modifier = Modifier
-                .size(38.dp)
+                .size(55.dp)
                 .background(
                     brush = Brush.radialGradient(
                         colors = listOf(
@@ -94,12 +94,12 @@ internal fun ChatTopBar(
                 imageVector = avatarIcon,
                 contentDescription = null,
                 tint = Color(0xFF2D9CDB).copy(alpha = 0.95f),
-                modifier = Modifier.size(17.dp)
+                modifier = Modifier.size(30.dp)
             )
             if (isOnline) {
                 Box(
                     modifier = Modifier
-                        .size(10.dp)
+                        .size(14.dp)
                         .align(Alignment.BottomEnd)
                         .background(colors.accent, CircleShape)
                         .border(2.dp, colors.backgroundStart, CircleShape)
@@ -118,12 +118,12 @@ internal fun ChatTopBar(
                 text = when {
                     isTyping -> "typing…"
                     isOnline -> "online"
-                    else     -> "offline"
+                    else -> "offline"
                 },
                 color = when {
                     isTyping -> colors.accent
                     isOnline -> colors.accent
-                    else     -> colors.textSecondary
+                    else -> colors.textSecondary
                 },
                 fontSize = 11.sp,
                 fontStyle = if (isTyping) FontStyle.Italic else FontStyle.Normal,
@@ -131,12 +131,12 @@ internal fun ChatTopBar(
             )
         }
 
-        ChatTopBarButton(
+/*        ChatTopBarButton(
             icon = Icons.Rounded.MoreHoriz,
             iconSize = 18.dp,
             colors = colors,
             onClick = onMenuClick
-        )
+        )*/
     }
 }
 

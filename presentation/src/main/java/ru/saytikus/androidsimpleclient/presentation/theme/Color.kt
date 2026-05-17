@@ -25,7 +25,22 @@ data class AppColors(
     val emptyIconTint: Color,
     val pullIndicatorContainer: Color,
     val avatar: Color,
-    val errorColor: Color
+    val errorColor: Color,
+    val inputBarColor: Color,
+    val barBackgroundStart: Color,
+    val barBackgroundEnd: Color,
+
+    val ownBubbleGradientStart: Color,
+    val ownBubbleGradientEnd: Color,
+    val ownBubbleBorder: Color,
+    val ownBubbleTime: Color,
+    val ownBubbleCheckRead: Color,
+    val ownBubbleCheckUnread: Color,
+
+    val otherBubbleBackgroundStart: Color,
+    val otherBubbleBackgroundEnd: Color,
+    val otherBubbleBorder: Color,
+    val otherBubbleTime: Color
 )
 
 val DarkAppColors = AppColors(
@@ -47,7 +62,22 @@ val DarkAppColors = AppColors(
     emptyIconTint      = Color(0xFFE9EAED).copy(alpha = 0.60f),
     pullIndicatorContainer = Color(0xFF1A1A2E),
     avatar = Color(0xFFE9EAED),
-    errorColor = Color(0xFFFFB830)
+    errorColor = Color(0xFFFFB830),
+    inputBarColor = Color.White.copy(alpha = 0.07f),
+    barBackgroundStart = Color(0xFF1A1A2E).copy(alpha = 0.75f),
+    barBackgroundEnd = Color(0xFF1A1A2E).copy(alpha = 0.95f),
+
+    ownBubbleGradientStart = Color(0xFF643CB4).copy(alpha = 0.42f),
+    ownBubbleGradientEnd   = Color(0xFF46288C).copy(alpha = 0.32f),
+    ownBubbleBorder        = Color(0xFF825AD2).copy(alpha = 0.35f),
+    ownBubbleTime          = Color(0xFFB496FF).copy(alpha = 0.65f),
+    ownBubbleCheckRead     = Color(0xFFA078FF).copy(alpha = 0.85f),
+    ownBubbleCheckUnread   = Color(0xFFA078FF).copy(alpha = 0.45f),
+
+    otherBubbleBackgroundStart = Color(0xFFB42846).copy(alpha = 0.45f),
+    otherBubbleBackgroundEnd  = Color(0xFF8C1E37).copy(alpha = 0.35f),
+    otherBubbleBorder      = Color(0xFFE94560).copy(alpha = 0.28f),
+    otherBubbleTime        = Color(0xFFE94560).copy(alpha = 0.55f)
 )
 
 val LightAppColors = AppColors(
@@ -69,7 +99,22 @@ val LightAppColors = AppColors(
     emptyIconTint      = Color(0xFF1A2E22).copy(alpha = 0.6f),
     pullIndicatorContainer = Color(0xFFF2F9F4),
     avatar = Color(0xFFE9EAED),
-    errorColor = Color(0xFFE94560).copy(alpha = 0.8f)
+    errorColor = Color(0xFFE94560).copy(alpha = 0.8f),
+    inputBarColor = Color.White.copy(alpha = 0.70f),
+    barBackgroundStart = Color(0xFFF2F9F4).copy(alpha = 0.15f),
+    barBackgroundEnd = Color(0xFFF2F9F4).copy(alpha = 0.35f),
+
+    ownBubbleGradientStart = Color(0xFF2D82DC).copy(alpha = 0.23f),
+    ownBubbleGradientEnd   = Color(0xFF1E64BE).copy(alpha = 0.15f),
+    ownBubbleBorder        = Color(0xFF2D82DC).copy(alpha = 0.30f),
+    ownBubbleTime          = Color(0xFF2D82DC).copy(alpha = 0.65f),
+    ownBubbleCheckRead     = Color(0xFF2D82DC).copy(alpha = 0.85f),
+    ownBubbleCheckUnread   = Color(0xFF2D82DC).copy(alpha = 0.45f),
+
+    otherBubbleBackgroundStart = Color(0xFF1FA85A).copy(alpha = 0.10f),
+    otherBubbleBackgroundEnd  = Color(0xFF1FA85A).copy(alpha = 0.17f),
+    otherBubbleBorder      = Color(0xFF1FA85A).copy(alpha = 0.30f),
+    otherBubbleTime        = Color(0xFF1FA85A).copy(alpha = 0.65f)
 )
 
 val LocalAppColors = staticCompositionLocalOf { ThemeState(true) {  } }

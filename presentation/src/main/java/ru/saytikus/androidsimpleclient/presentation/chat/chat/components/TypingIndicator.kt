@@ -72,12 +72,17 @@ internal fun TypingIndicator(
         Row(
             modifier = Modifier
                 .background(
-                    color = Color.White.copy(alpha = 0.08f),
+                    brush = Brush.linearGradient(
+                            colors = listOf(
+                                colors.otherBubbleBackgroundStart,
+                                colors.otherBubbleBackgroundEnd
+                            )
+                        ),
                     shape = RoundedCornerShape(16.dp, 16.dp, 16.dp, 4.dp)
                 )
                 .border(
                     1.dp,
-                    Color.White.copy(alpha = 0.10f),
+                    colors.otherBubbleBorder,
                     RoundedCornerShape(16.dp, 16.dp, 16.dp, 4.dp)
                 )
                 .padding(horizontal = 14.dp, vertical = 12.dp),
@@ -105,7 +110,7 @@ internal fun TypingIndicator(
                         .size(6.dp)
                         .offset(y = offsetY.dp)
                         .background(
-                            color = colors.textPrimary.copy(alpha = 0.40f),
+                            color = colors.textPrimary.copy(0.6f),
                             shape = CircleShape
                         )
                 )

@@ -84,7 +84,7 @@ internal fun SendButton(
         Canvas(modifier = Modifier.size(18.dp)) {
             val w = size.width
             val h = size.height
-            val color = Color(0xFFE94560).copy(alpha = accentAlpha)
+            val color = colors.accent.copy(alpha = accentAlpha)
             val strokeW = 2.2.dp.toPx()
 
             drawLine(

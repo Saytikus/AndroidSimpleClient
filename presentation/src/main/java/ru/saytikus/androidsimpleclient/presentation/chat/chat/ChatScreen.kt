@@ -3,7 +3,6 @@ package ru.saytikus.androidsimpleclient.presentation.chat.chat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +14,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -37,7 +37,6 @@ import ru.saytikus.androidsimpleclient.presentation.core.ui.message.MessageItem
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 @Composable
@@ -97,86 +96,90 @@ fun ChatScreen(
                 )
         )
 
-        Column(modifier = Modifier.fillMaxSize()) {
-            ChatTopBar(
-                chatName = state.chatName,
-                isOnline = state.isOnline,
-                isTyping = state.isTyping,
-                avatarIcon = state.avatarIcon,
-                colors = c,
-                onBackClick = { onAction(ChatAction.OnBackClick) },
-                onMenuClick = { onAction(ChatAction.OnMenuClick) }
-            )
-
-            Box(modifier = Modifier.weight(1f)) {
-                LazyColumn(
-                    state = listState,
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(
-                        start = 14.dp,
-                        end = 14.dp,
-                        top = 12.dp,
-                        bottom = 12.dp
-                    ),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    if (state.isLoadingMore) {
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 8.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                CircularProgressIndicator(
-                                    color = c.accent,
-                                    strokeWidth = 2.dp,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                        }
-                    }
-
-                    val grouped = state.messages.groupByDate()
-                    grouped.forEach { (date, msgs) ->
-                        item(key = "date_$date") {
-                            ChatDateSeparator(date = date, colors = c)
-                        }
-                        itemsIndexed(
-                            items = msgs,
-                            key = { _, msg -> msg.id.toString() }
-                        ) { index, message ->
-                            val prevMessage = msgs.getOrNull(index - 1)
-                            val isOwn = message.senderId == state.ownerProfileId
-                            val prevIsOwn = prevMessage?.senderId == state.ownerProfileId
-                            val showAvatar = !isOwn && (prevMessage == null || prevIsOwn)
-                            MessageItem(
-                                message = message,
-                                isOwn = isOwn,
-                                showAvatar = showAvatar,
-                                avatarIcon = state.avatarIcon,
-                                colors = c
-                            )
-                        }
-                    }
-
-                    if (state.isTyping) {
-                        item(key = "typing") {
-                            TypingIndicator(
-                                avatarIcon = state.avatarIcon,
-                                colors = c
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                ChatTopBar(
+                    chatName = state.chatName,
+                    isOnline = state.isOnline,
+                    isTyping = state.isTyping,
+                    avatarIcon = state.avatarIcon,
+                    colors = c,
+                    onBackClick = { onAction(ChatAction.OnBackClick) },
+                    onMenuClick = { onAction(ChatAction.OnMenuClick) }
+                )
+            },
+            bottomBar = {
+                ChatInputBar(
+                    text = state.inputText,
+                    onTextChange = { onAction(ChatAction.OnInputChange(it)) },
+                    onSendClick = { onAction(ChatAction.OnSendClick) },
+                    colors = c
+                )
+            }
+        ) { innerPadding ->
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                contentPadding = PaddingValues(
+                    start = 14.dp,
+                    end = 14.dp,
+                    top = 12.dp,
+                    bottom = 12.dp
+                ),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                if (state.isLoadingMore) {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(
+                                color = c.accent,
+                                strokeWidth = 2.dp,
+                                modifier = Modifier.size(20.dp)
                             )
                         }
                     }
                 }
-            }
 
-            ChatInputBar(
-                text = state.inputText,
-                onTextChange = { onAction(ChatAction.OnInputChange(it)) },
-                onSendClick = { onAction(ChatAction.OnSendClick) },
-                colors = c
-            )
+                val grouped = state.messages.groupByDate()
+                grouped.forEach { (date, msgs) ->
+                    item(key = "date_$date") {
+                        ChatDateSeparator(date = date, colors = c)
+                    }
+                    itemsIndexed(
+                        items = msgs,
+                        key = { _, msg -> msg.id.toString() }
+                    ) { index, message ->
+                        val prevMessage = msgs.getOrNull(index - 1)
+                        val isOwn = message.senderId == state.ownerProfileId
+                        val prevIsOwn = prevMessage?.senderId == state.ownerProfileId
+                        val showAvatar = !isOwn && (prevMessage == null || prevIsOwn)
+                        MessageItem(
+                            message = message,
+                            isOwn = isOwn,
+                            showAvatar = showAvatar,
+                            avatarIcon = state.avatarIcon,
+                            colors = c
+                        )
+                    }
+                }
+
+                if (state.isTyping) {
+                    item(key = "typing") {
+                        TypingIndicator(
+                            avatarIcon = state.avatarIcon,
+                            colors = c
+                        )
+                    }
+                }
+            }
         }
     }
 }
@@ -215,7 +218,7 @@ private fun ChatScreenPreviewLight() {
                         chatName = "Alice",
                         ownerProfileId = previewOwnerChatUuid,
                         isOnline = true,
-                        isTyping = false,
+                        isTyping = true,
                         messages = previewMessageList
                     ),
                     onAction = {}

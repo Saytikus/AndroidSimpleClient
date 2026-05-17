@@ -5,10 +5,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -30,14 +30,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import ru.saytikus.androidsimpleclient.domain.common.message.model.Message
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
+
 
 @Composable
 fun MessageItem(
@@ -47,6 +48,10 @@ fun MessageItem(
     avatarIcon: ImageVector,
     colors: AppColors
 ) {
+    val ownShape   = RoundedCornerShape(18.dp, 18.dp, 4.dp, 18.dp)
+    val otherShape = RoundedCornerShape(18.dp, 18.dp, 18.dp, 4.dp)
+    val bubbleShape = if (isOwn) ownShape else otherShape
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = if (isOwn) Arrangement.End else Arrangement.Start,
@@ -83,49 +88,37 @@ fun MessageItem(
             }
         }
 
-        Column(
-            horizontalAlignment = if (isOwn) Alignment.End else Alignment.Start
+        Box(
+            modifier = Modifier
+                .widthIn(max = 260.dp)
+                .background(
+                    brush = if (isOwn) {
+                        Brush.linearGradient(
+                            colors = listOf(
+                                colors.ownBubbleGradientStart,
+                                colors.ownBubbleGradientEnd
+                            )
+                        )
+                    } else {
+                        Brush.linearGradient(
+                            colors = listOf(
+                                colors.otherBubbleBackgroundStart,
+                                colors.otherBubbleBackgroundEnd
+                            )
+                        )
+                    },
+                    shape = bubbleShape
+                )
+                .border(
+                    width = 1.dp,
+                    color = if (isOwn) colors.ownBubbleBorder else colors.otherBubbleBorder,
+                    shape = bubbleShape
+                )
+                .padding(horizontal = 12.dp, vertical = 8.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .widthIn(max = 260.dp)
-                    .background(
-                        brush = if (isOwn) {
-                            Brush.linearGradient(
-                                colors = listOf(
-                                    Color(0xFFB42846).copy(alpha = 0.45f),
-                                    Color(0xFF8C1E37).copy(alpha = 0.35f)
-                                )
-                            )
-                        } else {
-                            Brush.linearGradient(
-                                colors = listOf(
-                                    Color.White.copy(alpha = 0.09f),
-                                    Color.White.copy(alpha = 0.06f)
-                                )
-                            )
-                        },
-                        shape = if (isOwn) {
-                            RoundedCornerShape(16.dp, 16.dp, 4.dp, 16.dp)
-                        } else {
-                            RoundedCornerShape(16.dp, 16.dp, 16.dp, 4.dp)
-                        }
-                    )
-                    .border(
-                        width = 1.dp,
-                        color = if (isOwn)
-                            Color(0xFFE94560).copy(alpha = 0.25f)
-                        else
-                            Color.White.copy(alpha = 0.10f),
-                        shape = if (isOwn) {
-                            RoundedCornerShape(16.dp, 16.dp, 4.dp, 16.dp)
-                        } else {
-                            RoundedCornerShape(16.dp, 16.dp, 16.dp, 4.dp)
-                        }
-                    )
-                    .padding(horizontal = 12.dp, vertical = 8.dp)
+            Column(
+                modifier = Modifier.width(IntrinsicSize.Max)
             ) {
-
                 Text(
                     text = message.text,
                     color = colors.textPrimary,
@@ -133,27 +126,32 @@ fun MessageItem(
                     lineHeight = 20.sp
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
-
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = if (isOwn) Arrangement.End else Arrangement.Start
                 ) {
+                    if (isOwn) {
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
+
                     Text(
                         text = formatMessageTime(message.createdAt),
-                        color = colors.textPrimary.copy(alpha = 0.35f),
+                        color = colors.textPrimary.copy(0.55f),
                         fontSize = 10.sp
                     )
+
                     if (isOwn) {
+                        Spacer(modifier = Modifier.width(3.dp))
                         Icon(
                             imageVector = if (message.isRead)
                                 Icons.Rounded.DoneAll else Icons.Rounded.Done,
                             contentDescription = null,
                             tint = if (message.isRead)
-                                Color(0xFFE94560).copy(alpha = 0.70f)
+                                colors.accent
                             else
-                                colors.textPrimary.copy(alpha = 0.35f),
-                            modifier = Modifier.size(12.dp)
+                                colors.accent.copy(0.7f),
+                            modifier = Modifier.size(14.dp)
                         )
                     }
                 }
@@ -161,6 +159,7 @@ fun MessageItem(
         }
     }
 }
+
 
 fun formatMessageTime(createdAt: String): String {
     return try {
