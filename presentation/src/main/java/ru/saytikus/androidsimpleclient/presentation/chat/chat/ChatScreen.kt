@@ -105,8 +105,7 @@ fun ChatScreen(
                     isTyping = state.isTyping,
                     avatarIcon = state.avatarIcon,
                     colors = c,
-                    onBackClick = { onAction(ChatAction.OnBackClick) },
-                    onMenuClick = { onAction(ChatAction.OnMenuClick) }
+                    onBackClick = { onAction(ChatAction.OnBackClick) }
                 )
             },
             bottomBar = {

@@ -40,8 +40,7 @@ internal fun ChatTopBar(
     isTyping: Boolean,
     avatarIcon: ImageVector,
     colors: AppColors,
-    onBackClick: () -> Unit,
-    onMenuClick: () -> Unit
+    onBackClick: () -> Unit
 ) {
     val topBarBackground = Brush.verticalGradient(
         colors = listOf(
@@ -151,8 +150,7 @@ private fun ChatTopBarLightOnline() {
                 isTyping = false,
                 avatarIcon = Icons.Rounded.Person,
                 colors = LightAppColors,
-                onBackClick = {},
-                onMenuClick = {}
+                onBackClick = {}
             )
         }
     )
@@ -170,8 +168,7 @@ private fun ChatTopBarDarkTyping() {
                 isTyping = true,
                 avatarIcon = Icons.Rounded.Person,
                 colors = DarkAppColors,
-                onBackClick = {},
-                onMenuClick = {}
+                onBackClick = {}
             )
         }
     )
@@ -189,8 +186,7 @@ private fun ChatTopBarDarkOffline() {
                 isTyping = false,
                 avatarIcon = Icons.Rounded.Person,
                 colors = DarkAppColors,
-                onBackClick = {},
-                onMenuClick = {}
+                onBackClick = {}
             )
         }
     )

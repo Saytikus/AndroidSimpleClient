@@ -53,8 +53,6 @@ class AndroidSimpleClient : Application() {
         val chatGateway = koin.get<IChatGateway>()
 
         val hubProvider = koin.get<IHubProvider>()
-
-        hubProvider.connect()
     }
 
 }

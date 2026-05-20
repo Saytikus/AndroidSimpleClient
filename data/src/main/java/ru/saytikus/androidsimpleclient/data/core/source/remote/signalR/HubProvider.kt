@@ -10,12 +10,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.KSerializer
@@ -39,8 +40,6 @@ class HubProvider(
 ) : IHubProvider {
 
 
-
-
     private val _scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     private val _connectionState = MutableStateFlow(ChatConnectionState.DISCONNECTED)
@@ -50,39 +49,39 @@ class HubProvider(
     private var _connection: HubConnection? = null
     private val _connectionMutex = Mutex()
 
+
+    private val _updateMutex = Mutex()
+
     private var _stateCollectorJob: Job? = null
 
     // subscribe handlers registry
     private val _registry = HubSubscribeHandlerRegistry()
 
-
-
     init {
 
-        runBlocking {
+        _scope.launch {
             try {
                 val connection = createConnection()
                 _connectionMutex.withLock { _connection = connection }
                 subscribeToConnectionState(connection)
                 _registry.reSubscribeAll(connection)
+                connection.start()
+
             } catch (e: Exception) {
                 println("HubProvider: initial connection creation failed: $e")
             }
         }
 
-
         _scope.launch {
             _settingsRepo.observeSettings()
                 .map { it.responseServerHostAddress }
-                .distinctUntilChanged()
                 .collect { newAddress ->
                     println("HubProvider: host address changed to $newAddress, recreating connection")
-                    val wasConnected = _connectionState.value == ChatConnectionState.CONNECTED
-                    updateConnection(wasConnected)
+
+                    updateConnection()
                 }
         }
     }
-
 
 
     override suspend fun connect() {
@@ -106,12 +105,12 @@ class HubProvider(
     }
 
 
-
     override suspend fun send(method: String, message: Any) {
+        println("HubProvider::send1")
         val connection = _connectionMutex.withLock { _connection }
-            ?: error("HubProvider: connection is not initialized yet")
+
         try {
-            connection.send(method, message)
+            connection?.send(method, message)
         } catch (e: Exception) {
             println("HubProvider: send() failed [$method]: $e")
             throw e
@@ -126,10 +125,14 @@ class HubProvider(
         serializer: KSerializer<ArgumentType>
     ) {
 
-        val connection = _connectionMutex.withLock { _connection }
-            ?: error("HubProvider::sendAwaitA1: connection is not initialized yet")
+        println("HubProvider::sendAwaitA1")
+        val connection = _connectionMutex.withLock {
+            println("CONNECTION STATE VALUE IN LOCK: ${_connection?.connectionState?.value}")
+            _connection
+        }
+
         try {
-            connection.invoke(method, message, serializer)
+            connection?.invoke(method, message, serializer)
         } catch (e: Exception) {
             println("HubProvider::sendAwaitA1: sendAwait() failed [$method]: $e")
             throw e
@@ -148,10 +151,11 @@ class HubProvider(
         serializer2: KSerializer<ArgumentType2>
     ) {
 
+        println("HubProvider::sendAwaitA2")
         val connection = _connectionMutex.withLock { _connection }
-            ?: error("HubProvider::sendAwaitA2: connection is not initialized yet")
+
         try {
-            connection.invoke(
+            connection?.invoke(
                 method = method,
 
                 arg1 = message1,
@@ -189,10 +193,11 @@ class HubProvider(
         serializer3: KSerializer<ArgumentType3>
     ) {
 
+        println("HubProvider::sendAwaitA3")
         val connection = _connectionMutex.withLock { _connection }
-            ?: error("HubProvider::sendAwaitA3: connection is not initialized yet")
+
         try {
-            connection.invoke(
+            connection?.invoke(
                 method = method,
 
                 arg1 = message1,
@@ -238,11 +243,11 @@ class HubProvider(
 
         serializer4: KSerializer<ArgumentType4>
     ) {
-
+        println("HubProvider::sendAwaitA4")
         val connection = _connectionMutex.withLock { _connection }
-            ?: error("HubProvider::sendAwaitA4: connection is not initialized yet")
+
         try {
-            connection.invoke(
+            connection?.invoke(
                 method = method,
 
                 arg1 = message1,
@@ -267,7 +272,6 @@ class HubProvider(
             throw e
         }
     }
-
 
 
     override fun subscribe(method: String, action: suspend () -> Unit) {
@@ -313,16 +317,15 @@ class HubProvider(
     }
 
 
-
     private suspend fun currentConnection() = _connectionMutex.withLock { _connection }
 
-    private fun subscribeToConnectionState(connection: HubConnection) {
-        _stateCollectorJob?.cancel()
+    private suspend fun subscribeToConnectionState(connection: HubConnection) {
+        _stateCollectorJob?.cancelAndJoin()
         _stateCollectorJob = _scope.launch {
             connection.connectionState.collect { state ->
                 _connectionState.value = when (state) {
-                    HubConnectionState.CONNECTING   -> ChatConnectionState.CONNECTING
-                    HubConnectionState.CONNECTED    -> ChatConnectionState.CONNECTED
+                    HubConnectionState.CONNECTING -> ChatConnectionState.CONNECTING
+                    HubConnectionState.CONNECTED -> ChatConnectionState.CONNECTED
                     HubConnectionState.DISCONNECTED -> ChatConnectionState.DISCONNECTED
                     HubConnectionState.RECONNECTING -> ChatConnectionState.RECONNECTING
                 }
@@ -330,38 +333,57 @@ class HubProvider(
         }
     }
 
-    private suspend fun updateConnection(wasConnected: Boolean) {
+    private suspend fun updateConnection() = _updateMutex.withLock {
         try {
-            _connectionMutex.withLock { _connection }?.stop()
+            val oldConnection = _connectionMutex.withLock {
+                val old = _connection
+                _connection = null
+                old
+            }
+
+            if (oldConnection != null) {
+                stopConnectionFully(oldConnection)
+            }
 
             val newConnection = createConnection()
-            _connectionMutex.withLock { _connection = newConnection }
 
             subscribeToConnectionState(newConnection)
+
             _registry.reSubscribeAll(newConnection)
 
-            if (wasConnected) {
-                try {
-                    newConnection.start()
-                } catch (e: Exception) {
-                    println("HubProvider: failed to restart after update: $e")
-                }
+            _connectionMutex.withLock { _connection = newConnection }
+
+            try {
+                newConnection.start()
+                println("HubProvider: newConnection.start() returned (state=${newConnection.connectionState.value})")
+            } catch (e: Exception) {
+                println("HubProvider: failed to start new connection: $e")
             }
         } catch (e: Exception) {
             println("HubProvider: updateConnection failed: $e")
+            e.printStackTrace()
+        }
+    }
+
+
+    private suspend fun stopConnectionFully(connection: HubConnection) {
+        try {
+            connection.stop()
+        } catch (e: Exception) {
+            println("HubProvider: initial stop failed: $e")
         }
     }
 
     private suspend fun createConnection(): HubConnection {
         val hostAddress = _settingsRepo.getOnce().responseServerHostAddress
         return HubConnectionBuilder.create("http://$hostAddress:8080/hubs/chat") {
-            automaticReconnect = AutomaticReconnect.Active
+            automaticReconnect = AutomaticReconnect.Inactive
             accessTokenProvider = { _encryptedSettingsRepository.getOnce().authenticationToken }
             logger = Logger { severity, message, cause ->
                 when (severity) {
-                    Logger.Severity.INFO    -> println("SIGNALR INFO: $message")
+                    Logger.Severity.INFO -> println("SIGNALR INFO: $message")
                     Logger.Severity.WARNING -> println("SIGNALR WARNING: $message")
-                    Logger.Severity.ERROR   -> println("SIGNALR ERROR: $message, cause: $cause")
+                    Logger.Severity.ERROR -> println("SIGNALR ERROR: $message, cause: $cause")
                 }
             }
         }

@@ -3,8 +3,7 @@ package ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -18,6 +17,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interceptors.AuthorizationInterceptor
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
+import ru.saytikus.androidsimpleclient.domain.settings.Settings
 
 @Single
 class RetrofitProvider(
@@ -30,7 +30,7 @@ class RetrofitProvider(
     @Volatile
     private var _retrofit: Retrofit = runBlocking {
         buildRetrofit(
-            settingsRepo.getOnce().responseServerHostAddress,
+            Settings().responseServerHostAddress,
             authInterceptor
             )
     }
@@ -41,11 +41,10 @@ class RetrofitProvider(
 
         scope.launch {
             settingsRepo.observeSettings()
-                .distinctUntilChanged()
-                .drop(1)
+                .map { it.responseServerHostAddress }
                 .onEach {
                     _retrofit = buildRetrofit(
-                        it.responseServerHostAddress,
+                        it,
                         authInterceptor
                         )
                 }

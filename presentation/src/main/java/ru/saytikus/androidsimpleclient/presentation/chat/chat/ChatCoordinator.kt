@@ -16,10 +16,15 @@ class ChatCoordinator(
 
     fun handle(action: ChatAction) {
         when (action) {
-            is ChatAction.OnInputChange -> { /* Handle */ }
-            ChatAction.OnSendClick -> { /* Handle */ }
-            ChatAction.OnBackClick -> onNavigate(ChatNavigation.Back)
-            ChatAction.OnMenuClick -> { /* Handle */ }
+            is ChatAction.OnInputChange -> viewModel.onInputChange(action.text)
+
+            is ChatAction.OnSendClick -> viewModel.onSendButtonClick()
+
+            is ChatAction.OnBackClick -> {
+                viewModel.onDispose()
+                onNavigate(ChatNavigation.Back)
+            }
+
             is ChatAction.OnFirstVisibleMessageChanged -> { /* Handle */ }
         }
     }
