@@ -7,7 +7,7 @@ import ru.saytikus.androidsimpleclient.data.chat.dto.ChatDto
 import ru.saytikus.androidsimpleclient.data.chat.dto.ChatListItemDto
 import ru.saytikus.androidsimpleclient.data.chat.dto.CreatePrivateChatAnswerDto
 import ru.saytikus.androidsimpleclient.data.chat.dto.ParticipantDto
-import ru.saytikus.androidsimpleclient.data.core.message.source.remote.toDomain
+import ru.saytikus.androidsimpleclient.data.core.features.message.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.domain.chat.dto.ChatCreatedEventBody
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat

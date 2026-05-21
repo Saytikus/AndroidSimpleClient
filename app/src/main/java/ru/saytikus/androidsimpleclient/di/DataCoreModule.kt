@@ -4,7 +4,7 @@ import eu.anifantakis.lib.ksafe.KSafe
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import ru.saytikus.androidsimpleclient.data.core.encryptedSettings.EncryptedSettingsRepository
+import ru.saytikus.androidsimpleclient.data.core.features.encryptedSettings.EncryptedSettingsRepository
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
 

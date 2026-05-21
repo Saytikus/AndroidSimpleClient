@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.data.chat.dto
 
 import kotlinx.serialization.Serializable
-import ru.saytikus.androidsimpleclient.data.core.message.dto.MessageDto
+import ru.saytikus.androidsimpleclient.data.core.features.message.dto.MessageDto
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
