@@ -6,7 +6,7 @@ import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfac
 import ru.saytikus.androidsimpleclient.data.registration.source.remote.IRegistrationService
 import ru.saytikus.androidsimpleclient.data.registration.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.registration.source.remote.toDto
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.registration.IRegistrationGateway
 import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand

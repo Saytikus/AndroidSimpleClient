@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.domain.settings.useCase
 
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 

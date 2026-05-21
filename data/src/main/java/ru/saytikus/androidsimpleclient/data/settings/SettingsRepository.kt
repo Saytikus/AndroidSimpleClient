@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Single
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 import ru.saytikus.androidsimpleclient.domain.settings.SettingsDefaults

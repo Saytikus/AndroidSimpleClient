@@ -25,7 +25,7 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatEvent
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

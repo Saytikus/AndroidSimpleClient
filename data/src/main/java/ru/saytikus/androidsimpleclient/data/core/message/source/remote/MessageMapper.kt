@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.data.core.message.source.remote
 
 import ru.saytikus.androidsimpleclient.data.core.message.dto.MessageDto
-import ru.saytikus.androidsimpleclient.domain.common.message.model.Message
+import ru.saytikus.androidsimpleclient.domain.core.message.model.Message
 import kotlin.uuid.ExperimentalUuidApi
 
 @OptIn(ExperimentalUuidApi::class)

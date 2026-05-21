@@ -13,9 +13,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Named
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 import ru.saytikus.androidsimpleclient.domain.settings.dto.SaveResponseServerHostAddressCommand
 

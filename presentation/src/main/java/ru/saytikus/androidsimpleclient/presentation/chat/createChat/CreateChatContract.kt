@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.presentation.chat.createChat
 
 import kotlinx.serialization.Serializable
-import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchListItem
+import ru.saytikus.androidsimpleclient.domain.core.profileSearch.answers.ProfileSearchListItem
 import ru.saytikus.androidsimpleclient.presentation.core.ui.search.SearchAction
 import ru.saytikus.androidsimpleclient.presentation.core.ui.search.SearchState
 import kotlin.uuid.ExperimentalUuidApi

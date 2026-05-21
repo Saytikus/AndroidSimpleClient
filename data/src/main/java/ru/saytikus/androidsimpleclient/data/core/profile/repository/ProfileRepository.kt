@@ -10,11 +10,11 @@ import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.data.core.profile.source.local.ProfileDao
 import ru.saytikus.androidsimpleclient.data.core.profile.source.local.toDomain
 import ru.saytikus.androidsimpleclient.data.core.profile.source.local.toRoom
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.profile.model.Profile
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IRepository
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.profile.model.Profile
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IRepository
+import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

@@ -6,8 +6,8 @@ import okhttp3.Response
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.RetrofitEndpoints
-import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.ISingleObjectRepository
+import ru.saytikus.androidsimpleclient.domain.core.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
 
 @Single
 class AuthorizationInterceptor(

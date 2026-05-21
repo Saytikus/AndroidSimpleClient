@@ -2,8 +2,8 @@ package ru.saytikus.androidsimpleclient.domain.authentication
 
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 
 class SignInProfileUseCase(
 

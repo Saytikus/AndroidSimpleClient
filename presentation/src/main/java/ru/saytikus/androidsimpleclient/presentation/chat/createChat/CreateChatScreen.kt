@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchListItem
+import ru.saytikus.androidsimpleclient.domain.core.profileSearch.answers.ProfileSearchListItem
 import ru.saytikus.androidsimpleclient.presentation.chat.createChat.components.CreateChatDisplayItem
 import ru.saytikus.androidsimpleclient.presentation.core.ui.search.SearchContent
 import ru.saytikus.androidsimpleclient.presentation.core.ui.search.SearchState

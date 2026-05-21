@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.domain.product.useCases
 
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.product.commands.CreateProductCommand
 
 

@@ -1,6 +1,6 @@
 package ru.saytikus.androidsimpleclient.data.core.profile.source.local
 
-import ru.saytikus.androidsimpleclient.domain.common.profile.model.Profile
+import ru.saytikus.androidsimpleclient.domain.core.profile.model.Profile
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

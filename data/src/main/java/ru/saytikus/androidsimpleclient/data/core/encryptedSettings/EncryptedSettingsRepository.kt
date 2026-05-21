@@ -5,11 +5,11 @@ import eu.anifantakis.lib.ksafe.invoke
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.ISingleObjectRepository
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
+import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
 
 
 class EncryptedSettingsRepository(

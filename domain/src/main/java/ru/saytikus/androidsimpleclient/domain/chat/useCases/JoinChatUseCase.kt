@@ -2,8 +2,8 @@ package ru.saytikus.androidsimpleclient.domain.chat.useCases
 
 import ru.saytikus.androidsimpleclient.domain.chat.IChatGateway
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import kotlin.uuid.ExperimentalUuidApi
 
 @OptIn(ExperimentalUuidApi::class)

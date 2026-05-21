@@ -9,7 +9,7 @@ import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfac
 import ru.saytikus.androidsimpleclient.domain.authentication.IAuthenticationGateway
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 
 @Single
 class AuthenticationGateway(

@@ -17,12 +17,11 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
-import ru.saytikus.androidsimpleclient.domain.common.message.model.MessageEvent
-import ru.saytikus.androidsimpleclient.domain.common.message.model.SendMessageCommand
-import ru.saytikus.androidsimpleclient.domain.common.profile.model.ProfileId
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IObserveInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.message.model.MessageEvent
+import ru.saytikus.androidsimpleclient.domain.core.message.model.SendMessageCommand
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

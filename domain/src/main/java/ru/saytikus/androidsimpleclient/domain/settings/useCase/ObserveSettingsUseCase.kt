@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.domain.settings.useCase
 
 import kotlinx.coroutines.flow.Flow
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 

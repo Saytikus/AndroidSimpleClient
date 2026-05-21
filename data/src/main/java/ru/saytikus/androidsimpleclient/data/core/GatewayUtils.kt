@@ -1,9 +1,9 @@
 package ru.saytikus.androidsimpleclient.data.core
 
 import retrofit2.Response
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
 import java.io.IOException
 import java.net.SocketTimeoutException
 

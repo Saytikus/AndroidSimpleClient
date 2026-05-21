@@ -1,9 +1,9 @@
 package ru.saytikus.androidsimpleclient.data.registration.validators
 
 import android.util.Patterns
-import ru.saytikus.androidsimpleclient.domain.common.dto.ValidateResult
-import ru.saytikus.androidsimpleclient.domain.common.profile.validators.IEmailValidator
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.ValidateError
+import ru.saytikus.androidsimpleclient.domain.core.dto.ValidateResult
+import ru.saytikus.androidsimpleclient.domain.core.profile.validators.IEmailValidator
+import ru.saytikus.androidsimpleclient.domain.core.valueObject.ValidateError
 
 class EmailValidator : IEmailValidator {
 

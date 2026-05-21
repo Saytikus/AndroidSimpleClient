@@ -1,6 +1,6 @@
 package ru.saytikus.androidsimpleclient.domain.product
 
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 
 interface IProductGateway {
 

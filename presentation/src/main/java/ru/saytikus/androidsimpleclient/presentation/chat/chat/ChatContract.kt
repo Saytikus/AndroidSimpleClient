@@ -4,7 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.serialization.Serializable
-import ru.saytikus.androidsimpleclient.domain.common.message.model.Message
+import ru.saytikus.androidsimpleclient.domain.core.message.model.Message
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

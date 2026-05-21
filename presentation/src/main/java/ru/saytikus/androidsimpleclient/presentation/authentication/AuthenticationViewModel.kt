@@ -11,13 +11,13 @@ import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Named
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.dto.ValidateResult
-import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IValidator
-import ru.saytikus.androidsimpleclient.domain.common.profile.model.ProfileId
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.dto.ValidateResult
+import ru.saytikus.androidsimpleclient.domain.core.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IValidator
+import ru.saytikus.androidsimpleclient.domain.core.profile.model.ProfileId
+import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 import kotlin.uuid.ExperimentalUuidApi
 

@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.domain.settings
 
 import kotlinx.coroutines.flow.Flow
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 
 interface ISettingsRepository {
 

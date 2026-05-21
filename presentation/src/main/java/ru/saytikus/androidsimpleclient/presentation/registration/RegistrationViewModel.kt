@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Named
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.dto.ValidateResult
-import ru.saytikus.androidsimpleclient.domain.common.profile.model.Profile
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IValidator
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.dto.ValidateResult
+import ru.saytikus.androidsimpleclient.domain.core.profile.model.Profile
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IValidator
 import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand
 import kotlin.uuid.ExperimentalUuidApi

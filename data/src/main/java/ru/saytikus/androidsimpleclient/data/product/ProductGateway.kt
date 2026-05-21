@@ -2,9 +2,9 @@ package ru.saytikus.androidsimpleclient.data.product
 
 import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
 import ru.saytikus.androidsimpleclient.domain.product.IProductGateway
 import ru.saytikus.androidsimpleclient.domain.product.Product
 

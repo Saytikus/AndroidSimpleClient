@@ -5,10 +5,10 @@ import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
 import ru.saytikus.androidsimpleclient.data.core.profileSearch.source.remote.IProfileSearchService
 import ru.saytikus.androidsimpleclient.data.core.profileSearch.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.RetrofitProvider
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.profileSearch.IProfileSearchGateway
-import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchAnswer
-import ru.saytikus.androidsimpleclient.domain.common.profileSearch.commands.ProfileSearchCommand
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.profileSearch.IProfileSearchGateway
+import ru.saytikus.androidsimpleclient.domain.core.profileSearch.answers.ProfileSearchAnswer
+import ru.saytikus.androidsimpleclient.domain.core.profileSearch.commands.ProfileSearchCommand
 
 
 @Single

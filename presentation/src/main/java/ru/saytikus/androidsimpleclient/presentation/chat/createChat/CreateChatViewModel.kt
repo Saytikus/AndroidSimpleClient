@@ -11,11 +11,11 @@ import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Named
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
-import ru.saytikus.androidsimpleclient.domain.common.profileSearch.ProfileSearchConstants
-import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchAnswer
-import ru.saytikus.androidsimpleclient.domain.common.profileSearch.commands.ProfileSearchCommand
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.profileSearch.ProfileSearchConstants
+import ru.saytikus.androidsimpleclient.domain.core.profileSearch.answers.ProfileSearchAnswer
+import ru.saytikus.androidsimpleclient.domain.core.profileSearch.commands.ProfileSearchCommand
 import ru.saytikus.androidsimpleclient.presentation.core.ui.search.SearchState
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

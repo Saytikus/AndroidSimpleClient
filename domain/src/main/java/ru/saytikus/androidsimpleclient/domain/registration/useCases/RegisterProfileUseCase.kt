@@ -1,9 +1,9 @@
 package ru.saytikus.androidsimpleclient.domain.registration.useCases
 
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbError
-import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
-import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbError
+import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
+import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
 import ru.saytikus.androidsimpleclient.domain.registration.IRegistrationGateway
 import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterProfileCommand
