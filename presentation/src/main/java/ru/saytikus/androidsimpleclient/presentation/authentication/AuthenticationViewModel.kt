@@ -2,8 +2,8 @@ package ru.saytikus.androidsimpleclient.presentation.authentication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -16,7 +16,10 @@ import ru.saytikus.androidsimpleclient.domain.common.dto.ValidateResult
 import ru.saytikus.androidsimpleclient.domain.common.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IValidator
+import ru.saytikus.androidsimpleclient.domain.common.profile.model.ProfileId
 import ru.saytikus.androidsimpleclient.domain.common.valueObject.DomainError
+import ru.saytikus.androidsimpleclient.domain.settings.Settings
+import kotlin.uuid.ExperimentalUuidApi
 
 @KoinViewModel
 class AuthenticationViewModel(
@@ -30,7 +33,19 @@ class AuthenticationViewModel(
 
     @Named("UpdateEncryptedSettingsUseCase")
     private val updateEncryptedSettingsCase:
-    IInputBoundary<MbResult<Unit>, EncryptedSettings>
+    IInputBoundary<MbResult<Unit>, EncryptedSettings>,
+
+    @Named("GetSettingsUseCase")
+    private val getSettingsCase:
+    IInputBoundary<MbResult<Settings>, Unit>,
+
+    @Named("SaveSettingsUseCase")
+    private val saveSettingsCase:
+    IInputBoundary<MbResult<Unit>, Settings>,
+
+    @Named("GetProfileIdByUsernameOrEmailUseCase")
+    private val getProfileIdByUsernameOrEmailCase:
+    IInputBoundary<MbResult<ProfileId>, String>
 
 ) : ViewModel() {
 
@@ -75,6 +90,7 @@ class AuthenticationViewModel(
         signInProfile(_stateFlow.value)
     }
 
+    @OptIn(ExperimentalUuidApi::class)
     private fun signInProfile(state: AuthenticationState) {
 
         viewModelScope.launch {
@@ -124,10 +140,6 @@ class AuthenticationViewModel(
 
                 is MbResult.Success -> {
 
-                    _stateFlow.update {
-                        it.copy(isAuthenticationSuccessfully = true)
-                    }
-
                     println("AuthenticationViewModel::signInProfile: receive answer on signInProfileCase: ${result.response}")
 
                     // save token
@@ -137,6 +149,39 @@ class AuthenticationViewModel(
                             result.response.expiresAt
                         )
                     )
+
+                    // get profile id by username or email
+                    val profileId = getProfileIdByUsernameOrEmailCase(stateFlow.value.usernameOrEmail)
+
+                    when(profileId) {
+                        is MbResult.Failure -> {
+                            // TODO
+                            return@launch
+                        }
+
+                        is MbResult.Success -> { /*NO-OP*/ }
+                    }
+
+                    // save active user Id
+                    val settings = getSettingsCase(Unit)
+                    when(settings) {
+                        is MbResult.Failure -> {
+                            // TODO
+                            return@launch
+                        }
+
+                        is MbResult.Success -> {
+                            val saveSettingsResult = saveSettingsCase(
+                                settings.response.copy(
+                                    activeUserId = profileId.response.profileId.toString()
+                                )
+                            )
+                        }
+                    }
+
+                    _stateFlow.update {
+                        it.copy(isAuthenticationSuccessfully = true)
+                    }
                 }
             }
         }

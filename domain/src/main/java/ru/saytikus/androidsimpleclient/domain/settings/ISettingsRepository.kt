@@ -7,6 +7,8 @@ interface ISettingsRepository {
 
     suspend fun getOnce(): Settings
 
+    suspend fun updateSettings(settings: Settings): MbResult<Unit>
+
     suspend fun setResponseServerHostAddress(newValue: String): MbResult<Unit>
 
     fun observeSettings(): Flow<Settings>

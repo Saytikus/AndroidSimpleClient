@@ -1,8 +1,9 @@
-package ru.saytikus.androidsimpleclient.domain.common.profile
+package ru.saytikus.androidsimpleclient.domain.common.profile.useCases
 
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IRepository
+import ru.saytikus.androidsimpleclient.domain.common.profile.model.Profile
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

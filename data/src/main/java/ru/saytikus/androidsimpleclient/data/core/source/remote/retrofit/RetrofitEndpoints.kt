@@ -21,4 +21,10 @@ object RetrofitEndpoints {
     const val PRIVATE_CHAT = "$CHAT_SUBROOT/private"
 
     const val CREATE_PRIVATE_CHAT = "$PRIVATE_CHAT/{userId}"
+
+    const val GET_CHAT = "$CHAT_SUBROOT/{chatId}"
+
+    const val GET_USER_ID = "$USERS_SUBROOT/GetUserId/{usernameOrEmail}"
+
+
 }

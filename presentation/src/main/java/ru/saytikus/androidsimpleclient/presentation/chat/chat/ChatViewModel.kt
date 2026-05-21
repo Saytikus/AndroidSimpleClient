@@ -13,13 +13,17 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Named
+import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
+import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.common.message.model.MessageEvent
 import ru.saytikus.androidsimpleclient.domain.common.message.model.SendMessageCommand
+import ru.saytikus.androidsimpleclient.domain.common.profile.model.ProfileId
+import ru.saytikus.androidsimpleclient.domain.settings.Settings
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
@@ -43,7 +47,16 @@ class ChatViewModel(
 
     @Named("ObserveMessageEventsUseCase")
     private val observeMessageEvents:
-    IObserveInputBoundary<Flow<MessageEvent>>
+    IObserveInputBoundary<Flow<MessageEvent>>,
+
+    @Named("GetChatUseCase")
+    private val getChatCase:
+    IInputBoundary<MbResult<Chat>, GetChatCommand>,
+
+    @Named("GetSettingsUseCase")
+    private val getSettingsCase:
+    IInputBoundary<MbResult<Settings>, Unit>
+
 
 ) : ViewModel() {
 
@@ -57,11 +70,46 @@ class ChatViewModel(
         checkNotNull(savedStateHandle["chatId"])
     )
 
+    private lateinit var activeUserId: Uuid
+
 
     init {
 
         viewModelScope.launch {
+            // TODO parse answer
+            when(val activeUserIdResult = getSettingsCase(Unit)) {
+                is MbResult.Failure -> {
+                    // TODO
+                }
+                is MbResult.Success -> {
+                    val userId = activeUserIdResult.response.activeUserId
+                    if(userId == null) {
+                        //TODO
+                        return@launch
+                    }
+
+                    activeUserId = Uuid.parse(userId)
+                }
+            }
+
             joinChatCase(JoinChatCommand(chatId))
+
+            when(val chat = getChatCase(GetChatCommand(chatId))) {
+                is MbResult.Failure -> {
+                    // TODO
+                }
+
+                is MbResult.Success -> {
+
+
+                    _stateFlow.update {
+                        it.copy(
+                            chatName = if(chat.response.title == "NO_TITLE") chat.response.participants[1].displayName else chat.response.title,
+                            ownerProfileId = activeUserId
+                        )
+                    }
+                }
+            }
         }
 
         observeMessageEvents()
@@ -102,6 +150,7 @@ class ChatViewModel(
 
     fun onDispose() {
         viewModelScope.launch {
+            // TODO parse answer
             leaveChatCase(LeaveChatCommand(chatId))
         }
     }

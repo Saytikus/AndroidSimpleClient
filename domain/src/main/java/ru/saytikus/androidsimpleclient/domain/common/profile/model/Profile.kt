@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.domain.common.profile
+package ru.saytikus.androidsimpleclient.domain.common.profile.model
 
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

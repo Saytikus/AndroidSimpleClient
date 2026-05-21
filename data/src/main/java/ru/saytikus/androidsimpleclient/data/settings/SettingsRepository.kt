@@ -25,10 +25,21 @@ class SettingsRepository(
     override suspend fun getOnce(): Settings {
         // TODO try catch
         val prefs = context.dataStore.data.first()
+
+        val serverAddress = prefs[SettingsKeys.RESPONSE_SERVER_HOST_KEY]
+        val activeUserId = prefs[SettingsKeys.ACTIVE_USER_ID_KEY]
+
         return Settings(
-            prefs[SettingsKeys.RESPONSE_SERVER_HOST_KEY] ?:
-            SettingsDefaults.defaultSettings.responseServerHostAddress
+            serverAddress ?: SettingsDefaults.defaultSettings.responseServerHostAddress,
+            activeUserId
         )
+    }
+
+    override suspend fun updateSettings(settings: Settings): MbResult<Unit> {
+        // TODO handle errors
+        setResponseServerHostAddress(settings.responseServerHostAddress)
+        setActiveUserId(settings.activeUserId ?: "")
+        return MbResult.Success(Unit)
     }
 
     override suspend fun setResponseServerHostAddress(newValue: String): MbResult<Unit> {
@@ -44,8 +55,19 @@ class SettingsRepository(
         return context.dataStore.data.map { preferences ->
             Settings(
                 preferences[SettingsKeys.RESPONSE_SERVER_HOST_KEY]
-                    ?: SettingsDefaults.defaultSettings.responseServerHostAddress
+                    ?: SettingsDefaults.defaultSettings.responseServerHostAddress,
+                preferences[SettingsKeys.ACTIVE_USER_ID_KEY]
+
             )
         }.distinctUntilChanged()
+    }
+
+    private suspend fun setActiveUserId(newValue: String): MbResult<Unit> {
+        // TODO try catch
+        context.dataStore.edit { preferences ->
+            preferences[SettingsKeys.ACTIVE_USER_ID_KEY] = newValue
+        }
+
+        return MbResult.Success(Unit)
     }
 }

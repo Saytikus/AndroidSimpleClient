@@ -10,11 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
@@ -65,7 +64,6 @@ class HubProvider(
                 _connectionMutex.withLock { _connection = connection }
                 subscribeToConnectionState(connection)
                 _registry.reSubscribeAll(connection)
-                connection.start()
 
             } catch (e: Exception) {
                 println("HubProvider: initial connection creation failed: $e")
@@ -80,6 +78,12 @@ class HubProvider(
 
                     updateConnection()
                 }
+        }
+
+        _scope.launch {
+            _connection?.connectionState?.collect {
+                println("CONNECTION STATE CHANGED: $it")
+            }
         }
     }
 
@@ -371,6 +375,13 @@ class HubProvider(
             connection.stop()
         } catch (e: Exception) {
             println("HubProvider: initial stop failed: $e")
+        }
+
+        delay(300)
+
+        if(connection.connectionState.value != HubConnectionState.DISCONNECTED) {
+            connection.stop()
+            println("HubProvider: second stop in stopConnectionFully")
         }
     }
 

@@ -19,8 +19,10 @@ import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.sendAwait
 import ru.saytikus.androidsimpleclient.domain.chat.IChatGateway
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
+import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
+import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatEvent
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.common.dto.MbResult
@@ -157,5 +159,16 @@ class ChatGateway(
         val answer = handleHubResult(result)
 
         return answer
+    }
+
+    override suspend fun getChat(cmd: GetChatCommand): MbResult<Chat> {
+        println("Gateway call ChatListGateway::getChat")
+
+        val result = runCatching { _service.getChat(cmd.chatId) }
+
+        val answer = handleRetrofitServiceResult(result)
+
+        return if (answer is MbResult.Success) MbResult.Success(answer.response.toDomain())
+        else answer as MbResult.Failure
     }
 }

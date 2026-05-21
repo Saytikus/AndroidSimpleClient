@@ -8,10 +8,13 @@ import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInPro
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
+import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
+import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.CreatePrivateChatUseCase
+import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetProfileChatsUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.JoinChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.LeaveChatUseCase
@@ -24,8 +27,10 @@ import ru.saytikus.androidsimpleclient.domain.common.message.model.MessageEvent
 import ru.saytikus.androidsimpleclient.domain.common.message.model.SendMessageCommand
 import ru.saytikus.androidsimpleclient.domain.common.message.useCases.ObserveMessageEventsUseCase
 import ru.saytikus.androidsimpleclient.domain.common.message.useCases.SendMessageUseCase
-import ru.saytikus.androidsimpleclient.domain.common.profile.Profile
-import ru.saytikus.androidsimpleclient.domain.common.profile.SaveProfileUseCase
+import ru.saytikus.androidsimpleclient.domain.common.profile.model.Profile
+import ru.saytikus.androidsimpleclient.domain.common.profile.model.ProfileId
+import ru.saytikus.androidsimpleclient.domain.common.profile.useCases.GetProfileIdByUsernameOrEmailUseCase
+import ru.saytikus.androidsimpleclient.domain.common.profile.useCases.SaveProfileUseCase
 import ru.saytikus.androidsimpleclient.domain.common.profileSearch.answers.ProfileSearchAnswer
 import ru.saytikus.androidsimpleclient.domain.common.profileSearch.commands.ProfileSearchCommand
 import ru.saytikus.androidsimpleclient.domain.common.profileSearch.useCases.SearchProfilesUseCase
@@ -36,8 +41,10 @@ import ru.saytikus.androidsimpleclient.domain.registration.commands.C1RegisterPr
 import ru.saytikus.androidsimpleclient.domain.registration.useCases.RegisterProfileUseCase
 import ru.saytikus.androidsimpleclient.domain.settings.Settings
 import ru.saytikus.androidsimpleclient.domain.settings.dto.SaveResponseServerHostAddressCommand
+import ru.saytikus.androidsimpleclient.domain.settings.useCase.GetSettingsUseCase
 import ru.saytikus.androidsimpleclient.domain.settings.useCase.ObserveSettingsUseCase
 import ru.saytikus.androidsimpleclient.domain.settings.useCase.SaveResponseServerHostAddressUseCase
+import ru.saytikus.androidsimpleclient.domain.settings.useCase.SaveSettingsUseCase
 import kotlin.uuid.ExperimentalUuidApi
 
 @OptIn(ExperimentalUuidApi::class)
@@ -96,5 +103,21 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<Unit>, SendMessageCommand>>(named("SendMessageUseCase")) {
         SendMessageUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<Chat>, GetChatCommand>>(named("GetChatUseCase")) {
+        GetChatUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<Unit>, Settings>>(named("SaveSettingsUseCase")) {
+        SaveSettingsUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<Settings>, Unit>>(named("GetSettingsUseCase")) {
+        GetSettingsUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<ProfileId>, String>>(named("GetProfileIdByUsernameOrEmailUseCase")) {
+        GetProfileIdByUsernameOrEmailUseCase(get())
     }
 }
