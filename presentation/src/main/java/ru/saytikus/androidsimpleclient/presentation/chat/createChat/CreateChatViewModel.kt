@@ -13,9 +13,9 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
-import ru.saytikus.androidsimpleclient.domain.core.profileSearch.ProfileSearchConstants
-import ru.saytikus.androidsimpleclient.domain.core.profileSearch.answers.ProfileSearchAnswer
-import ru.saytikus.androidsimpleclient.domain.core.profileSearch.commands.ProfileSearchCommand
+import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.ProfileSearchConstants
+import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.answers.ProfileSearchAnswer
+import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.commands.ProfileSearchCommand
 import ru.saytikus.androidsimpleclient.presentation.core.ui.search.SearchState
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

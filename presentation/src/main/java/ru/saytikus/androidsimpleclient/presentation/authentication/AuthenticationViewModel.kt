@@ -13,12 +13,12 @@ import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInPro
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.dto.ValidateResult
-import ru.saytikus.androidsimpleclient.domain.core.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IValidator
-import ru.saytikus.androidsimpleclient.domain.core.profile.model.ProfileId
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.model.ProfileId
 import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
-import ru.saytikus.androidsimpleclient.domain.settings.Settings
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.Settings
 import kotlin.uuid.ExperimentalUuidApi
 
 @KoinViewModel

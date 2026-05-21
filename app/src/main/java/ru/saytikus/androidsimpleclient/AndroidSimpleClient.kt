@@ -17,7 +17,7 @@ import ru.saytikus.androidsimpleclient.di.LocalStorageModule
 import ru.saytikus.androidsimpleclient.di.PresentationModule
 import ru.saytikus.androidsimpleclient.di.dataCoreModule
 import ru.saytikus.androidsimpleclient.domain.chat.IChatGateway
-import ru.saytikus.androidsimpleclient.domain.core.message.IMessageGateway
+import ru.saytikus.androidsimpleclient.domain.core.features.message.IMessageGateway
 
 @KoinApplication
 class AndroidSimpleClient : Application() {

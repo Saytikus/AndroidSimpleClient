@@ -6,8 +6,8 @@ import ru.saytikus.androidsimpleclient.data.core.profile.source.remote.IProfileS
 import ru.saytikus.androidsimpleclient.data.core.profile.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.core.profile.IProfileGateway
-import ru.saytikus.androidsimpleclient.domain.core.profile.model.ProfileId
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.IProfileGateway
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.model.ProfileId
 
 @Single
 class ProfileGateway(

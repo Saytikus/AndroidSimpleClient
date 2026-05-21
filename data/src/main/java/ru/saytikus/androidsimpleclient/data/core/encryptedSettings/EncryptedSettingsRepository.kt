@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.core.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
 import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
 

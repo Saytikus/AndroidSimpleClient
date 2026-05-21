@@ -16,8 +16,8 @@ import org.koin.core.annotation.Named
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IObserveInputBoundary
-import ru.saytikus.androidsimpleclient.domain.settings.Settings
-import ru.saytikus.androidsimpleclient.domain.settings.dto.SaveResponseServerHostAddressCommand
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.Settings
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.dto.SaveResponseServerHostAddressCommand
 
 @KoinViewModel
 class SettingsViewModel(

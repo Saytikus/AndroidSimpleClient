@@ -1,8 +1,8 @@
 package ru.saytikus.androidsimpleclient.presentation.settings
 
 import kotlinx.serialization.Serializable
-import ru.saytikus.androidsimpleclient.domain.settings.Settings
-import ru.saytikus.androidsimpleclient.domain.settings.SettingsDefaults
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.Settings
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.SettingsDefaults
 
 
 /**

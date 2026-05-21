@@ -1,7 +1,7 @@
 package ru.saytikus.androidsimpleclient.domain.core.valueObject
 
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatEvent
-import ru.saytikus.androidsimpleclient.domain.core.message.model.MessageEvent
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.MessageEvent
 
 sealed interface DomainEvent {
 

@@ -11,9 +11,9 @@ import ru.saytikus.androidsimpleclient.data.core.message.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.IHubProvider
 import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.sendAwait
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.core.message.IMessageGateway
-import ru.saytikus.androidsimpleclient.domain.core.message.model.MessageEvent
-import ru.saytikus.androidsimpleclient.domain.core.message.model.SendMessageCommand
+import ru.saytikus.androidsimpleclient.domain.core.features.message.IMessageGateway
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.MessageEvent
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.SendMessageCommand
 import kotlin.uuid.ExperimentalUuidApi
 
 

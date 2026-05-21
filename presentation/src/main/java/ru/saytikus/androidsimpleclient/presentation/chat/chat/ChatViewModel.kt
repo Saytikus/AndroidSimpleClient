@@ -20,9 +20,9 @@ import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IObserveInputBoundary
-import ru.saytikus.androidsimpleclient.domain.core.message.model.MessageEvent
-import ru.saytikus.androidsimpleclient.domain.core.message.model.SendMessageCommand
-import ru.saytikus.androidsimpleclient.domain.settings.Settings
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.MessageEvent
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.SendMessageCommand
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.Settings
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 

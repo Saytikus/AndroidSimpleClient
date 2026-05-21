@@ -22,9 +22,9 @@ import kotlinx.serialization.KSerializer
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.domain.chat.ChatConnectionState
-import ru.saytikus.androidsimpleclient.domain.core.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
-import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.ISettingsRepository
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @Single

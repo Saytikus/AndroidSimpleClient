@@ -1,6 +1,6 @@
 package ru.saytikus.androidsimpleclient.data.core.encryptedSettings
 
-import ru.saytikus.androidsimpleclient.domain.core.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 
 fun EncryptedSettings.toDto() =
     EncryptedSettingsDto(

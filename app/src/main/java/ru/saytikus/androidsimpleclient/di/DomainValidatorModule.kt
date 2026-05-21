@@ -4,9 +4,9 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.saytikus.androidsimpleclient.data.registration.validators.EmailValidator
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IValidator
-import ru.saytikus.androidsimpleclient.domain.core.profile.validators.DisplayNameValidator
-import ru.saytikus.androidsimpleclient.domain.core.profile.validators.PasswordValidator
-import ru.saytikus.androidsimpleclient.domain.core.profile.validators.UsernameValidator
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.validators.DisplayNameValidator
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.validators.PasswordValidator
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.validators.UsernameValidator
 
 val DomainValidatorModule = module {
     single<IValidator<String>>(named("UsernameValidator")) {

@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
-import ru.saytikus.androidsimpleclient.domain.settings.Settings
-import ru.saytikus.androidsimpleclient.domain.settings.SettingsDefaults
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.ISettingsRepository
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.Settings
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.SettingsDefaults
 
 private val Context.dataStore by preferencesDataStore(name = "settings")
 

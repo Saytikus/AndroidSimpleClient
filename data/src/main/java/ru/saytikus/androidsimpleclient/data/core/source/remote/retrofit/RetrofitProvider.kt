@@ -16,8 +16,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interceptors.AuthorizationInterceptor
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
-import ru.saytikus.androidsimpleclient.domain.settings.ISettingsRepository
-import ru.saytikus.androidsimpleclient.domain.settings.Settings
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.ISettingsRepository
+import ru.saytikus.androidsimpleclient.domain.core.features.settings.Settings
 
 @Single
 class RetrofitProvider(

@@ -6,9 +6,9 @@ import ru.saytikus.androidsimpleclient.data.core.profileSearch.source.remote.IPr
 import ru.saytikus.androidsimpleclient.data.core.profileSearch.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.RetrofitProvider
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.core.profileSearch.IProfileSearchGateway
-import ru.saytikus.androidsimpleclient.domain.core.profileSearch.answers.ProfileSearchAnswer
-import ru.saytikus.androidsimpleclient.domain.core.profileSearch.commands.ProfileSearchCommand
+import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.IProfileSearchGateway
+import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.answers.ProfileSearchAnswer
+import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.commands.ProfileSearchCommand
 
 
 @Single

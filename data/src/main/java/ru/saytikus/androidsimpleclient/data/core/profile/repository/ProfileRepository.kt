@@ -12,7 +12,7 @@ import ru.saytikus.androidsimpleclient.data.core.profile.source.local.toDomain
 import ru.saytikus.androidsimpleclient.data.core.profile.source.local.toRoom
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbError
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
-import ru.saytikus.androidsimpleclient.domain.core.profile.model.Profile
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.model.Profile
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IRepository
 import ru.saytikus.androidsimpleclient.domain.core.valueObject.DomainError
 import kotlin.uuid.ExperimentalUuidApi

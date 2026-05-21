@@ -6,7 +6,7 @@ import okhttp3.Response
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.RetrofitEndpoints
-import ru.saytikus.androidsimpleclient.domain.core.encryptedSettings.EncryptedSettings
+import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
 
 @Single

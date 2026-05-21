@@ -11,7 +11,7 @@ import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Named
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.dto.ValidateResult
-import ru.saytikus.androidsimpleclient.domain.core.profile.model.Profile
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.model.Profile
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IValidator
 import ru.saytikus.androidsimpleclient.domain.registration.answers.A1RegisterProfileAnswer

@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.saytikus.androidsimpleclient.domain.core.message.model.Message
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.Message
 import ru.saytikus.androidsimpleclient.presentation.chat.chat.components.ChatDateSeparator
 import ru.saytikus.androidsimpleclient.presentation.chat.chat.components.ChatInputBar
 import ru.saytikus.androidsimpleclient.presentation.chat.chat.components.ChatTopBar

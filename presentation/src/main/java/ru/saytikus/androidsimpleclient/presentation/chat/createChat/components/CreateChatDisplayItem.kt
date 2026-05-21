@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.saytikus.androidsimpleclient.domain.core.profileSearch.answers.ProfileSearchListItem
+import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.answers.ProfileSearchListItem
 import ru.saytikus.androidsimpleclient.presentation.R
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
