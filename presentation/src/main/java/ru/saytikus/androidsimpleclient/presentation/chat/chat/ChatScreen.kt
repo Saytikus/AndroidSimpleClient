@@ -1,5 +1,6 @@
 package ru.saytikus.androidsimpleclient.presentation.chat.chat
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -46,6 +47,11 @@ fun ChatScreen(
 ) {
     val c = ColorProvider.colors
     val listState = rememberLazyListState()
+
+
+    BackHandler {
+        onAction(ChatAction.OnBackClick)
+    }
 
     LaunchedEffect(state.messages.size) {
         if (state.messages.isNotEmpty()) {

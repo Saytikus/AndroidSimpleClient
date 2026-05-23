@@ -1,7 +1,10 @@
 package ru.saytikus.androidsimpleclient.data.core.features.message.source.remote
 
 import ru.saytikus.androidsimpleclient.data.core.features.message.dto.MessageDto
+import ru.saytikus.androidsimpleclient.data.core.features.message.dto.MessagesWithCursorDto
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.GetMessagesWithCursorCommand
 import ru.saytikus.androidsimpleclient.domain.core.features.message.model.Message
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.MessagesWithCursor
 import kotlin.uuid.ExperimentalUuidApi
 
 @OptIn(ExperimentalUuidApi::class)
@@ -35,4 +38,13 @@ fun MessageDto.toDomain() =
         createdAt,
 
         isRead
+    )
+
+fun MessagesWithCursorDto.toDomain() =
+    MessagesWithCursor(
+        items.map { it.toDomain() },
+
+        nextCursor,
+
+        hasMore
     )

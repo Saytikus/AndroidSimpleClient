@@ -18,9 +18,11 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.GetMessagesWithCursorCommand
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.core.features.message.model.MessageEvent
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.MessagesWithCursor
 import ru.saytikus.androidsimpleclient.domain.core.features.message.model.SendMessageCommand
 import ru.saytikus.androidsimpleclient.domain.core.features.settings.Settings
 import kotlin.uuid.ExperimentalUuidApi
@@ -54,7 +56,11 @@ class ChatViewModel(
 
     @Named("GetSettingsUseCase")
     private val getSettingsCase:
-    IInputBoundary<MbResult<Settings>, Unit>
+    IInputBoundary<MbResult<Settings>, Unit>,
+
+    @Named("GetMessagesWithCursorUseCase")
+    private val getMessagesWithCursorCase:
+    IInputBoundary<MbResult<MessagesWithCursor>, GetMessagesWithCursorCommand>
 
 
 ) : ViewModel() {
@@ -70,6 +76,8 @@ class ChatViewModel(
     )
 
     private lateinit var activeUserId: Uuid
+
+    private lateinit var nextCursor: String
 
 
     init {
@@ -109,6 +117,29 @@ class ChatViewModel(
                     }
                 }
             }
+
+            val getMessagesWithCursorResult = getMessagesWithCursorCase(
+                GetMessagesWithCursorCommand(
+                    chatId = chatId,
+                    limit = 100)
+            ) // TODO fix limit magic number
+
+            when(getMessagesWithCursorResult) {
+                is MbResult.Failure -> {
+                    // TODO
+                    return@launch
+                }
+
+                is MbResult.Success -> {
+                    nextCursor = getMessagesWithCursorResult.response.nextCursor
+                    _stateFlow.update {
+                        it.copy(
+                            messages = getMessagesWithCursorResult.response.items,
+                            isLoadingMore = getMessagesWithCursorResult.response.hasMore
+                        )
+                    }
+                }
+            }
         }
 
         observeMessageEvents()
@@ -131,12 +162,23 @@ class ChatViewModel(
 
     fun onSendButtonClick() {
         viewModelScope.launch {
-            sendMessageCase(
+            val sendMessageResult = sendMessageCase(
                 SendMessageCommand(
                     chatId,
                     stateFlow.value.inputText
                 )
             )
+
+            when(sendMessageResult) {
+                is MbResult.Failure -> {
+                    // TODO user notification
+                    return@launch
+                }
+
+                is MbResult.Success -> _stateFlow.update {
+                    it.copy(inputText = "")
+                }
+            }
         }
     }
 

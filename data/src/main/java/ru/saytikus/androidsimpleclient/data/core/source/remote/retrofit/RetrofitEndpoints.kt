@@ -10,6 +10,8 @@ object RetrofitEndpoints {
 
     private const val USERS_SUBROOT = "$ROOT/Users"
 
+    private const val MESSAGE_SUBROOT = "$CHAT_SUBROOT/{chatId}/messages"
+
 
 
     const val LOGIN = "$AUTH_SUBROOT/login"
@@ -26,5 +28,5 @@ object RetrofitEndpoints {
 
     const val GET_USER_ID = "$USERS_SUBROOT/GetUserId/{usernameOrEmail}"
 
-
+    const val GET_MESSAGES_WITH_CURSOR = "$MESSAGE_SUBROOT/cursor"
 }

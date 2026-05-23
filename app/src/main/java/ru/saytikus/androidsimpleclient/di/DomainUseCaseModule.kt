@@ -21,10 +21,13 @@ import ru.saytikus.androidsimpleclient.domain.chat.useCases.LeaveChatUseCase
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.useCases.UpdateEncryptedSettingsUseCase
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.GetMessagesWithCursorCommand
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IObserveInputBoundary
 import ru.saytikus.androidsimpleclient.domain.core.features.message.model.MessageEvent
+import ru.saytikus.androidsimpleclient.domain.core.features.message.model.MessagesWithCursor
 import ru.saytikus.androidsimpleclient.domain.core.features.message.model.SendMessageCommand
+import ru.saytikus.androidsimpleclient.domain.core.features.message.useCases.GetMessagesWithCursorUseCase
 import ru.saytikus.androidsimpleclient.domain.core.features.message.useCases.ObserveMessageEventsUseCase
 import ru.saytikus.androidsimpleclient.domain.core.features.message.useCases.SendMessageUseCase
 import ru.saytikus.androidsimpleclient.domain.core.features.profile.model.Profile
@@ -119,5 +122,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<ProfileId>, String>>(named("GetProfileIdByUsernameOrEmailUseCase")) {
         GetProfileIdByUsernameOrEmailUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<MessagesWithCursor>, GetMessagesWithCursorCommand>>(named("GetMessagesWithCursorUseCase")) {
+        GetMessagesWithCursorUseCase(get())
     }
 }
