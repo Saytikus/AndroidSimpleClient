@@ -11,9 +11,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
@@ -23,11 +23,11 @@ import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 import ru.saytikus.androidsimpleclient.domain.chat.ChatConnectionState
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
-import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
 import ru.saytikus.androidsimpleclient.domain.core.features.settings.ISettingsRepository
+import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
-@Single
+@Single(binds = [IHubProvider::class])
 @OptIn(ExperimentalAtomicApi::class, ExperimentalCoroutinesApi::class)
 class HubProvider(
 
@@ -59,31 +59,14 @@ class HubProvider(
     init {
 
         _scope.launch {
-            try {
-                val connection = createConnection()
-                _connectionMutex.withLock { _connection = connection }
-                subscribeToConnectionState(connection)
-                _registry.reSubscribeAll(connection)
-
-            } catch (e: Exception) {
-                println("HubProvider: initial connection creation failed: $e")
-            }
-        }
-
-        _scope.launch {
             _settingsRepo.observeSettings()
                 .map { it.responseServerHostAddress }
+                .distinctUntilChanged()
                 .collect { newAddress ->
                     println("HubProvider: host address changed to $newAddress, recreating connection")
 
                     updateConnection()
                 }
-        }
-
-        _scope.launch {
-            _connection?.connectionState?.collect {
-                println("CONNECTION STATE CHANGED: $it")
-            }
         }
     }
 
@@ -358,7 +341,7 @@ class HubProvider(
             _connectionMutex.withLock { _connection = newConnection }
 
             try {
-                newConnection.start()
+                connect()
                 println("HubProvider: newConnection.start() returned (state=${newConnection.connectionState.value})")
             } catch (e: Exception) {
                 println("HubProvider: failed to start new connection: $e")
@@ -375,13 +358,6 @@ class HubProvider(
             connection.stop()
         } catch (e: Exception) {
             println("HubProvider: initial stop failed: $e")
-        }
-
-        delay(300)
-
-        if(connection.connectionState.value != HubConnectionState.DISCONNECTED) {
-            connection.stop()
-            println("HubProvider: second stop in stopConnectionFully")
         }
     }
 

@@ -37,8 +37,17 @@ class SettingsRepository(
 
     override suspend fun updateSettings(settings: Settings): MbResult<Unit> {
         // TODO handle errors
-        setResponseServerHostAddress(settings.responseServerHostAddress)
-        setActiveUserId(settings.activeUserId ?: "")
+        context.dataStore.edit { preferences ->
+            val currentAddress = preferences[SettingsKeys.RESPONSE_SERVER_HOST_KEY]
+            val currentUserId = preferences[SettingsKeys.ACTIVE_USER_ID_KEY]
+
+            if (currentAddress != settings.responseServerHostAddress) {
+                preferences[SettingsKeys.RESPONSE_SERVER_HOST_KEY] = settings.responseServerHostAddress
+            }
+            if (currentUserId != (settings.activeUserId ?: "")) {
+                preferences[SettingsKeys.ACTIVE_USER_ID_KEY] = settings.activeUserId ?: ""
+            }
+        }
         return MbResult.Success(Unit)
     }
 
@@ -60,14 +69,5 @@ class SettingsRepository(
 
             )
         }.distinctUntilChanged()
-    }
-
-    private suspend fun setActiveUserId(newValue: String): MbResult<Unit> {
-        // TODO try catch
-        context.dataStore.edit { preferences ->
-            preferences[SettingsKeys.ACTIVE_USER_ID_KEY] = newValue
-        }
-
-        return MbResult.Success(Unit)
     }
 }
