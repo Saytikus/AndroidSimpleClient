@@ -17,6 +17,7 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
+import ru.saytikus.androidsimpleclient.domain.chat.model.ChatEvent
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.features.message.model.GetMessagesWithCursorCommand
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.IInputBoundary
@@ -60,7 +61,11 @@ class ChatViewModel(
 
     @Named("GetMessagesWithCursorUseCase")
     private val getMessagesWithCursorCase:
-    IInputBoundary<MbResult<MessagesWithCursor>, GetMessagesWithCursorCommand>
+    IInputBoundary<MbResult<MessagesWithCursor>, GetMessagesWithCursorCommand>,
+
+    @Named("ObserveChatEventsUseCase")
+    private val observeChatEventsCase:
+    IObserveInputBoundary<Flow<ChatEvent>>
 
 
 ) : ViewModel() {
@@ -113,7 +118,7 @@ class ChatViewModel(
                         it.copy(
                             chatName = if(chat.response.title == "NO_TITLE") chat.response.participants[1].displayName else chat.response.title,
                             ownerProfileId = activeUserId
-                        )
+                        ) // TODO fix magic string parse
                     }
                 }
             }
@@ -156,6 +161,35 @@ class ChatViewModel(
 
                 }
 
+            }
+            .launchIn(viewModelScope)
+
+        observeChatEventsCase()
+            .onEach { event ->
+                when(event) {
+
+                    is ChatEvent.ChatCreatedEvent -> {
+                        // TODO user notification
+                    }
+
+                    is ChatEvent.ChatListUpdatedEvent -> { /* NO-OP */ }
+
+                    is ChatEvent.TypingChangedEvent -> {
+                        if(event.chatId == chatId) {
+                            _stateFlow.update {
+                                it.copy(isTyping = event.isTyping)
+                            }
+                        }
+                    }
+
+                    is ChatEvent.UserOnlineChangedEvent -> {
+                        if(event.chatId == chatId) {
+                            _stateFlow.update {
+                                it.copy(isTyping = event.isOnline)
+                            }
+                        }
+                    }
+                }
             }
             .launchIn(viewModelScope)
     }

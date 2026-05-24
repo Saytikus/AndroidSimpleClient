@@ -12,12 +12,14 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
+import ru.saytikus.androidsimpleclient.domain.chat.model.ChatEvent
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.CreatePrivateChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetProfileChatsUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.JoinChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.LeaveChatUseCase
+import ru.saytikus.androidsimpleclient.domain.chat.useCases.ObserveChatEventsUseCase
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.useCases.UpdateEncryptedSettingsUseCase
@@ -126,5 +128,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<MbResult<MessagesWithCursor>, GetMessagesWithCursorCommand>>(named("GetMessagesWithCursorUseCase")) {
         GetMessagesWithCursorUseCase(get())
+    }
+    
+    single<IObserveInputBoundary<Flow<ChatEvent>>>(named("ObserveChatEventsUseCase")) {
+        ObserveChatEventsUseCase(get())
     }
 }

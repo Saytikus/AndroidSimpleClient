@@ -35,7 +35,7 @@ sealed interface ChatEvent {
 
         val userId: Uuid,
 
-        val isOnline: Boolean
+        val isTyping: Boolean
 
     ) : ChatEvent
 }
