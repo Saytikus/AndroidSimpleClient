@@ -175,7 +175,7 @@ class ChatViewModel(
                     is ChatEvent.ChatListUpdatedEvent -> { /* NO-OP */ }
 
                     is ChatEvent.TypingChangedEvent -> {
-                        if(event.chatId == chatId) {
+                        if(event.chatId == chatId && event.userId != activeUserId) {
                             _stateFlow.update {
                                 it.copy(isTyping = event.isTyping)
                             }
@@ -185,7 +185,7 @@ class ChatViewModel(
                     is ChatEvent.UserOnlineChangedEvent -> {
                         if(event.chatId == chatId) {
                             _stateFlow.update {
-                                it.copy(isTyping = event.isOnline)
+                                it.copy(isOnline = event.isOnline)
                             }
                         }
                     }
