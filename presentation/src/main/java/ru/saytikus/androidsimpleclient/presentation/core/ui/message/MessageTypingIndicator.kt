@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.chat.chat.components
+package ru.saytikus.androidsimpleclient.presentation.core.ui.message
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -35,7 +35,7 @@ import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
 
 @Composable
-internal fun TypingIndicator(
+fun MessageTypingIndicator(
     avatarIcon: ImageVector,
     colors: AppColors
 ) {
@@ -73,11 +73,11 @@ internal fun TypingIndicator(
             modifier = Modifier
                 .background(
                     brush = Brush.linearGradient(
-                            colors = listOf(
-                                colors.otherBubbleBackgroundStart,
-                                colors.otherBubbleBackgroundEnd
-                            )
-                        ),
+                        colors = listOf(
+                            colors.otherBubbleBackgroundStart,
+                            colors.otherBubbleBackgroundEnd
+                        )
+                    ),
                     shape = RoundedCornerShape(16.dp, 16.dp, 16.dp, 4.dp)
                 )
                 .border(
@@ -119,9 +119,9 @@ internal fun TypingIndicator(
     }
 }
 
-@Preview(name = "TypingIndicator")
+@Preview(name = "MessageTypingIndicator")
 @Composable
-private fun TypingIndicatorLight() {
+private fun MessageTypingIndicatorLight() {
     AndroidSimpleClientTheme(
         previewDarkTheme = false,
         content = {
@@ -132,7 +132,7 @@ private fun TypingIndicatorLight() {
                     .padding(14.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
-                TypingIndicator(
+                MessageTypingIndicator(
                     avatarIcon = Icons.Rounded.Person,
                     colors = LightAppColors
                 )
@@ -141,9 +141,9 @@ private fun TypingIndicatorLight() {
     )
 }
 
-@Preview(name = "TypingIndicator")
+@Preview(name = "MessageTypingIndicator")
 @Composable
-private fun TypingIndicatorDark() {
+private fun MessageTypingIndicatorDark() {
     AndroidSimpleClientTheme(
         previewDarkTheme = true,
         content = {
@@ -154,7 +154,7 @@ private fun TypingIndicatorDark() {
                     .padding(14.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
-                TypingIndicator(
+                MessageTypingIndicator(
                     avatarIcon = Icons.Rounded.Person,
                     colors = DarkAppColors
                 )

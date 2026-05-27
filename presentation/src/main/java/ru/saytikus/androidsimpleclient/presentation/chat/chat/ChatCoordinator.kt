@@ -25,6 +25,8 @@ class ChatCoordinator(
                 onNavigate(ChatNavigation.Back)
             }
 
+            is ChatAction.OnLoadMoreMessages -> viewModel.loadMoreMessages()
+
             is ChatAction.OnFirstVisibleMessageChanged -> { /* Handle */ }
         }
     }

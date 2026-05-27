@@ -84,6 +84,12 @@ class ChatViewModel(
 
     private lateinit var nextCursor: String
 
+    private var hasMore: Boolean = false
+
+    private companion object {
+        const val PAGE_SIZE = 100
+    }
+
 
     init {
 
@@ -126,8 +132,9 @@ class ChatViewModel(
             val getMessagesWithCursorResult = getMessagesWithCursorCase(
                 GetMessagesWithCursorCommand(
                     chatId = chatId,
-                    limit = 100)
-            ) // TODO fix limit magic number
+                    limit = PAGE_SIZE
+                )
+            )
 
             when(getMessagesWithCursorResult) {
                 is MbResult.Failure -> {
@@ -137,10 +144,11 @@ class ChatViewModel(
 
                 is MbResult.Success -> {
                     nextCursor = getMessagesWithCursorResult.response.nextCursor
+                    hasMore = getMessagesWithCursorResult.response.hasMore
                     _stateFlow.update {
                         it.copy(
                             messages = getMessagesWithCursorResult.response.items,
-                            isLoadingMore = getMessagesWithCursorResult.response.hasMore
+                            isLoadingMore = false
                         )
                     }
                 }
@@ -220,6 +228,34 @@ class ChatViewModel(
         // TODO validator
         _stateFlow.update {
             it.copy(inputText = newValue)
+        }
+    }
+
+    fun loadMoreMessages() {
+        if (!hasMore || _stateFlow.value.isLoadingMore) return
+        viewModelScope.launch {
+            _stateFlow.update { it.copy(isLoadingMore = true) }
+            when (val result = getMessagesWithCursorCase(
+                GetMessagesWithCursorCommand(
+                    chatId = chatId,
+                    cursor = nextCursor,
+                    limit = PAGE_SIZE
+                )
+            )) {
+                is MbResult.Failure -> {
+                    _stateFlow.update { it.copy(isLoadingMore = false) }
+                }
+                is MbResult.Success -> {
+                    nextCursor = result.response.nextCursor
+                    hasMore = result.response.hasMore
+                    _stateFlow.update {
+                        it.copy(
+                            messages = result.response.items + it.messages,
+                            isLoadingMore = false
+                        )
+                    }
+                }
+            }
         }
     }
 

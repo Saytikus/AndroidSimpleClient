@@ -1,4 +1,4 @@
-package ru.saytikus.androidsimpleclient.presentation.chat.chat.components
+package ru.saytikus.androidsimpleclient.presentation.core.ui.message
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,14 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
+import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import ru.saytikus.androidsimpleclient.presentation.theme.DarkAppColors
 import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
 
 @Composable
-internal fun ChatDateSeparator(
+fun MessageDateSeparator(
     date: String,
     colors: AppColors
 ) {
@@ -43,9 +43,9 @@ internal fun ChatDateSeparator(
     }
 }
 
-@Preview(name = "ChatDateSeparator")
+@Preview(name = "MessageDateSeparator")
 @Composable
-private fun ChatDateSeparatorLight() {
+private fun MessageDateSeparatorLight() {
     AndroidSimpleClientTheme(
         previewDarkTheme = false,
         content = {
@@ -55,15 +55,15 @@ private fun ChatDateSeparatorLight() {
                     .background(brush = ColorProvider.backgroundBrush()),
                 contentAlignment = Alignment.Center
             ) {
-                ChatDateSeparator(date = "16 May", colors = LightAppColors)
+                MessageDateSeparator(date = "16 May", colors = LightAppColors)
             }
         }
     )
 }
 
-@Preview(name = "ChatDateSeparator")
+@Preview(name = "MessageDateSeparator")
 @Composable
-private fun ChatDateSeparatorDark() {
+private fun MessageDateSeparatorDark() {
     AndroidSimpleClientTheme(
         previewDarkTheme = true,
         content = {
@@ -73,7 +73,7 @@ private fun ChatDateSeparatorDark() {
                     .background(brush = ColorProvider.backgroundBrush()),
                 contentAlignment = Alignment.Center
             ) {
-                ChatDateSeparator(date = "16 May", colors = DarkAppColors)
+                MessageDateSeparator(date = "16 May", colors = DarkAppColors)
             }
         }
     )
