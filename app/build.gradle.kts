@@ -60,6 +60,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.process)
 
     implementation(libs.ksafe.core)
 

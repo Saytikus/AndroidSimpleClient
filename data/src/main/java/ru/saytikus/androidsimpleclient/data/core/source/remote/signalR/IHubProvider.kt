@@ -2,11 +2,11 @@ package ru.saytikus.androidsimpleclient.data.core.source.remote.signalR
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.KSerializer
-import ru.saytikus.androidsimpleclient.domain.chat.ChatConnectionState
+import ru.saytikus.androidsimpleclient.domain.connection.ConnectionState
 
 interface IHubProvider {
 
-    val connectionState: Flow<ChatConnectionState>
+    val connectionState: Flow<ConnectionState>
 
 
     suspend fun connect()

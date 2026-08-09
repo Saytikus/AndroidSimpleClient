@@ -20,6 +20,10 @@ import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetProfileChatsUseCa
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.JoinChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.LeaveChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.ObserveChatEventsUseCase
+import ru.saytikus.androidsimpleclient.domain.connection.ConnectionState
+import ru.saytikus.androidsimpleclient.domain.connection.useCases.ConnectToHubUseCase
+import ru.saytikus.androidsimpleclient.domain.connection.useCases.DisconnectFromHubUseCase
+import ru.saytikus.androidsimpleclient.domain.connection.useCases.ObserveConnectionStateUseCase
 import ru.saytikus.androidsimpleclient.domain.core.dto.MbResult
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.useCases.UpdateEncryptedSettingsUseCase
@@ -132,5 +136,17 @@ val DomainUseCaseModule = module {
     
     single<IObserveInputBoundary<Flow<ChatEvent>>>(named("ObserveChatEventsUseCase")) {
         ObserveChatEventsUseCase(get())
+    }
+
+    single<IObserveInputBoundary<Flow<ConnectionState>>>(named("ObserveConnectionStateUseCase")) {
+        ObserveConnectionStateUseCase(get())
+    }
+
+    single<IInputBoundary<Unit, Unit>>(named("DisconnectFromHubUseCase")) {
+        DisconnectFromHubUseCase(get())
+    }
+
+    single<IInputBoundary<Unit, Unit>>(named("ConnectToHubUseCase")) {
+        ConnectToHubUseCase(get())
     }
 }

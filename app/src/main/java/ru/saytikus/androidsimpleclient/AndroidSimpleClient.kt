@@ -1,6 +1,8 @@
 package ru.saytikus.androidsimpleclient
 
 import android.app.Application
+import androidx.lifecycle.ProcessLifecycleOwner
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.annotation.KoinApplication
@@ -9,6 +11,7 @@ import org.koin.ksp.generated.startKoin
 import ru.saytikus.androidsimpleclient.di.DomainUseCaseModule
 import ru.saytikus.androidsimpleclient.di.DomainValidatorModule
 import ru.saytikus.androidsimpleclient.di.dataCoreModule
+import ru.saytikus.androidsimpleclient.lifecycle.AppLifecycleObserver
 
 @KoinApplication
 class AndroidSimpleClient : Application() {
@@ -29,5 +32,7 @@ class AndroidSimpleClient : Application() {
                 )
             )
         }
+
+        ProcessLifecycleOwner.get().lifecycle.addObserver(getKoin().get<AppLifecycleObserver>())
     }
 }

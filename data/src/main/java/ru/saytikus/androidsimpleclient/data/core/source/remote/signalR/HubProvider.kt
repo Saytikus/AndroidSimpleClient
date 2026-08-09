@@ -21,7 +21,7 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.KSerializer
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
-import ru.saytikus.androidsimpleclient.domain.chat.ChatConnectionState
+import ru.saytikus.androidsimpleclient.domain.connection.ConnectionState
 import ru.saytikus.androidsimpleclient.domain.core.features.encryptedSettings.EncryptedSettings
 import ru.saytikus.androidsimpleclient.domain.core.features.settings.ISettingsRepository
 import ru.saytikus.androidsimpleclient.domain.core.interfaces.ISingleObjectRepository
@@ -41,7 +41,7 @@ class HubProvider(
 
     private val _scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    private val _connectionState = MutableStateFlow(ChatConnectionState.DISCONNECTED)
+    private val _connectionState = MutableStateFlow(ConnectionState.DISCONNECTED)
     override val connectionState = _connectionState.asStateFlow()
 
     // hub connection
@@ -311,10 +311,10 @@ class HubProvider(
         _stateCollectorJob = _scope.launch {
             connection.connectionState.collect { state ->
                 _connectionState.value = when (state) {
-                    HubConnectionState.CONNECTING -> ChatConnectionState.CONNECTING
-                    HubConnectionState.CONNECTED -> ChatConnectionState.CONNECTED
-                    HubConnectionState.DISCONNECTED -> ChatConnectionState.DISCONNECTED
-                    HubConnectionState.RECONNECTING -> ChatConnectionState.RECONNECTING
+                    HubConnectionState.CONNECTING -> ConnectionState.CONNECTING
+                    HubConnectionState.CONNECTED -> ConnectionState.CONNECTED
+                    HubConnectionState.DISCONNECTED -> ConnectionState.DISCONNECTED
+                    HubConnectionState.RECONNECTING -> ConnectionState.RECONNECTING
                 }
             }
         }
