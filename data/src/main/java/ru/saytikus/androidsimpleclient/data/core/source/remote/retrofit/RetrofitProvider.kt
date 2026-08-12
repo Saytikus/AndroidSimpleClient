@@ -62,7 +62,7 @@ class RetrofitProvider(
     ): Retrofit {
 
         return Retrofit.Builder()
-            .baseUrl("http://$hostAddress:8080") // TODO: url
+            .baseUrl(/*"http://$hostAddress:8080"*/"https://ascserver.home-ken.crazedns.ru/") // TODO: url
             .client(buildClient(authInterceptor))
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
