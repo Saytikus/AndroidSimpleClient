@@ -137,11 +137,22 @@ class CreateChatViewModel(
                     _stateFlow.update {
                         it.copy(
                             searchState = SearchState(),
-                            isCreateChatSuccessfully = true
+                            isCreateChatSuccessfully = true,
+                            createdChatId = createPrivateChatResult.response.chatId.toString()
                         )
                     }
                 }
             }
+        }
+    }
+
+    fun onSuccessfulCreateChatConsumed() {
+        _stateFlow.update {
+            it.copy(
+                searchState = SearchState(),
+                isCreateChatSuccessfully = false,
+                createdChatId = null
+            )
         }
     }
 }

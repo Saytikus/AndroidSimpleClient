@@ -30,6 +30,7 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -55,6 +56,10 @@ fun ChatListScreen(
     onAction: (ChatListAction) -> Unit
 ) {
     val c = ColorProvider.colors
+
+    LaunchedEffect(Unit) {
+        onAction(ChatListAction.OnChatsRefresh)
+    }
 
     Scaffold(
         containerColor = Color.Transparent,

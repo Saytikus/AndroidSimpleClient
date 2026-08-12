@@ -31,11 +31,6 @@ class ChatListViewModel(
 
 
 
-    init {
-
-        onChatRefresh()
-    }
-
     fun onChatRefresh() {
 
         viewModelScope.launch {

@@ -43,8 +43,8 @@ fun CreateChatScreen(
     // create chat successfully end
     // TODO fix
     LaunchedEffect(state.isCreateChatSuccessfully) {
-        if(state.isCreateChatSuccessfully) {
-            onAction(CreateChatAction.OnCreateChatSuccessfully)
+        if(state.isCreateChatSuccessfully && state.createdChatId != null) {
+            onAction(CreateChatAction.OnCreateChatSuccessfully(state.createdChatId))
         }
     }
 

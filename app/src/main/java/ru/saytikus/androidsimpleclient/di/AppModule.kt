@@ -10,7 +10,10 @@ import org.koin.core.annotation.Single
 
 @Module
 @Configuration
-@ComponentScan("ru.saytikus.androidsimpleclient.lifecycle")
+@ComponentScan(
+    "ru.saytikus.androidsimpleclient.lifecycle",
+    "ru.saytikus.androidsimpleclient.navigation"
+)
 class AppModule {
 
     @Single

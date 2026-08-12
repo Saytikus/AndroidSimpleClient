@@ -25,7 +25,9 @@ class ChatListCoordinator(
 
             ChatListAction.OnChatsRefresh -> viewModel.onChatRefresh()
 
-            is ChatListAction.OnSearchQueryChange -> TODO()
+            is ChatListAction.OnSearchQueryChange -> {
+                // TODO
+            }
 
             ChatListAction.OnSettingsButtonClick -> onNavigate(
                 ChatListNavigation.Settings

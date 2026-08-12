@@ -39,6 +39,7 @@ import ru.saytikus.androidsimpleclient.domain.core.features.message.useCases.Sen
 import ru.saytikus.androidsimpleclient.domain.core.features.profile.model.Profile
 import ru.saytikus.androidsimpleclient.domain.core.features.profile.model.ProfileId
 import ru.saytikus.androidsimpleclient.domain.core.features.profile.useCases.GetProfileIdByUsernameOrEmailUseCase
+import ru.saytikus.androidsimpleclient.domain.core.features.profile.useCases.GetSavedProfilesUseCase
 import ru.saytikus.androidsimpleclient.domain.core.features.profile.useCases.SaveProfileUseCase
 import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.answers.ProfileSearchAnswer
 import ru.saytikus.androidsimpleclient.domain.core.features.profileSearch.commands.ProfileSearchCommand
@@ -148,5 +149,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<Unit, Unit>>(named("ConnectToHubUseCase")) {
         ConnectToHubUseCase(get())
+    }
+
+    single<IInputBoundary<List<Profile>, Unit>>(named("GetSavedProfilesUseCase")) {
+        GetSavedProfilesUseCase(get())
     }
 }

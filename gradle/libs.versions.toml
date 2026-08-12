@@ -31,6 +31,7 @@ roomCompiler = "2.8.4"
 roomKtx = "2.8.4"
 ksafe = "2.0.0-RC2"
 signalRKore = "0.9.13"
+navigationComposeVersion = "2.9.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -84,6 +85,7 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 ksafe-core = { group = "eu.anifantakis", name = "ksafe", version.ref = "ksafe" }
 
 signalR-kore = { group = "eu.lepicekmichal.signalrkore", name = "signalrkore", version.ref = "signalRKore" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationComposeVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

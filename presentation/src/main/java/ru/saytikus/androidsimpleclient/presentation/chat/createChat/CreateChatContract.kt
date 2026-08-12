@@ -21,12 +21,14 @@ data class CreateChatState(
 
     val searchState: SearchState<ProfileSearchListItem> = SearchState(),
 
-    val isCreateChatSuccessfully: Boolean = false
+    val isCreateChatSuccessfully: Boolean = false,
+
+    val createdChatId: String? = null
 )
 
 sealed interface CreateChatNavigation {
 
-    data object CreatedChat : CreateChatNavigation
+    data class CreatedChat(val newChatId: String) : CreateChatNavigation
 }
 
 /**
@@ -41,6 +43,8 @@ sealed interface CreateChatAction {
     @OptIn(ExperimentalUuidApi::class)
     data class OnProfileClick(val profileId: Uuid) : CreateChatAction
 
-    data object OnCreateChatSuccessfully : CreateChatAction
+    data class OnCreateChatSuccessfully(val newChatId: String) : CreateChatAction
+
+
 }
 

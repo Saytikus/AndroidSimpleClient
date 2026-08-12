@@ -173,7 +173,7 @@ class AuthenticationViewModel(
                         is MbResult.Success -> {
                             val saveSettingsResult = saveSettingsCase(
                                 settings.response.copy(
-                                    activeUserId = profileId.response.profileId.toString()
+                                    activeProfileId = profileId.response.profileId.toString()
                                 )
                             )
                         }

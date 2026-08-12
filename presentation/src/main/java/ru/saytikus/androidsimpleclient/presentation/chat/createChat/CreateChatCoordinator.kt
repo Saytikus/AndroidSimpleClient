@@ -33,7 +33,10 @@ class CreateChatCoordinator(
 
             is CreateChatAction.OnProfileClick -> viewModel.onProfileClick(action.profileId)
 
-            is CreateChatAction.OnCreateChatSuccessfully -> onNavigate(CreateChatNavigation.CreatedChat)
+            is CreateChatAction.OnCreateChatSuccessfully -> {
+                viewModel.onSuccessfulCreateChatConsumed()
+                onNavigate(CreateChatNavigation.CreatedChat(action.newChatId))
+            }
         }
     }
 

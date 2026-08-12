@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.annotations)
     implementation(libs.koin.android)
+    implementation(libs.navigation.compose)
     ksp(libs.koin.ksp.compiler)
 
     implementation(libs.androidx.room.runtime)
