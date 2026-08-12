@@ -100,7 +100,7 @@ class ChatViewModel(
                     // TODO
                 }
                 is MbResult.Success -> {
-                    val userId = activeUserIdResult.response.activeUserId
+                    val userId = activeUserIdResult.response.activeProfileId
                     if(userId == null) {
                         //TODO
                         return@launch
@@ -119,10 +119,17 @@ class ChatViewModel(
 
                 is MbResult.Success -> {
 
+                    val opponent = chat.response.participants.firstOrNull { it.userId != activeUserId }
+
+                    if(opponent == null) {
+                        // TODO think and fix (pizdec) TODO TEST
+                        _stateFlow.update { it.copy(joinChatError = true) }
+                        return@launch
+                    }
 
                     _stateFlow.update {
                         it.copy(
-                            chatName = if(chat.response.title == "NO_TITLE") chat.response.participants[1].displayName else chat.response.title,
+                            chatName = if(chat.response.title == "NO_TITLE") opponent.displayName else chat.response.title,
                             ownerProfileId = activeUserId
                         ) // TODO fix magic string parse
                     }
@@ -143,7 +150,7 @@ class ChatViewModel(
                 }
 
                 is MbResult.Success -> {
-                    nextCursor = getMessagesWithCursorResult.response.nextCursor
+                    nextCursor = getMessagesWithCursorResult.response.nextCursor ?: ""
                     hasMore = getMessagesWithCursorResult.response.hasMore
                     _stateFlow.update {
                         it.copy(
@@ -246,7 +253,7 @@ class ChatViewModel(
                     _stateFlow.update { it.copy(isLoadingMore = false) }
                 }
                 is MbResult.Success -> {
-                    nextCursor = result.response.nextCursor
+                    nextCursor = result.response.nextCursor ?: ""
                     hasMore = result.response.hasMore
                     _stateFlow.update {
                         it.copy(
@@ -264,5 +271,9 @@ class ChatViewModel(
             // TODO parse answer
             leaveChatCase(LeaveChatCommand(chatId))
         }
+    }
+
+    fun onJoinChatErrorConsumed() {
+        _stateFlow.update { it.copy(joinChatError = false) }
     }
 }

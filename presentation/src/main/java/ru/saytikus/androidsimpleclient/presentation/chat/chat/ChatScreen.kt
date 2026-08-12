@@ -36,6 +36,13 @@ fun ChatScreen(
     val c = ColorProvider.colors
     val listState = rememberLazyListState()
 
+    LaunchedEffect(state.joinChatError) {
+        if(state.joinChatError) {
+            // TODO notification with error string
+            onAction(ChatAction.OnBackClick)
+        }
+    }
+
     BackHandler {
         onAction(ChatAction.OnBackClick)
     }

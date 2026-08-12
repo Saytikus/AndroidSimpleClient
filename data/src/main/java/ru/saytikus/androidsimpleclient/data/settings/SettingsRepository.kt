@@ -44,8 +44,8 @@ class SettingsRepository(
             if (currentAddress != settings.responseServerHostAddress) {
                 preferences[SettingsKeys.RESPONSE_SERVER_HOST_KEY] = settings.responseServerHostAddress
             }
-            if (currentUserId != (settings.activeUserId ?: "")) {
-                preferences[SettingsKeys.ACTIVE_USER_ID_KEY] = settings.activeUserId ?: ""
+            if (currentUserId != (settings.activeProfileId ?: "")) {
+                preferences[SettingsKeys.ACTIVE_USER_ID_KEY] = settings.activeProfileId ?: ""
             }
         }
         return MbResult.Success(Unit)

@@ -38,7 +38,9 @@ data class ChatState(
 
     val isLoadingMore: Boolean = false,
 
-    val avatarIcon: ImageVector = Icons.Rounded.Person
+    val avatarIcon: ImageVector = Icons.Rounded.Person,
+
+    val joinChatError: Boolean = false
 )
 
 /**
@@ -53,4 +55,6 @@ sealed interface ChatAction {
     data class OnFirstVisibleMessageChanged @OptIn(ExperimentalUuidApi::class) constructor(
         val messageId: Uuid
     ) : ChatAction
+
+    data object JoinChatErrorConsumed : ChatAction
 }

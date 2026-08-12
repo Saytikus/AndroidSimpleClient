@@ -28,6 +28,8 @@ class ChatCoordinator(
             is ChatAction.OnLoadMoreMessages -> viewModel.loadMoreMessages()
 
             is ChatAction.OnFirstVisibleMessageChanged -> { /* Handle */ }
+
+            ChatAction.JoinChatErrorConsumed -> viewModel.onJoinChatErrorConsumed()
         }
     }
 }

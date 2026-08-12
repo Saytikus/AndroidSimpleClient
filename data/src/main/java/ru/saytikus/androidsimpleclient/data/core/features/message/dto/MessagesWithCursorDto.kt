@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class MessagesWithCursorDto(
     val items: List<MessageDto>,
 
-    val nextCursor: String,
+    val nextCursor: String?,
 
     val hasMore: Boolean
 )
