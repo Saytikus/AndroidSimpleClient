@@ -2,8 +2,12 @@ package ru.saytikus.androidsimpleclient.presentation.chat.chat
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.saytikus.androidsimpleclient.presentation.chat.chat.components.ChatInputBar
@@ -27,17 +32,16 @@ import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientThe
 import ru.saytikus.androidsimpleclient.presentation.theme.ColorProvider
 import kotlin.uuid.ExperimentalUuidApi
 
-@OptIn(ExperimentalUuidApi::class)
+@OptIn(ExperimentalUuidApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun ChatScreen(
-    state: ChatState,
-    onAction: (ChatAction) -> Unit
+    state: ChatState, onAction: (ChatAction) -> Unit
 ) {
     val c = ColorProvider.colors
     val listState = rememberLazyListState()
 
     LaunchedEffect(state.joinChatError) {
-        if(state.joinChatError) {
+        if (state.joinChatError) {
             // TODO notification with error string
             onAction(ChatAction.OnBackClick)
         }
@@ -53,10 +57,24 @@ fun ChatScreen(
         }
     }
 
+    val focusManager = LocalFocusManager.current
+
+    val imeVisible = WindowInsets.isImeVisible
+
+    LaunchedEffect(imeVisible) {
+        if(!imeVisible) {
+            focusManager.clearFocus()
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(brush = ColorProvider.backgroundBrush())
+            .clickable {
+                focusManager.clearFocus()
+            }
+
     ) {
         Box(
             modifier = Modifier
@@ -64,10 +82,8 @@ fun ChatScreen(
                 .size(280.dp)
                 .background(
                     brush = Brush.radialGradient(
-                        colors = listOf(c.blob1, Color.Transparent),
-                        radius = 500f
-                    ),
-                    shape = CircleShape
+                        colors = listOf(c.blob1, Color.Transparent), radius = 500f
+                    ), shape = CircleShape
                 )
         )
         Box(
@@ -77,31 +93,28 @@ fun ChatScreen(
                 .size(300.dp)
                 .background(
                     brush = Brush.radialGradient(
-                        colors = listOf(c.blob2, Color.Transparent),
-                        radius = 500f
-                    ),
-                    shape = CircleShape
+                        colors = listOf(c.blob2, Color.Transparent), radius = 500f
+                    ), shape = CircleShape
                 )
         )
 
-        Scaffold(
-            containerColor = Color.Transparent,
-            topBar = {
-                ChatTopBar(
-                    chatName = state.chatName,
-                    isOnline = state.isOnline,
-                    isTyping = state.isTyping,
-                    avatarIcon = state.avatarIcon,
-                    colors = c,
-                    onBackClick = { onAction(ChatAction.OnBackClick) }
-                )
-            },
+        Scaffold(containerColor = Color.Transparent, topBar = {
+            ChatTopBar(
+                chatName = state.chatName,
+                isOnline = state.isOnline,
+                isTyping = state.isTyping,
+                avatarIcon = state.avatarIcon,
+                colors = c,
+                onBackClick = { onAction(ChatAction.OnBackClick) })
+        },
             bottomBar = {
+
                 ChatInputBar(
                     text = state.inputText,
                     onTextChange = { onAction(ChatAction.OnInputChange(it)) },
                     onSendClick = { onAction(ChatAction.OnSendClick) },
-                    colors = c
+                    colors = c,
+                    onTypingChange = { onAction(ChatAction.OnTypingChange(it)) }
                 )
             }
         ) { innerPadding ->
@@ -117,10 +130,9 @@ fun ChatScreen(
                     .padding(innerPadding),
                 listState = listState,
                 onFirstVisibleMessageChanged = {
-                    onAction(ChatAction.OnFirstVisibleMessageChanged(it))
+                    onAction(ChatAction.OnFirstVisibleMessageChange(it))
                 },
-                onLoadMore = { onAction(ChatAction.OnLoadMoreMessages) }
-            )
+                onLoadMore = { onAction(ChatAction.OnLoadMoreMessages) })
         }
     }
 }
@@ -130,8 +142,7 @@ fun ChatScreen(
 @Composable
 private fun ChatScreenPreviewLight() {
     AndroidSimpleClientTheme(
-        previewDarkTheme = false,
-        content = {
+        previewDarkTheme = false, content = {
             Box(modifier = Modifier.fillMaxSize()) {
                 ChatScreen(
                     state = ChatState(
@@ -140,12 +151,9 @@ private fun ChatScreenPreviewLight() {
                         isOnline = true,
                         isTyping = true,
                         messages = previewMessageList
-                    ),
-                    onAction = {}
-                )
+                    ), onAction = {})
             }
-        }
-    )
+        })
 }
 
 @OptIn(ExperimentalUuidApi::class)
@@ -153,8 +161,7 @@ private fun ChatScreenPreviewLight() {
 @Composable
 private fun ChatScreenPreviewDark() {
     AndroidSimpleClientTheme(
-        previewDarkTheme = true,
-        content = {
+        previewDarkTheme = true, content = {
             Box(modifier = Modifier.fillMaxSize()) {
                 ChatScreen(
                     state = ChatState(
@@ -163,10 +170,7 @@ private fun ChatScreenPreviewDark() {
                         isOnline = true,
                         isTyping = true,
                         messages = previewMessageList
-                    ),
-                    onAction = {}
-                )
+                    ), onAction = {})
             }
-        }
-    )
+        })
 }

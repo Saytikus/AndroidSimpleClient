@@ -6,6 +6,7 @@ import org.koin.dsl.module
 import ru.saytikus.androidsimpleclient.domain.authentication.SignInProfileUseCase
 import ru.saytikus.androidsimpleclient.domain.authentication.answers.A2SignInProfileAnswer
 import ru.saytikus.androidsimpleclient.domain.authentication.commands.C2SignInProfileCommand
+import ru.saytikus.androidsimpleclient.domain.chat.dto.ChangeTypingCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
@@ -14,6 +15,7 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatEvent
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
+import ru.saytikus.androidsimpleclient.domain.chat.useCases.ChangeTypingUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.CreatePrivateChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetChatUseCase
 import ru.saytikus.androidsimpleclient.domain.chat.useCases.GetProfileChatsUseCase
@@ -153,5 +155,9 @@ val DomainUseCaseModule = module {
 
     single<IInputBoundary<List<Profile>, Unit>>(named("GetSavedProfilesUseCase")) {
         GetSavedProfilesUseCase(get())
+    }
+
+    single<IInputBoundary<MbResult<Unit>, ChangeTypingCommand>>(named("ChangeTypingUseCase")) {
+        ChangeTypingUseCase(get())
     }
 }

@@ -5,4 +5,6 @@ object ChatHubMethods {
     const val JOIN_CHAT = "JoinChat"
 
     const val LEAVE_CHAT = "LeaveChat"
+
+    const val CHANGE_TYPING = "Typing"
 }

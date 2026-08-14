@@ -6,6 +6,7 @@ import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
+import ru.saytikus.androidsimpleclient.domain.chat.dto.ChangeTypingCommand
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatEvent
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
@@ -27,4 +28,6 @@ interface IChatGateway {
     suspend fun leaveChat(cmd: LeaveChatCommand): MbResult<Unit>
 
     suspend fun getChat(cmd: GetChatCommand): MbResult<Chat>
+
+    suspend fun changeTyping(cmd: ChangeTypingCommand): MbResult<Unit>
 }

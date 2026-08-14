@@ -27,9 +27,11 @@ class ChatCoordinator(
 
             is ChatAction.OnLoadMoreMessages -> viewModel.loadMoreMessages()
 
-            is ChatAction.OnFirstVisibleMessageChanged -> { /* Handle */ }
+            is ChatAction.OnFirstVisibleMessageChange -> { /* Handle */ }
 
-            ChatAction.JoinChatErrorConsumed -> viewModel.onJoinChatErrorConsumed()
+            ChatAction.JoinChatErrorConsume -> viewModel.onJoinChatErrorConsume()
+
+            is ChatAction.OnTypingChange -> viewModel.onTypingChange(action.typing)
         }
     }
 }

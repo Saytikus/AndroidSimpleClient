@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -36,7 +37,8 @@ internal fun ChatInputBar(
     text: String,
     onTextChange: (String) -> Unit,
     onSendClick: () -> Unit,
-    colors: AppColors
+    colors: AppColors,
+    onTypingChange: (Boolean) -> Unit
 ) {
     val bottomBarBackground = Brush.verticalGradient(
         colors = listOf(
@@ -78,7 +80,11 @@ internal fun ChatInputBar(
             BasicTextField(
                 value = text,
                 onValueChange = onTextChange,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onFocusChanged {
+                        onTypingChange(it.isFocused)
+                },
                 textStyle = TextStyle(
                     fontSize = 14.sp,
                     color = colors.textPrimary,
@@ -124,7 +130,8 @@ private fun ChatInputBarLightEmpty() {
                 text = "",
                 onTextChange = {},
                 onSendClick = {},
-                colors = LightAppColors
+                colors = LightAppColors,
+                onTypingChange = {}
             )
         }
     )
@@ -140,7 +147,8 @@ private fun ChatInputBarDarkWithText() {
                 text = "Hey, how are you?",
                 onTextChange = {},
                 onSendClick = {},
-                colors = DarkAppColors
+                colors = DarkAppColors,
+                onTypingChange = {}
             )
         }
     )

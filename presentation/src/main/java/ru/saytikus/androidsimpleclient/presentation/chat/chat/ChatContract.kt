@@ -52,9 +52,11 @@ sealed interface ChatAction {
     data object OnSendClick : ChatAction
     data object OnBackClick : ChatAction
     data object OnLoadMoreMessages : ChatAction
-    data class OnFirstVisibleMessageChanged @OptIn(ExperimentalUuidApi::class) constructor(
+    data class OnFirstVisibleMessageChange @OptIn(ExperimentalUuidApi::class) constructor(
         val messageId: Uuid
     ) : ChatAction
 
-    data object JoinChatErrorConsumed : ChatAction
+    data object JoinChatErrorConsume : ChatAction
+
+    data class OnTypingChange(val typing: Boolean) : ChatAction
 }

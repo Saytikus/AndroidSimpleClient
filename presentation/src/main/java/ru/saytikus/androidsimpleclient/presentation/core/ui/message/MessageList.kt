@@ -17,7 +17,10 @@ import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -28,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import ru.saytikus.androidsimpleclient.domain.core.features.message.model.Message
 import ru.saytikus.androidsimpleclient.presentation.theme.AndroidSimpleClientTheme
 import ru.saytikus.androidsimpleclient.presentation.theme.AppColors
@@ -57,6 +61,8 @@ fun MessageList(
     val updatedOnFirstVisible by rememberUpdatedState(onFirstVisibleMessageChanged)
     val updatedOnLoadMore by rememberUpdatedState(onLoadMore)
 
+    val scope = rememberCoroutineScope()
+
     LaunchedEffect(listState) {
         snapshotFlow { listState.firstVisibleItemIndex }
             .collect { index ->
@@ -70,6 +76,15 @@ fun MessageList(
             .distinctUntilChanged()
             .filter { it }
             .collect { updatedOnLoadMore() }
+    }
+
+    val isAtPenultimateMessage by remember {
+        derivedStateOf {
+            val layoutInfo = listState.layoutInfo
+            val lastVisibleItem = layoutInfo.visibleItemsInfo.lastOrNull()
+
+            lastVisibleItem?.index == layoutInfo.totalItemsCount - 2
+        }
     }
 
     LazyColumn(
@@ -129,6 +144,18 @@ fun MessageList(
                     avatarIcon = avatarIcon,
                     colors = colors
                 )
+            }
+
+            scope.launch {
+                if(isAtPenultimateMessage) {
+                    val layoutInfo = listState.layoutInfo
+                    val lastVisibleItem = layoutInfo.visibleItemsInfo.lastOrNull()
+
+                    if(lastVisibleItem != null) {
+                        listState.scrollToItem(lastVisibleItem.index)
+                    }
+
+                }
             }
         }
     }

@@ -7,9 +7,11 @@ import ru.saytikus.androidsimpleclient.data.chat.dto.ChatDto
 import ru.saytikus.androidsimpleclient.data.chat.dto.ChatListItemDto
 import ru.saytikus.androidsimpleclient.data.chat.dto.CreatePrivateChatAnswerDto
 import ru.saytikus.androidsimpleclient.data.chat.dto.ParticipantDto
+import ru.saytikus.androidsimpleclient.data.chat.dto.ChangeTypingCommandDto
 import ru.saytikus.androidsimpleclient.data.core.features.message.source.remote.toDomain
 import ru.saytikus.androidsimpleclient.domain.chat.dto.ChatCreatedEventBody
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
+import ru.saytikus.androidsimpleclient.domain.chat.dto.ChangeTypingCommand
 import ru.saytikus.androidsimpleclient.domain.chat.model.Chat
 import ru.saytikus.androidsimpleclient.domain.chat.model.ChatListItem
 import ru.saytikus.androidsimpleclient.domain.chat.model.Participant
@@ -67,4 +69,11 @@ fun ParticipantDto.toDomain() =
         userId,
         displayName ?: "NO_DISPLAY_NAME",
         username ?: "NO_USERNAME"
+    )
+
+fun ChangeTypingCommand.toDto() =
+    ChangeTypingCommandDto(
+        chatId = chatId,
+
+        isTyping = isTyping
     )

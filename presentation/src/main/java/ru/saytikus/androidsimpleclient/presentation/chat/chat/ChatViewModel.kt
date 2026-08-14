@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Named
+import ru.saytikus.androidsimpleclient.domain.chat.dto.ChangeTypingCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.JoinChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.LeaveChatCommand
@@ -65,7 +66,11 @@ class ChatViewModel(
 
     @Named("ObserveChatEventsUseCase")
     private val observeChatEventsCase:
-    IObserveInputBoundary<Flow<ChatEvent>>
+    IObserveInputBoundary<Flow<ChatEvent>>,
+
+    @Named("ChangeTypingUseCase")
+    private val changeTYpingCase:
+    IInputBoundary<MbResult<Unit>, ChangeTypingCommand>
 
 
 ) : ViewModel() {
@@ -266,6 +271,12 @@ class ChatViewModel(
         }
     }
 
+    fun onTypingChange(typing: Boolean) {
+        viewModelScope.launch {
+            changeTYpingCase(ChangeTypingCommand(chatId, typing))
+        }
+    }
+
     fun onDispose() {
         viewModelScope.launch {
             // TODO parse answer
@@ -273,7 +284,7 @@ class ChatViewModel(
         }
     }
 
-    fun onJoinChatErrorConsumed() {
+    fun onJoinChatErrorConsume() {
         _stateFlow.update { it.copy(joinChatError = false) }
     }
 }

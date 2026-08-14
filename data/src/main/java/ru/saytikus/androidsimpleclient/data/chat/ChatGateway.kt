@@ -9,14 +9,15 @@ import ru.saytikus.androidsimpleclient.data.chat.constants.ChatHubMethods
 import ru.saytikus.androidsimpleclient.data.chat.dto.ChatCreatedEventBodyDto
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.IChatService
 import ru.saytikus.androidsimpleclient.data.chat.souce.remote.toDomain
-import ru.saytikus.androidsimpleclient.data.core.handleHubResult
-import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
 import ru.saytikus.androidsimpleclient.data.core.features.message.dto.MessageDto
 import ru.saytikus.androidsimpleclient.data.core.features.message.source.remote.toDomain
+import ru.saytikus.androidsimpleclient.data.core.handleHubResult
+import ru.saytikus.androidsimpleclient.data.core.handleRetrofitServiceResult
 import ru.saytikus.androidsimpleclient.data.core.source.remote.retrofit.interfaces.IRetrofitProvider
 import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.IHubProvider
 import ru.saytikus.androidsimpleclient.data.core.source.remote.signalR.sendAwait
 import ru.saytikus.androidsimpleclient.domain.chat.IChatGateway
+import ru.saytikus.androidsimpleclient.domain.chat.dto.ChangeTypingCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatAnswer
 import ru.saytikus.androidsimpleclient.domain.chat.dto.CreatePrivateChatCommand
 import ru.saytikus.androidsimpleclient.domain.chat.dto.GetChatCommand
@@ -170,5 +171,22 @@ class ChatGateway(
 
         return if (answer is MbResult.Success) MbResult.Success(answer.response.toDomain())
         else answer as MbResult.Failure
+    }
+
+    override suspend fun changeTyping(cmd: ChangeTypingCommand): MbResult<Unit> {
+        println("Gateway call ChatGateway::changeTyping")
+
+        val result = runCatching {
+            _hubProvider.sendAwait(
+                method = ChatHubMethods.CHANGE_TYPING,
+                message1 = cmd.chatId.toString(),
+                message2 = cmd.isTyping
+
+            )
+        }
+
+        val answer = handleHubResult(result)
+
+        return answer
     }
 }
