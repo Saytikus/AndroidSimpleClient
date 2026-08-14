@@ -14,10 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,7 +25,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.saytikus.androidsimpleclient.presentation.BuildConfig
 import ru.saytikus.androidsimpleclient.presentation.registration.components.RegistrationButton
 import ru.saytikus.androidsimpleclient.presentation.registration.components.RegistrationFormCard
 import ru.saytikus.androidsimpleclient.presentation.registration.components.RegistrationIconZone
@@ -135,36 +131,6 @@ fun RegistrationScreen(
                         onAction(RegistrationAction.OnSignInClick)
                     }
                 )
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-
-            // debug button to navigate to settings for set server ip
-            if(BuildConfig.DEBUG) {
-                Box(modifier = Modifier
-                    .clickable(
-                        onClick = { onAction(RegistrationAction.DEBUG_onSettingsButtonClick) }
-                    )
-                    .background(color = ColorProvider.colors.accent.copy(0.5f))
-                ) {
-                    Column(
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Settings,
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .size(48.dp),
-                            contentDescription = null,
-                            tint = ColorProvider.colors.textPrimary
-                        )
-
-                        Text(
-                            "DEBUG BUTTON",
-                            color = ColorProvider.colors.textPrimary)
-                    }
-                }
             }
         }
     }

@@ -79,10 +79,6 @@ class AppNavigationCoordinator(
 
     fun onRegistrationNavigate(navigation: RegistrationNavigation) {
         when (navigation) {
-            RegistrationNavigation.Settings -> {
-                _commands.tryEmit(NavigationCommand.Navigate(SettingsDestination))
-            }
-
             RegistrationNavigation.Authentication -> {
                 _commands.tryEmit(NavigationCommand.ReplaceRoot(AuthenticationDestination))
             }

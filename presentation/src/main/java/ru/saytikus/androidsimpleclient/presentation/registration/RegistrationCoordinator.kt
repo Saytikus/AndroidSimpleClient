@@ -29,10 +29,6 @@ class RegistrationCoordinator(
                 RegistrationNavigation.Authentication
             )
 
-            is RegistrationAction.DEBUG_onSettingsButtonClick -> onNavigate(
-                RegistrationNavigation.Settings
-            )
-
             is RegistrationAction.OnRegistrationSuccessfully -> onNavigate(
                 RegistrationNavigation.Authentication
             )

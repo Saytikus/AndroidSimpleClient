@@ -33,8 +33,6 @@ data class RegistrationState(
 )
 
 sealed interface RegistrationNavigation {
-
-    data object Settings : RegistrationNavigation
     
     data object Authentication : RegistrationNavigation
 }
@@ -56,8 +54,6 @@ sealed interface RegistrationAction {
     data object OnRegistrationSubmit : RegistrationAction
 
     data object OnSignInClick : RegistrationAction
-
-    data object DEBUG_onSettingsButtonClick : RegistrationAction
 
     data object OnRegistrationSuccessfully : RegistrationAction
 }
