@@ -363,7 +363,7 @@ class HubProvider(
 
     private suspend fun createConnection(): HubConnection {
         val hostAddress = _settingsRepo.getOnce().responseServerHostAddress
-        return HubConnectionBuilder.create("https://ascserver.home-ken.crazedns.ru/hubs/chat"/*"http://$hostAddress:8080/hubs/chat"*/) {
+        return HubConnectionBuilder.create("http://64.188.58.109:8085/hubs/chat") {
             automaticReconnect = AutomaticReconnect.Inactive
             accessTokenProvider = { _encryptedSettingsRepository.getOnce().authenticationToken }
             logger = Logger { severity, message, cause ->
