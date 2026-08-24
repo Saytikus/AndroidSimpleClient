@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,14 +32,19 @@ fun MessageDateSeparator(
     ) {
         Text(
             text = date,
-            fontSize = 11.sp,
-            color = colors.textSecondary,
+            fontSize = 12.sp,
+            color = colors.textPrimary,
             modifier = Modifier
                 .background(
-                    color = colors.textPrimary.copy(alpha = 0.05f),
-                    shape = RoundedCornerShape(8.dp)
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            colors.otherBubbleBackgroundStart,
+                            colors.otherBubbleBackgroundEnd
+                        )
+                    ),
+                    shape = RoundedCornerShape(10.dp)
                 )
-                .padding(horizontal = 10.dp, vertical = 3.dp)
+                .padding(horizontal = 12.dp, vertical = 6.dp)
         )
     }
 }

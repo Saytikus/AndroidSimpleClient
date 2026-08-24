@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -62,7 +63,7 @@ fun ChatScreen(
     val imeVisible = WindowInsets.isImeVisible
 
     LaunchedEffect(imeVisible) {
-        if(!imeVisible) {
+        if (!imeVisible) {
             focusManager.clearFocus()
         }
     }
@@ -98,18 +99,24 @@ fun ChatScreen(
                 )
         )
 
-        Scaffold(containerColor = Color.Transparent, topBar = {
-            ChatTopBar(
-                chatName = state.chatName,
-                isOnline = state.isOnline,
-                isTyping = state.isTyping,
-                avatarIcon = state.avatarIcon,
-                colors = c,
-                onBackClick = { onAction(ChatAction.OnBackClick) })
-        },
+        Scaffold(
+            containerColor = Color.Transparent,
+
+            topBar = {
+                ChatTopBar(
+                    chatName = state.chatName,
+                    isOnline = state.isOnline,
+                    isTyping = state.isTyping,
+                    avatarIcon = state.avatarIcon,
+                    colors = c,
+                    onBackClick = { onAction(ChatAction.OnBackClick) }
+                )
+            },
+
             bottomBar = {
 
                 ChatInputBar(
+                    modifier = Modifier.imePadding(),
                     text = state.inputText,
                     onTextChange = { onAction(ChatAction.OnInputChange(it)) },
                     onSendClick = { onAction(ChatAction.OnSendClick) },

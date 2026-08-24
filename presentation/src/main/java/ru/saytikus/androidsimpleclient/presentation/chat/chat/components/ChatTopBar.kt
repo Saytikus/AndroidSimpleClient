@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -61,7 +62,8 @@ internal fun ChatTopBar(
                     strokeWidth = 1.dp.toPx()
                 )
             }
-            .padding(horizontal = 14.dp, vertical = 26.dp),
+            .padding(horizontal = 14.dp, vertical = 26.dp)
+            .offset(y = 20.dp),
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
@@ -74,7 +76,7 @@ internal fun ChatTopBar(
 
         Box(
             modifier = Modifier
-                .size(55.dp)
+                .size(52.dp)
                 .background(
                     brush = Brush.radialGradient(
                         colors = listOf(
@@ -109,7 +111,7 @@ internal fun ChatTopBar(
             Text(
                 text = chatName,
                 color = colors.textPrimary,
-                fontSize = 15.sp,
+                fontSize = 22.sp,
                 fontWeight = FontWeight.SemiBold
             )
             Text(
@@ -123,9 +125,10 @@ internal fun ChatTopBar(
                     isOnline -> colors.accent
                     else -> colors.textSecondary
                 },
-                fontSize = 11.sp,
+                fontSize = 14.sp,
                 fontStyle = if (isTyping) FontStyle.Italic else FontStyle.Normal,
-                modifier = Modifier.padding(top = 1.dp)
+                modifier = Modifier
+                    .padding(top = 1.dp)
             )
         }
 

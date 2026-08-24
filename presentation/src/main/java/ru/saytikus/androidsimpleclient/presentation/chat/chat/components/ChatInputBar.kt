@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -34,6 +35,7 @@ import ru.saytikus.androidsimpleclient.presentation.theme.LightAppColors
 
 @Composable
 internal fun ChatInputBar(
+    modifier: Modifier = Modifier,
     text: String,
     onTextChange: (String) -> Unit,
     onSendClick: () -> Unit,
@@ -48,7 +50,7 @@ internal fun ChatInputBar(
     )
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(brush = bottomBarBackground)
             .drawBehind {
@@ -59,7 +61,8 @@ internal fun ChatInputBar(
                     strokeWidth = 1.dp.toPx()
                 )
             }
-            .padding(horizontal = 14.dp, vertical = 36.dp),
+            .padding(horizontal = 14.dp, vertical = 16.dp)
+            .offset(y = (-10).dp),
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -84,7 +87,7 @@ internal fun ChatInputBar(
                     .fillMaxWidth()
                     .onFocusChanged {
                         onTypingChange(it.isFocused)
-                },
+                    },
                 textStyle = TextStyle(
                     fontSize = 14.sp,
                     color = colors.textPrimary,

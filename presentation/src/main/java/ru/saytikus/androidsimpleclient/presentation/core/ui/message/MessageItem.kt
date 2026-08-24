@@ -122,7 +122,7 @@ fun MessageItem(
                 Text(
                     text = message.text,
                     color = colors.textPrimary,
-                    fontSize = 14.sp,
+                    fontSize = 16.sp,
                     lineHeight = 20.sp
                 )
 
@@ -138,7 +138,7 @@ fun MessageItem(
                     Text(
                         text = formatMessageTime(message.createdAt),
                         color = colors.textPrimary.copy(0.55f),
-                        fontSize = 10.sp
+                        fontSize = 12.sp
                     )
 
                     if (isOwn) {

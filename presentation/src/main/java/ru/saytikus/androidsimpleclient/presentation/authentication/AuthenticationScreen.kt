@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
@@ -57,6 +58,8 @@ fun AuthenticationScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(brush = ColorProvider.backgroundBrush())
+            .imePadding()
+
     ) {
 
         Column(
